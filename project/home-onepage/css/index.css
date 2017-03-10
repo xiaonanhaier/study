@@ -132,6 +132,7 @@ a{
 .services{
 	width: 100%;
 	height: 735px;
+	overflow: hidden;
 }
 .services-nav{
 	height: 228px;
@@ -191,4 +192,71 @@ a{
 	left: 15%;
 	width: 550px;
 	border-top: 0.5px solid black;
+}
+.services-content{
+	height: 509px;
+	width: 1170px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+}
+.services-img{
+	flex: 8;
+	text-align: center;
+}
+.services-img img{
+	margin-top: 75px;
+}
+.services-word{
+	flex: 10;
+	padding-left: 60px;
+}
+.services-word p{
+	line-height: 25px;
+	font-size: 15px;
+	color: #858585;
+	margin-top: 25px;
+}
+.services-word h3{
+	font-size: 37px;
+	font-family: "方正兰亭特黑简体";
+	color: #666;
+	margin-top: 134px;
+}
+.services-word span{
+	color: #e74c3c;
+}
+.services-word-r{
+	padding: 0px;
+}
+.services-link{
+	width: 150px;
+	height: 50px;
+	background: #e74c3c;
+	padding-left: 25px;
+	color: #fff;
+	line-height: 50px;
+	font-size: 20px;
+	border-radius: 5px;
+}
+.services-link a{
+	display: block;
+	margin-top: 40px;
+	width: 100%；
+	height:100%;
+	background: url(../images/arrow-R.png) center no-repeat;
+	background-position: 120px;
+}
+.ser1{
+	display: none;
+}
+.ser2{
+	display: flex;
+}
+.ser3{
+	display: none;
+}
+.ser4{
+	display: none;
 }
