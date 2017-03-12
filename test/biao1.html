@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟1</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			background: #eee;
+		}
+		.box{
+			width: 990px;
+			height: 240px;
+			margin: 0 auto;
+			margin-top: 200px;
+			background: black;
+			border: 5px solid #bbb;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+		.dx{
+			width: 274px;
+			height: 200px;
+			float: left;
+			margin-right: 25px;
+			margin-left: 25px;
+			border: 3px solid #ccc;
+			border-radius: 5px;
+			margin-top: 20px;
+			display: flex;
+			overflow: hidden;
+		}
+		.xk{
+			flex: 1;
+			margin: 5px;
+			background: red;
+			border-radius: 5px;
+			line-height: 200px;
+			text-align: center;
+			font-size: 100px;
+			font-family: "方正兰亭特黑简体";
+			color: #fff;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var hou = document.getElementById('hour');
+			var mine = document.getElementById('min');
+			var seco = document.getElementById('sec');
+			var houn = hou.getElementsByClassName('xk');
+			var minen = mine.getElementsByClassName('xk');
+			var secon= seco.getElementsByClassName('xk');
+
+// string.split() 方法
+// var str="How are you doing today?"    
+// document.write(str.split(" ") + "<br />") 	结果： How,are,you,doing,today?
+// document.write(str.split("") + "<br />")		结果：H,o,w, ,a,r,e, ,y,o,u, ,d,o,i,n,g, ,t,o,d,a,y,?
+// document.write(str.split(" ",3))		结果：How,are,you
+
+
+			function zh(num,arr){
+				if (num<10) {
+					arr[0].innerHTML = 0;
+					arr[1].innerHTML = num;
+				}else{
+					var shii = num / 10;
+					var shi = parseInt(shii);
+					var ge = num-shi*10;
+					arr[0].innerHTML = shi;
+					arr[1].innerHTML = ge;
+				}
+			}
+			var timeId = setInterval(function(){
+				var a = new Date();
+				var hour = a.getHours();
+				var minutes = a.getMinutes();
+				var mio = a.getSeconds();
+				zh(hour,houn);
+				zh(minutes,minen);
+				zh(mio,secon);
+			},1000)
+		}
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="dx" id="hour">
+			<div class="xk" id="shi">0</div>
+			<div class="xk" id="ge">0</div>
+		</div>
+		<div class="dx" id="min">
+			<div class="xk" id="shi">0</div>
+			<div class="xk" id="ge">0</div>
+		</div>
+		<div class="dx" id="sec">
+			<div class="xk" id="shi">0</div>
+			<div class="xk" id="ge">0</div>
+		</div>
+	</div>
+</body>
+</html>

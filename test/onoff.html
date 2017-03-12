@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onoff</title>
+	<style rel="stylesheet" type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.bigbox{
+			width: 600px;
+			height: 400px;
+			border: 1px solid red;
+		}
+		.word{
+			width: 100%;
+			height: 40px;
+			overflow: hidden;
+		}
+		.word-c{
+			line-height: 40px;
+			float: left;
+			font-size: 20px;
+		}
+		.wen{
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			font-weight: bold;
+			float: right;
+			background: #ccc;
+			color: #fff;
+			border-radius: 20px;
+		}
+		.wen:hover{
+			cursor: pointer;
+		}
+		.onoff{
+			width: 400px;
+			height: 200px;
+			color: #fff;
+			background: black;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			function show(a){
+				return document.getElementById(a);
+			}
+			// var wend = document.getElementById('wen');
+			// var off = document.getElementById('onoff')
+			// var onff = true;
+			show('wen').onclick = function(){
+				if (onff) {
+					show('onoff').style.display = "none";
+					// show('onoff').style['display'] = "none";
+					// console.log('ddd');
+					onff = false;
+				}else{
+					show('onoff').style.display = 'block';
+					// console.log('ddd');
+					onff = true;
+				}
+			}
+			// show('wen').onclick = null;///移除
+			// function clic(){
+			// 	alert('dddd')
+			// }
+			
+
+			// function myFunction() {
+			//     alert('ddddd');
+			// }
+			// show('wen').addEventListener("click", myFunction);
+
+			// // 添加 <div> 事件句柄 
+			// document.getElementById("myDIV").addEventListener("mousemove", myFunction);
+
+			// // 移除 <div> 事件句柄 
+			// document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
+		}
+	</script>
+</head>
+<body>
+	<div class="bigbox">
+		<div class="word">
+			<div class="word-c">
+				<p>鼠标点击右侧的“？”问好上查看效果</p>
+			</div>
+			<div class="wen" id="wen">
+				?
+			</div>
+		</div>
+		<div class="onoff" id="onoff">
+			<p>onmousedown、onmouseup 以及 onclick 事件
+onmousedown, onmouseup 以及 onclick 构成了鼠标点击事件的所有部分。首先当点击鼠标按钮时，会触发 onmousedown 事件，当释放鼠标按钮时，会触发 onmouseup 事件，最后，当完成鼠标点击时，会触发 onclick 事件。</p>
+		</div>
+	</div>
+</body>
+</html>

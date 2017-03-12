@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器</title>
+	<script type="text/javascript">
+		// 语法：setTimeout(Fn,ms)
+		// 清除定时器：clearTimeout(timeid)
+		// 语法：setInterval(Fn,ms)
+		// 清除定时器：clearInterval(timeid)
+		window.onload = function() {
+			var ima = document.getElementById('im');
+			var tim = document.getElementById('timed');
+			var sta = document.getElementById('star');
+			console.log(ima);
+			var timeid =null;
+			var c = '';
+			// var tiemid = setTimeout(function(){
+			// 	ima.src="images/2.jpg";
+			// },3000)
+			function getweek(day){
+				var wek = '';
+				switch(day){
+					case 0:
+						wek = "星期日";
+						break;
+					case 1:
+						wek = "星期一";
+						break;
+					case 2:
+						wek = "星期二";
+						break;
+					case 3:
+						wek = "星期三";
+						break;
+					case 4:
+						wek = "星期四";
+						break;
+					case 5:
+						wek = "星期五";
+						break;
+					case 6:
+						wek = "星期六";
+						break;
+				}
+				return wek;
+			}
+			function estye(tim){
+				var tr = '';
+				if (tim<10) {
+					tr = '0' + tim;
+				}else{
+					tr = tim;
+				}
+				return tr;
+			}
+			timeid = setInterval(function(){
+					var a = new Date();
+					var year = a.getFullYear();
+					var month = a.getMonth();
+					var day = a.getDate();
+					var hour = a.getHours();
+					var week = a.getDay();
+					var minutes = a.getMinutes();
+					var mio = a.getSeconds();
+					c = year+'.'+month+'.'+day+" "+getweek(week)+" "+estye(hour)+':'+estye(minutes)+':'+estye(mio);
+					tim.innerHTML = c;
+			},1000)
+			tim.onclick = function(){
+				clearInterval(timeid);
+			}
+			// sta.onclick = function(){
+			// 	timeid = setInterval(function(){
+			// 		a+=1;
+			// 		tim.innerHTML = a;
+			// 	},1000)
+			// }
+		}
+	</script>
+	<style type="text/css">
+		p{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<!-- <img id="im" src="images/1.jpg" alt=""> -->
+	<p id="timed"></p>
+	<p id="star">star</p>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.box{
+			width: 1170px;
+			margin: 0 auto;
+		}
+		.list{
+			width: 100%;
+			border-top: 1px solid #aaa;
+			background: #ccc;
+		}
+		.jj{
+			width: 84px;
+			height: 23px;
+			line-height: 21px;
+			text-align: center;
+			overflow: hidden;
+		}
+		.jj p:hover{
+			cursor: pointer;
+		}
+		.jj p:nth-child(2){
+			width: 30px;
+			margin-left: 4px;
+			margin-right: 4px;
+			float: left;
+			border: 0.5px solid black;
+			border-radius: 3px;
+			overflow: hidden;
+		}
+		.jj p:nth-child(1),p:nth-child(3){
+			width: 20px;
+			height: 20px;
+			border: 0.5px solid black;
+			float: left;
+			border-radius: 3px;
+			overflow: hidden;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			function D(a){
+				return document.getElementsByClassName(a);
+			}
+			function G(a){
+				return document.getElementById(a);
+			}
+			function jisuan(q){
+				var zonggong = 0;
+				jjj[q][1].innerHTML = sum[q];
+			 	dgzj[q] = sum[q] * dj[q]
+			 	pase[q].innerHTML = dgzj[q];
+			 	for(var i =0;i < D('jj').length;i++){
+			 		zonggong = zonggong + dgzj[i];
+			 	}
+			 	G('zong').innerHTML = zonggong;
+			}
+			var jjj = new Array()
+			for (var i = 0;i < D('jj').length;i++) {
+				jjj[i] = D('jj')[i].getElementsByTagName('p');
+			}
+			var dj =[2,4,6,8,10];
+			var pase = D('pase');			
+			var sum = [0,0,0,0,0];
+			var dgzj = [0,0,0,0,0];
+			var gc = function(q){
+				 jjj[q][0].onclick = function(){
+				 	// var zonggong = 0;
+				 	if (sum[q] == 0) {
+				 		sum[q] = 0;
+				 	}else{
+				 		sum[q] = sum[q] - 1;
+				 	}
+				 	jisuan(q);	
+				 	// jjj[q][1].innerHTML = sum[q];
+				 	// dgzj[q] = sum[q] * dj[q]
+				 	// pase[q].innerHTML = dgzj[q];
+				 	// for(var i =0;i < D('jj').length;i++){
+				 	// 	zonggong = zonggong + dgzj[i];
+				 	// }
+				 	// G('zong').innerHTML = zonggong;
+				 }
+			}
+			var js = function(q){
+				 jjj[q][2].onclick = function(){
+				 	// var zonggong = 0;
+				 	sum[q] = sum[q] + 1;
+				 	jisuan(q);				 	
+				 	// jjj[q][1].innerHTML = sum[q];
+				 	// dgzj[q] = sum[q] * dj[q]
+				 	// pase[q].innerHTML = dgzj[q];
+				 	// for(var i =0;i < D('jj').length;i++){				 		
+				 	// 	zonggong = zonggong + dgzj[i];
+				 	// }
+				 	// G('zong').innerHTML = zonggong;
+				 }
+			}
+			for (var i = 0;i < D('jj').length;i++) {
+				jjj[i][0] = gc(i);
+				jjj[i][2] = js(i);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="list">
+			<div class="jj">
+				<p>-</p>
+				<p>0</p>
+				<p>+</p>
+			</div>
+			<div class="pase">
+				<p id="pase">元</p>
+			</div>
+		</div>
+		<div class="list">
+			<div class="jj">
+				<p>-</p>
+				<p>0</p>
+				<p>+</p>
+			</div>
+			<div class="pase">
+				<p id="pase">元</p>
+			</div>
+		</div>
+		<div class="list">
+			<div class="jj">
+				<p>-</p>
+				<p>0</p>
+				<p>+</p>
+			</div>
+			<div class="pase">
+				<p id="pase">元</p>
+			</div>
+		</div>
+		<div class="list">
+			<div class="jj">
+				<p>-</p>
+				<p>0</p>
+				<p>+</p>
+			</div>
+			<div class="pase">
+				<p id="pase">元</p>
+			</div>
+		</div>
+		<div class="list">
+			<div class="jj">
+				<p>-</p>
+				<p>0</p>
+				<p>+</p>
+			</div>
+			<div class="pase">
+				<p id="pase">元</p>
+			</div>
+		</div>
+		<p id="zong">yuan</p>
+	</div>
+</body>
+</html>
