@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>opacity定位弹窗</title>
+	<style type="text/css">
+		body,p{
+			margin: 0;
+			padding: 0;
+		}
+		.bigbox{
+			width: 1100px;height: 619px;margin: 0 auto;
+		}
+		.big{
+			position: relative;
+		}
+		.opa{
+			position: absolute;background-color: blue;opacity: 0.4;left: 0;top: 0;
+		}
+		.tan{
+			position: fixed;width: 440px;height: 270px;top: 50%;left: 50%;border-top: 2px solid #f39800;background-color: white;margin-left:-220px;margin-top:-135px;
+		}
+		.tan img{
+			position: absolute;	top: 35px;left: 185px;
+		}
+		.shou{
+			position: absolute;font-size: 14px;	width: 100%;height: 27px;
+			text-align: center;
+			}
+		.p1{
+			top: 100px;
+		}
+		.p2{
+			top: 150px;
+		}
+		.p3{
+			top: 200px;
+		}
+		.shou a{
+			float: left;
+			display: block;
+			width: 65px;
+			height: 27px;
+
+			text-decoration: none;
+			color: white;
+			font-size: 14px;
+			line-height: 27px;
+			text-align: center;
+
+			background-color: #ccc;
+		}
+		.bianju1{
+			margin-left: 116px;
+		}
+		.bianju2{
+			margin-left: 75px;
+		}
+	</style>
+</head>
+<body>
+	<div class="bigbox big">
+
+		<div class="bigbox opa">
+			
+		</div>
+
+		<div class="tan">
+			<img src="images/duihao.png" alt="">
+			<p class="shou p1">收藏成功</p>
+			<p class="shou p2">加入： 文章  设计  搞笑   科技</p>
+			<p class="shou p3"><a class="bianju1" href="#">确定</a> <a class="bianju2" href="#">取消</a></p>
+		</div>
+
+		<div class="bigbox">
+
+			<img src="images/img1.png" alt="">
+
+		</div>
+
+	</div>
+</body>
+</html>

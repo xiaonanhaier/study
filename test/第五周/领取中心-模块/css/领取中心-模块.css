@@ -1,0 +1,88 @@
+body,div,p{
+	margin: 0;
+	padding: 0;
+}
+.bigbox{
+	width: 1037px;
+	height: 265px;
+	padding-left: 37px;
+	margin: 0 auto;
+
+	border:10px solid #d2d2d2;
+}
+
+
+.box{
+	width: 180px;
+	height: 210px;
+	float: left;
+	position: relative;
+
+	margin-top: 35px;
+	padding-right: 20px;
+}
+.box img{
+	float: right;
+	margin-top: 25px;
+	border: 1px solid white;
+}
+.border{
+	border-right: 1px solid #d2d2d2;;
+}
+
+
+.discount{
+	border-top: 3px solid #e93524;
+	width: 95px;
+
+	position: absolute;
+	top: 7px;
+	left: 25px;	
+
+	background-color: white;
+}
+.price{
+	height: 42px;
+
+	line-height: 42px;
+	text-align:center;
+
+	font-size: 28px;
+	font-weight: bold;
+	color: #e93524;
+}	
+.explain{
+	height: 40px;
+
+	font-size: 12px;
+	font-weight: bold;
+	color: #e93524;
+
+	line-height: 19PX;
+}
+.condition{
+	height: 50px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 15px;
+
+	font-size: 12PX;
+	color: #616161;
+	font-weight: bold;
+	
+	line-height: 20px;
+	background-color: #e7e7e7;
+}
+.better{
+	height: 23px;
+	font-size: 12px;
+
+	line-height: 23px;
+	text-align: center;
+	background-color: #e93524;
+}
+.better a{
+	text-decoration: none;
+	color: white;
+}

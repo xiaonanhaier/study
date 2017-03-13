@@ -1,0 +1,100 @@
+body,div,p,ul,li,img,tr,td{
+	margin: 0;
+	padding: 0;
+}
+.bigbox{
+	margin: 0 auto;
+	width: 1000px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+}
+.title{
+	width: 100%;
+	font-size: 40px;
+	line-height: 50px;
+	text-align: center;
+}
+.border{
+	overflow: hidden;
+}
+.secend{
+	height: 50px;
+	width: 920px;
+	margin: 0 auto;
+
+	line-height: 50px;
+	font-size: 26px;
+	margin-bottom: 25px;
+	margin-top: 25px;
+
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+
+
+.img{
+	float: left;
+	margin-left: 70px;
+}
+.information{
+	font-size: 22px;
+	color: #404040;
+	font-weight: bold;
+
+	margin-left: 40px;
+	margin-right: 70px;
+	line-height: 70px;
+}
+.essential1{
+	height: 110px;
+	font-size: 26px;
+	line-height: 110px;
+	margin-left: 100px;
+}
+.skilllist{
+	margin-left: 100px;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 35px;
+	color: #404040;
+}
+
+
+.exper{
+	border-collapse: collapse;
+	font-size: 18px;
+	color:#404040;
+	font-weight: bold;
+	margin-left: 100px;
+}
+td,th{
+	border: 1px solid #404040;
+	padding-left: 5px;
+}
+th{
+	width: 65px;
+	height: 30px;
+}
+.sizexin1{
+	width: 250px;
+}
+.sizexin2{
+	width: 165px;
+}
+.sizexin3{
+	width: 315px;
+}
+
+.selfp{
+	width: 820px;
+	font-size: 20px;
+	line-height: 37px;
+	color: #404040;
+	margin-left: 100px;
+}
