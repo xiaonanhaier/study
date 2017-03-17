@@ -8,42 +8,151 @@
 			padding: 0;
 			margin: 0;
 		}
+		body{
+			background: #ddd;
+		}
+		a{
+			text-decoration: none;
+			color: inherit;
+		}
 		.box{
 			width: 1170px;
 			margin: 0 auto;
+			background: #fff;
 		}
 		.list{
 			width: 100%;
-			border-top: 1px solid #aaa;
-			background: #ccc;
+			height: 115px;
+			overflow: hidden;
+			border-top: 1px solid #ddd;
 		}
 		.jj{
-			width: 84px;
-			height: 23px;
-			line-height: 21px;
+			width: 150px;
+			height: 40px;
+			margin-top: 35px;
+			line-height: 115px;
+			margin-right: 40px;
+			margin-left: 40px;
 			text-align: center;
 			overflow: hidden;
+			border: 1px solid #ddd;
 		}
 		.jj p:hover{
 			cursor: pointer;
 		}
 		.jj p:nth-child(2){
-			width: 30px;
-			margin-left: 4px;
-			margin-right: 4px;
+			width: 70px;
+			height: 40px;
 			float: left;
-			border: 0.5px solid black;
-			border-radius: 3px;
+			text-align: center;
+			line-height: 40px;
 			overflow: hidden;
 		}
 		.jj p:nth-child(1),p:nth-child(3){
-			width: 20px;
-			height: 20px;
-			border: 0.5px solid black;
+			width: 40px;
+			height: 40px;
 			float: left;
-			border-radius: 3px;
+			text-align: center;
+			line-height: 40px;
 			overflow: hidden;
 		}
+		.jj p:nth-child(1):hover{
+			background: #ddd;
+			transition: 0.5s;
+		}
+		.jj p:nth-child(3):hover{
+			background: #ddd;
+			transition: 0.5s;
+		}
+		.leftf{
+			float: left;
+		}
+		.name{
+			width: 545px;
+			height: 115px;
+			display: flex;
+		}
+		.img{
+			width: 150px;
+			height: 115px;
+			line-height: 135px;
+			text-align: center;
+		}
+		.word,.dj{
+			line-height: 115px;
+			font-size: 20px;
+		}
+		.dj{
+			width: 145px;
+			height: 115px;
+			margin-left: 40px;
+		}
+		.pase{
+			float: left;
+			line-height: 115px;
+			padding-left: 40px;
+			font-size: 20px;
+		}
+		.zong{
+			width: 1170px;
+			height: 50px;
+			font-size: 30px;
+			position: fixed;
+			bottom: 0;
+			background: #fff;
+			margin-left: 55px;
+		}
+		.zong p:nth-child(3){
+			width: 190px;
+			height: 50px;
+			line-height: 50px;
+			color: rgb(255,104,0);
+			float: right;
+			text-align: center;
+			font-weight: bold;
+		}
+		.zong p:nth-child(2){
+			float: right;
+			background: rgb(255,104,0);
+			width: 200px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+		}
+		.zong p>span{
+			font-size: 20px;
+		}
+		.zong p:nth-child(1){
+			width: 300px;
+			height: 50px;
+			float: left;
+			font-size: 20px;
+			color: rgb(255,104,0);
+			text-align: center;
+			line-height: 50px;
+		}
+		
+	.tit p{
+		float: left;
+		font-size: 15px;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		font-weight: bold;
+	}
+	.tit p:nth-child(1){
+		width: 545px;
+	}
+	.tit p:nth-child(2){
+		width: 145px;
+	}
+	.tit p:nth-child(3){
+		width: 150px;
+		margin-right: 90px;
+		margin-left: 60px;
+	}
 	</style>
 	<script type="text/javascript">
 		window.onload = function() {
@@ -55,20 +164,23 @@
 			}
 			function jisuan(q){
 				var zonggong = 0;
+				var summ = 0;
 				jjj[q][1].innerHTML = sum[q];
 			 	dgzj[q] = sum[q] * dj[q]
-			 	pase[q].innerHTML = dgzj[q];
+			 	pase[q].innerHTML = dgzj[q]+'元';
 			 	for(var i =0;i < D('jj').length;i++){
 			 		zonggong = zonggong + dgzj[i];
+			 		summ = summ + sum[i];
 			 	}
-			 	G('zong').innerHTML = zonggong;
+			 	G('zong').innerHTML ='<span>总价：</span>'+zonggong+'元';
+			 	G('sum').innerHTML = '总共：'+summ+'件';
 			}
 			var jjj = new Array()
 			for (var i = 0;i < D('jj').length;i++) {
 				jjj[i] = D('jj')[i].getElementsByTagName('p');
 			}
-			var dj =[2,4,6,8,10];
-			var pase = D('pase');			
+			var dj =[3499,2599,1999,149,0];
+			var pase = D('pase');
 			var sum = [0,0,0,0,0];
 			var dgzj = [0,0,0,0,0];
 			var gc = function(q){
@@ -79,7 +191,7 @@
 				 	}else{
 				 		sum[q] = sum[q] - 1;
 				 	}
-				 	jisuan(q);	
+				 	jisuan(q);
 				 	// jjj[q][1].innerHTML = sum[q];
 				 	// dgzj[q] = sum[q] * dj[q]
 				 	// pase[q].innerHTML = dgzj[q];
@@ -93,11 +205,11 @@
 				 jjj[q][2].onclick = function(){
 				 	// var zonggong = 0;
 				 	sum[q] = sum[q] + 1;
-				 	jisuan(q);				 	
+				 	jisuan(q);
 				 	// jjj[q][1].innerHTML = sum[q];
 				 	// dgzj[q] = sum[q] * dj[q]
 				 	// pase[q].innerHTML = dgzj[q];
-				 	// for(var i =0;i < D('jj').length;i++){				 		
+				 	// for(var i =0;i < D('jj').length;i++){
 				 	// 	zonggong = zonggong + dgzj[i];
 				 	// }
 				 	// G('zong').innerHTML = zonggong;
@@ -112,8 +224,25 @@
 </head>
 <body>
 	<div class="box">
+		<div class="tit">
+			<p>商品名称</p>
+			<p>单价</p>
+			<p>数量</p>
+			<p>小计</p>
+		</div>
 		<div class="list">
-			<div class="jj">
+			<div class="name leftf">
+				<div class="img">
+					<img src="images/55.jpg" alt="">
+				</div>
+				<div class="word leftf">
+					<h4>小米笔记本Air 12.5英寸 银色</h4>
+				</div>
+			</div>
+			<div class="dj leftf">
+				<h4>3499元</h4>
+			</div>
+			<div class="jj leftf">
 				<p>-</p>
 				<p>0</p>
 				<p>+</p>
@@ -123,7 +252,18 @@
 			</div>
 		</div>
 		<div class="list">
-			<div class="jj">
+			<div class="name leftf">
+				<div class="img">
+					<img src="images/9.jpg" alt="">
+				</div>
+				<div class="word leftf">
+					<h4>小米电视3s 48英寸</h4>
+				</div>
+			</div>
+			<div class="dj leftf">
+				<h4>2599元</h4>
+			</div>
+			<div class="jj leftf">
 				<p>-</p>
 				<p>0</p>
 				<p>+</p>
@@ -133,7 +273,18 @@
 			</div>
 		</div>
 		<div class="list">
-			<div class="jj">
+			<div class="name leftf">
+				<div class="img">
+					<img src="images/10.jpg" alt="">
+				</div>
+				<div class="word leftf">
+					<h4>小米手机5s 高配全网通版 3GB内存</h4>
+				</div>
+			</div>
+			<div class="dj leftf">
+				<h4>1999元</h4>
+			</div>
+			<div class="jj leftf">
 				<p>-</p>
 				<p>0</p>
 				<p>+</p>
@@ -143,7 +294,18 @@
 			</div>
 		</div>
 		<div class="list">
-			<div class="jj">
+			<div class="name leftf">
+				<div class="img">
+					<img src="images/06.jpg" alt="">
+				</div>
+				<div class="word leftf">
+					<h4>小米路由器3 白色</h4>
+				</div>
+			</div>
+			<div class="dj leftf">
+				<h4>149元</h4>
+			</div>
+			<div class="jj leftf">
 				<p>-</p>
 				<p>0</p>
 				<p>+</p>
@@ -152,17 +314,14 @@
 				<p id="pase">元</p>
 			</div>
 		</div>
-		<div class="list">
-			<div class="jj">
-				<p>-</p>
-				<p>0</p>
-				<p>+</p>
-			</div>
-			<div class="pase">
-				<p id="pase">元</p>
-			</div>
-		</div>
-		<p id="zong">yuan</p>
+		
+		
+	</div>
+	<div class="zong">
+		<p id="sum">总共：0件</p>
+		<p><a href="">去结算</a></p>
+		<p id="zong"><span>总价：</span>0元</p>
+		
 	</div>
 </body>
 </html>
