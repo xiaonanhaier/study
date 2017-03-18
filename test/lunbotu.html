@@ -78,15 +78,42 @@
 			// }
 
 			// 方法二
+			// var imgarry = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']
+			// show('down').onclick = function(){
+			// 	num++;
+			// 	if (num > imgarry.length - 1){
+			// 		num = 0;
+			// 	}
+			// 	console.log(num);
+			// 	// show('imag').className+=' bounceInLeft';
+			// 	show('imag').src = imgarry[num];
+			// }
+			// show('up').onclick = function(){
+			// 	num--;
+			// 	if (num < 0) {
+			// 		num = imgarry.length - 1;
+			// 	}
+			// 	console.log(num);
+			// 	show('imag').src = imgarry[num];	
+			}
+
+			// 方法二加点击动画
 			var imgarry = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']
+
+
 			show('down').onclick = function(){
 				num++;
 				if (num > imgarry.length - 1){
 					num = 0;
 				}
-				console.log(num);
-				// show('imag').className+=' bounceInLeft';
-				show('imag').src = imgarry[num];
+				show('imag').className = 'animated';
+			    setTimeout(function() {
+			        show('imag').className = 'animated bounceInRight';
+			    }, 10);
+				show('imag').src = imgarry[num];				
+			}
+			show('down').onmouseup = function(){
+				show('imag').className ='animated';				
 			}
 			show('up').onclick = function(){
 				num--;
@@ -94,7 +121,14 @@
 					num = imgarry.length - 1;
 				}
 				console.log(num);
-				show('imag').src = imgarry[num];	
+			    show('imag').className = 'animated';
+			    setTimeout(function() {
+			        show('imag').className = 'animated bounceInLeft';
+			    }, 10);
+				
+				// show('imag').className+='animated bounceInLeft';
+				show('imag').src = imgarry[num];
+				// show('imag').className = '';	
 			}
 		}
 	</script>
