@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动框</title>
+	<style type="text/css">
+		*{
+			margin: 0;padding: 0;
+		}
+		.scroll{
+			width: 1100px;height: 220px;border:1px solid black;margin: 0 auto;
+			overflow: hidden;position: relative;
+		}
+		.scrill-con{
+			width: 200%;height: 100%;overflow: hidden;position: absolute;
+		}
+		.scrill-con a{
+			display: block;width: 220px;height: 220px;float: left;overflow: hidden;
+		}
+		.scrill-con a>img{
+			display: block;width: 220px;height: 220px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var scrollc = document.getElementById('con');
+			var all = scrollc.innerHTML + scrollc.innerHTML;
+			scrollc.innerHTML = all; 
+			var time = null;
+			time = setInterval(function(){
+				if(scrollc.offsetLeft <= -1100){
+					scrollc.style.left = 0;
+				}
+				scrollc.style.left = (scrollc.offsetLeft - 5)+'px';
+			},10)
+		}
+	</script>
+</head>
+<body>
+	<div class="scroll">
+		<div class="scrill-con" id="con">
+			<a href=""><img src="images/s-img1.jpg" alt=""></a>
+			<a href=""><img src="images/s-img2.jpg" alt=""></a>
+			<a href=""><img src="images/s-img3.jpg" alt=""></a>
+			<a href=""><img src="images/s-img4.jpg" alt=""></a>
+			<a href=""><img src="images/s-img5.jpg" alt=""></a>
+		</div>
+	</div>
+</body>
+</html>

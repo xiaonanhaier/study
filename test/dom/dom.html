@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM操作</title>
+	<script type="text/javascript">
+		window.onload = function () {
+			var list = document.getElementById('list');
+			var btn = document.getElementById('button');
+			var lilist = document.getElementsByTagName('li')
+			btn.onclick = function(){
+				var lie = document.createElement('li');
+				var text = document.createTextNode('dazhuang');
+				lie.appendChild(text);
+				list.insertBefore(lie,lilist[0]);
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" name="" value="添加" id="button">
+	<ul id="list">
+		<li>ddd</li>
+	</ul>
+</body>
+</html>
