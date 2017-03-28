@@ -1,7 +1,11 @@
 BOM
 ====  
   1.BOM 浏览器对象模型
-    *   B browser   浏览器
+  * 所有浏览器都支持
+  * 绑定：使用 on + 事件类型:onclick
+  * 解绑：on + 事件类型 = null;
+  * 一个元素只能绑定一次 同类型的事件
+    * B browser   浏览器
     * O object    对象
     * M model     模型
     * 简明理解：浏览器提供给开发者的js接口    
