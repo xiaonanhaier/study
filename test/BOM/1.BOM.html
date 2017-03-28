@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var foo = 'hi';
+    function test() {
+      console.log('hello word!');
+    }
+    window.onload = function(){
+      console.log(window);
+      console.log(foo);
+      window.test();
+      var fn = window.test;
+      fn(); 
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

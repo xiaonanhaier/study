@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prompt输入框</title>
+  <script type="text/javascript">
+
+    window.onload = function(){
+      var bth = document.getElementById('del-bth');
+      bth.onclick = function() {
+      window.open(
+        'http://www.baidu.com',
+        'new',
+        'width=500,height=500,top=300,left=300'        
+      )
+      }
+    }
+  </script>
+  <style media="screen">
+    #box{width: 300px;height: 300px;background: blue;}
+  </style>
+</head>
+  <button type="button" name="button" id="del-bth">打开窗口</button>
+</body>
+</html>

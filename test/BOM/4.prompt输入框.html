@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prompt输入框</title>
+  <script type="text/javascript">
+
+    window.onload = function(){
+      var bth = document.getElementById('del-bth');
+      var con = document.getElementById('box');
+      bth.onclick = function() {
+        //confirm('要删除啦！')
+        var conn = window.prompt('input');
+        console.log(conn);
+        if (conn != null) {
+          con.innerHTML = conn;
+        }
+      }
+    }
+  </script>
+  <style media="screen">
+    #box{width: 300px;height: 300px;background: blue;}
+  </style>
+</head>
+  <button type="button" name="button" id="del-bth">点击输入</button>
+  <div id="box">
+
+  </div>
+</body>
+</html>

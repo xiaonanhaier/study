@@ -17,3 +17,20 @@ BOM
   3. window.prompt('提示内容')     输入框
     * 确认输入
     * 取消返回 null
+  4. window.open(pageurl,name,param)
+    * pageurl   要打开的网页地址
+    * name    窗口的名字
+    * param   窗口参数  逗号隔开
+      1. width
+      2. height
+      3. top
+      4. left
+  5. 常用方法
+    * window.onload   页面加载
+    * window.onunload   页面卸载
+    * window.onscroll   滚动条滚动的时候
+#### 滚动距离
+  1.  document.body.scrollTop   //chrome等标准浏览器
+  2.  document.documentElement.scrollTop    //ie
+  3.  兼容
+    * ||

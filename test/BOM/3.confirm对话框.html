@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>confirm</title>
+  <script type="text/javascript">
+    window.onload = function(){
+      var bth = document.getElementById('del-bth');
+      var con = document.getElementById('box');
+      bth.onclick = function() {
+        //confirm('要删除啦！')
+        var fh = window.confirm('delect');
+        console.log(fh);
+        if (fh) {
+            document.body.removeChild(con)
+        }
+      }
+    }
+  </script>
+  <style media="screen">
+    #box{width: 300px;height: 300px;background: blue;}
+  </style>
+</head>
+  <button type="button" name="button" id="del-bth">删除</button>
+  <div id="box">
+    aaaaaaaaaaaaaa
+  </div>
+</body>
+</html>
