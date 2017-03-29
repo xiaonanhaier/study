@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>回到顶部</title>
+  <script type="text/javascript">
+    window.onload = function() {
+      var boxx = document.getElementById('box');
+      var fhh = document.getElementById('fh');
+      window.onscroll = function () {
+        //或前面是false则执行后面的语句反之执行前面的语句
+        var top = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log(top);
+        if (top >=200) {
+          fhh.style.display = 'block';
+        }else{
+          fhh.style.display = 'none';
+        }
+      }
+    }
+  </script>
+  <style media="screen">
+    #box{width: 300px;height: 3000px;background: blue;}
+    #fh{display: none;width: 200px;height: 200px;background: red;position: fixed;;right: 0;bottom: 200px;}
+  </style>
+</head>
+  <button type="button" name="button" id="del-bth">打开窗口</button>
+  <div id="box"> </div>
+  <a href='#del-bth' id="fh">回到顶部</a>
+</body>
+</html>

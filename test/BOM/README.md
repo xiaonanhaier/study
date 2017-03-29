@@ -30,7 +30,18 @@ BOM
     * window.onunload   页面卸载
     * window.onscroll   滚动条滚动的时候
 #### 滚动距离
+  0.  scrollLeft    横向滚动距离
   1.  document.body.scrollTop   //chrome等标准浏览器
   2.  document.documentElement.scrollTop    //ie
   3.  兼容
     * ||
+  4.  返回顶部
+    * 锚点
+      1. <div id='top' ></div>
+      按钮：<a href='#top'>返回顶部</a>
+    * 动画方式
+      1. setInterval
+      2. 不断改变scrollTop值 到 0；
+  5. 运动原理
+    * 匀速运动：   当前值 - 固定的值（speed）
+    * 缓冲运动：   当前值 - 不断变化的值（speed）
