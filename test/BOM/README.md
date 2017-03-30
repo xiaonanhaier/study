@@ -45,3 +45,25 @@ BOM
   5. 运动原理
     * 匀速运动：   当前值 - 固定的值（speed）
     * 缓冲运动：   当前值 - 不断变化的值（speed）
+#### loction对象
+  * 获取当前访问网页的信息
+  * location.href   当前页面的完整地址
+  * location.hash   用于页面内跳转 一般为'#xxxxx'
+    1. 页内导航
+  * location.search 返回查询字符串，包括问好
+  * location.port   端口号
+  * locatio.reload()  当前页面重新加载
+#### history对象
+  1. 历史记录对象，js操作浏览器历史记录的接口
+  2. history.back() 后退 回到历史记录的上一步
+  3. history.forward() 前进
+  4. history.go(n)  回到第n步
+    * history.go(-1) 等同于 history.back()
+    * history.go(1)  等同于 history.forward()
+#### navigator对象
+  1. userAgent(用户代理) : 获取一些客户端浏览器信息 名称 引擎 操作系统
+  2. appCodeName  浏览器名称
+  3. appVersion   浏览器版本
+  4. platform   浏览器所在的系统平台
+  5.  应用： 返回用户浏览器等信息
+    * indexOf(str)  字符串方法 返回str在字符串中首次出现的索引

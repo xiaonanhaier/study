@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>history对象应用</title>
+  <script type="text/javascript">
+    window.onload = function() {
+      var gobtn = document.getElementById('go');
+      go.onclick = function() {
+        history.forward();
+      }
+    }
+  </script>
+  <style media="screen">
+    .bth{display: block;width: 50px;height: 30px;background: yellow;text-align: center;line-height: 30px;color: #fff;}
+  </style>
+</head>
+  <a href="http://www.baidu.com">baidu</a>
+  <span class="btn" id="go">前进</span>
+  <span class="btn" id="to">后退</span>
+</body>
+</html>

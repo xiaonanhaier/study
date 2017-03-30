@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nvaigator对象</title>
+  <script type="text/javascript">
+    window.onload = function() {
+      var str = navigator.userAgent;
+
+      console.log(navigator.userAgent);
+      console.log(navigator.appName);
+      console.log(navigator.appVersion);
+      console.log(navigator.product);
+      console.log(navigator.platform);
+      console.log(navigator.appName);
+      console.log(navigator.language);
+      if (str.indexOf('Chrome') > -1) {
+        console.log(str);
+          console.log('IE');
+      }
+    }
+  </script>
+  <style media="screen">
+    .bth{display: block;width: 50px;height: 30px;background: yellow;text-align: center;line-height: 30px;color: #fff;}
+  </style>
+</head>
+  <a href="http://www.baidu.com">baidu</a>
+  <span class="btn" id="go">前进</span>
+  <span class="btn" id="to">后退</span>
+</body>
+</html>
