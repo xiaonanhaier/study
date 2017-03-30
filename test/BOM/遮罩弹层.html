@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>遮罩弹层</title>
+  <style media="screen">
+    .box{width: 100%;height: 500px;overflow: hidden;}
+    .co1{background: red;}
+    .co2{background: blue;}
+    .co3{background: yellow;}
+    .co4{background: orange;}
+    #btn{width: 100px;height:50px;background: yellow;border-radius: 10px;
+      text-align: center;line-height: 50px;color: black;border: 3px solid black;
+      margin-left: 200px;margin-top: 100px;
+    }
+    #zz{background: #fff;position: fixed;top:0;left: 0;opacity: 0.5;
+      display: none;
+    }
+    #xx{width: 350px;height: 450px;background: rgba(255,127,127,0.5);position: absolute;
+        top: 50%;left: 50%;margin-left: -175px;margin-top: -225px;border: 1px solid blue;
+        border-radius: 15px;
+    }
+    #off{width: 80px;height: 50px;position: absolute;top: 50%;left: 50%;
+        margin-left: -40px;margin-top: -25px;border: 1px solid blue;
+        border-radius: 50px;text-align: center;line-height: 50px;color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="box co1">
+    <div id="btn">打开</div>
+  </div>
+  <div class="box co2"></div>
+  <div class="box co3"></div>
+  <div class="box co4"></div>
+  <div id="zz">
+    <div id="xx">
+      <p id="off">关闭</p>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var btn = document.getElementById('btn');
+    var zz = document.getElementById('zz');
+    var off = document.getElementById('off');
+    window.onresize = function(){
+      zz.style.width = document.documentElement.clientWidth+'px';
+      zz.style.height= document.documentElement.clientHeight+'px';
+    }
+    window.onload = function(){
+      // var str = document.documentElement.clientWidth;
+      // var str1 = document.documentElement.clientHeight;
+      // console.log('可视区宽度：'+str);
+      // console.log('可视区高度：'+str1);
+
+      btn.onclick = function(){
+        zz.style.width = document.documentElement.clientWidth+'px';
+        zz.style.height = document.documentElement.clientHeight+'px';
+        zz.style.display = 'block';
+      }
+      off.onclick = function() {
+        zz.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

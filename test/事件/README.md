@@ -9,7 +9,7 @@
       1. 如果多次绑定同一类型事件，后面会覆盖前面
   2. DOM2
     * 绑定：element.addEventListener(type,fn,[useCapture])
-      1. type  事件类型 click
+      1. type  事件类型 click   (不带on)
       2. fn   执行的函数
       3. useCapture 是否使用捕获  true 或 false
 
@@ -68,5 +68,3 @@
         1. 利用事件会冒泡，而且在冒泡阶段会传播到父元素上，可以把处理程序绑定在父元素上
         2. 解决动态创建的元素，无法绑定事件的问题。
         3. 节省内容，优化性能
-
-        

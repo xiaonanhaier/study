@@ -29,6 +29,7 @@ BOM
     * window.onload   页面加载
     * window.onunload   页面卸载
     * window.onscroll   滚动条滚动的时候
+    * window.onresize   浏览器窗口缩放
 #### 滚动距离
   0.  scrollLeft    横向滚动距离
   1.  document.body.scrollTop   //chrome等标准浏览器
@@ -67,3 +68,22 @@ BOM
   4. platform   浏览器所在的系统平台
   5.  应用： 返回用户浏览器等信息
     * indexOf(str)  字符串方法 返回str在字符串中首次出现的索引
+####遮罩弹层
+  1.  定位
+    * fixed
+  2. opacity
+  3. 相对可视区 水平 垂直居中
+    * 弹层打开的时候，水平垂直居中
+    * 浏览器窗口缩放的时候，水平垂直居中 onresize
+  4. 遮罩层 覆盖整个页面高度
+    1. 可视区尺寸
+      * document.documentElement.clientWidth
+      * document.documentElement.clientHeight
+    2. 文档尺寸
+      * document.documentElement.scrollWidth
+      * document.documentElement.scrollHeight
+  5. 点击按钮打开和关闭
+  6. div 相对可视区 水平垂直居中
+    1. js做法
+      * 距离左侧left = (可视区宽度 - 元素宽度)/2
+      * 距离顶部top = (可视区高度 - 元素高度)/2
