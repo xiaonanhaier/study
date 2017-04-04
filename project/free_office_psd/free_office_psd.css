@@ -2,7 +2,7 @@
 a{text-decoration: none;color: inherit;}
 .top{width: 100%;height:890px;
 	background: url(images/Layer.png) center no-repeat;
-	background-size: 100% 890px;overflow: hidden;
+	background-size: 1920px 890px;overflow: hidden;
 }
 .content{width: 1214px;margin: 0 auto;overflow: hidden;
 	color: #fff;
@@ -14,3 +14,29 @@ a{text-decoration: none;color: inherit;}
 .tm p:nth-child(1){width: 500px;line-height: 60px;font-size: 48px;}
 .tm p:nth-child(2){margin-top:50px;width: 620px;
 	line-height: 24px;font-size: 16px;}
+.tm p:nth-child(3){margin-top:30px;margin-bottom:30px;width: 25px;border-bottom: 1px solid #fff;}
+.tm p:nth-child(4){width: 153px;height: 55px;
+text-align: center;line-height: 55px;
+border: 2px solid #fff;
+}
+.second{width: 100%;height: 890px;background: #f6f6f6;overflow: hidden;}
+.scon{width: 1214px;margin: 0 auto;margin-top: 290px;color: #333333;position: relative;}
+.scon p:nth-child(1){font-size: 53px;font-weight: bold;
+}
+.scon p:nth-child(2){margin-top:30px;margin-bottom:30px;width: 25px;border-bottom: 1px solid #333;}
+.scon p:nth-child(3){width: 415px;line-height: 26px;font-size: 18px;}
+.sconlist{position: absolute;width:900px;}
+.dw{left: 605px;top: -115px;}
+.dw1{left: 460px;top: 30px;}
+.dw2{left: 315px;top: 175px;}
+.li{width: 195px;height: 195px;overflow:hidden;
+	transform:rotate(45deg);background: #fff;
+	float: left;margin-left:95px;position: relative;
+}
+.li:hover{background: #28282e;color: #fff;cursor: pointer;}
+.lcon{
+	width: 265px;height: 265px;transform: rotate(-45deg);
+	text-align: center;
+}
+.lcon img{margin-top: 50px;margin-bottom: 10px;}
+.lconp{text-align: center;}
