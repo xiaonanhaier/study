@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>随机取整函数</title>
+</head>
+<body>
+  <script type="text/javascript">
+    function getrandom(num1,num2) {
+      var ca = num2 - num1 + 1;
+      return Math.floor(Math.random()*ca+num1);
+    }
+    console.log(getrandom(10,20));
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>随机滚动game</title>
+  <style>
+    body{background:tan;}
+    #colbox{width: 900px;height: 600px;margin: 0 auto;border: 4px solid #eee;
+      margin-top: 100px;background: #ccc;position:relative;}
+    #win{width: 50px;height: 50px;background: yellow;position: absolute;top: 0;left: 0;}
+    #win:hover{cursor: pointer;}
+    #fs{width: 60px;height: 40px;background: orange;margin: 0 auto;margin-top: 20px;text-align: center;
+        line-height: 40px;border-radius: 10px;font-weight: bold;font-size: 20px;color: #fff;}
+    #tc{width: 300px;height: 200px;position: absolute;background: tan;border: 4px solid #eee;
+      top: 50%;left: 50%;margin-left: -150px;margin-top: -100px;text-align: center;color: #eee;display: none;}
+    #tc p:nth-child(1){margin-top: 50px;font-size: 30px;font-weight: bold;}
+    #tc p:nth-child(2){width: 200px;height: 50px;text-align: center;line-height: 50px;
+      margin: 0 auto;border: 1px solid #eee; border-radius: 25px;}
+    #tc p:nth-child(2):hover{cursor: pointer;}
+  </style>
+</head>
+<body>
+  <div id="colbox">
+    <!-- <div id="win"></div> -->
+    <div id="tc">
+      <p>Game Over!</p>
+      <p id="over">开始游戏</p>
+    </div>
+  </div>
+  <p id="fs">0</p>
+  <script type="text/javascript">
+      var cors =['yellow','blue','orange','black','purple','green','brown','tan','syan','gray','pink'];
+      function getrandom(num1,num2) {
+        var ca = num2 - num1 + 1;
+        return Math.floor(Math.random()*ca+num1);
+      };
+      function move(obj,Num,func){
+				clearInterval(obj.time);
+        console.log(obj)
+				obj.time = setInterval(function(){
+					var speet = 10;
+					var left = obj.offsetTop;
+          console.log(left);
+					if (left > Num) {
+						speet = -10;
+					}else{
+						speet = 10;
+					}
+					obj.style.top = (left + speet)+'px';
+					var result = Math.abs(left - Num);
+					if(result < 10){
+						clearInterval(obj.time);
+						obj.style.top = Num+'px';
+            if (func) {
+              func();
+            }
+					}
+				},10)
+			}
+      function creatdiv(fu) {
+        var el = document.createElement('div');
+        el.id = 'win';
+        el.style.left = getrandom(0,850)+'px';
+        el.style.background = cors[getrandom(0,cors.length)];
+        return el;
+      }
+      function render(){
+        box = creatdiv();
+        colbox.appendChild(box);
+        box.onclick = function(){
+          colbox.removeChild(box);
+          num++;
+          render();
+        };
+        move(box,550,function(){
+          num--;
+          if (num<=0) {
+            num=0;
+            box.style.top = '550px';
+          }else {
+            colbox.removeChild(box);
+            render();
+          }
+          fs.innerHTML = num;
+        });
+      }
+      window.onload = function(){
+        var fs = document.getElementById('fs');
+        var tc = document.getElementById('tc');
+        var over = document.getElementById('over');
+        var colbox = document.getElementById('colbox');
+        var num = 0;
+        render();
+      }
+  </script>
+</body>
+</html>

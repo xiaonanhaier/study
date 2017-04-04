@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>随机位置</title>
+  <style>
+    #colbox{width: 400px;height: 300px;margin-top: 30px;margin: 0 auto;}
+    #win{width: 400px;height: 250px;margin: 0 auto;border: 1px solid red;
+      border-radius: 15px;line-height: 250px;text-align: center;font-size:40px;color: red;font-weight: bold;}
+    #star{width: 60px;height: 40px;background: orange;margin: 0 auto;margin-top: 20px;text-align: center;
+        line-height: 40px;border-radius: 10px;font-weight: bold;font-size: 20px;color: #fff;}
+    #star:hover{cursor: pointer;}
+    span{position: absolute;width: 80px;height: 20px;font-weight: bold;}
+  </style>
+</head>
+<body>
+  <div id="colbox">
+    <div id="win">
+        炒面
+    </div>
+    <p id="star">star</p>
+  </div>
+  <script type="text/javascript">
+    function getrandom(num1,num2) {
+      var ca = num2 - num1 + 1;
+      return Math.floor(Math.random()*ca+num1);
+    };
+    var wid = document.documentElement.clientWidth-80;
+    var hei = document.documentElement.clientHeight-20;
+    window.onresize = function(){
+      wid = document.documentElement.clientWidth-80;
+      hei = document.documentElement.clientHeight-20;
+    }
+    // var wid = document.documentElement.clientWidth-80;
+    // var hei = document.documentElement.clientHeight-20;
+    var fan = ['炒饭','炒饼','麻辣香锅','烤鱼','烤肉拌饭','水饺','馄饨','豆腐脑','2123','131231','werqw','rwer'];
+    var cors =['yellow','blue','orange','black','purple','green','brown','tan','syan','gray','pink']
+    window.onload = function(){
+      var timeid = null;
+      for (var i = 0; i < fan.length; i++) {
+        var sp = document.createElement('span');
+        var tex = document.createTextNode(fan[i]);
+        sp.appendChild(tex);
+        document.body.appendChild(sp);
+      }
+      var spans = document.getElementsByTagName('span');
+      for (var i = 0; i < spans.length; i++) {
+        spans[i].style.display = 'none';
+      }
+      var win = document.getElementById('win');
+      var onoff = document.getElementById('star');
+      var kg = true;
+      onoff.onclick = function(){
+        if (kg) {
+          timeid = setInterval(function() {
+            win.innerHTML = fan[0,getrandom(0,fan.length-1)];
+            for (var i = 0; i < spans.length; i++) {
+              spans[i].style.display = 'none';
+            }
+            for (var i = 0; i < 10; i++) {
+              var q = getrandom(0,spans.length-1);
+              spans[q].style.display = 'block';
+              spans[q].style.top = getrandom(0,hei)+'px';
+              spans[q].style.left = getrandom(0,wid)+'px';
+              spans[q].style.color = cors[getrandom(0,cors.length-1)];
+            }
+          },100);
+          kg = false;
+          onoff.innerHTML = 'stop';
+        }else {
+            clearInterval(timeid);
+            for (var i = 0; i < spans.length; i++) {
+              spans[i].style.display = 'none';
+            }
+            kg = true;
+            onoff.innerHTML = 'star';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
