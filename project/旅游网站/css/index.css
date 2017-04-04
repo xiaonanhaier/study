@@ -49,7 +49,7 @@ a{
 	/*overflow: hidden;*/
 }
 .tit-inm{
-	position: absolute;	
+	position: absolute;
 	height: 44px;
 	width: 720px;
 	float: left;
@@ -98,7 +98,7 @@ a{
 .tit-input-f a{
 	display: block;
 	width: 59px;
-	height: 40px;	
+	height: 40px;
 	text-align: center;
 	float: right;
 	font-size: 16px;
@@ -369,7 +369,7 @@ a{
 .rmtj-main-js span:nth-child(1){
 	display: block;
 	float: right;
-	color: #a3a3a3;	
+	color: #a3a3a3;
 }
 .rmtj-main-js span:nth-child(2){
 	display: block;
