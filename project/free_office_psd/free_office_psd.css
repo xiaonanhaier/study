@@ -1,0 +1,16 @@
+*{margin: 0;padding: 0}
+a{text-decoration: none;color: inherit;}
+.top{width: 100%;height:890px;
+	background: url(images/Layer.png) center no-repeat;
+	background-size: 100% 890px;overflow: hidden;
+}
+.content{width: 1214px;margin: 0 auto;overflow: hidden;
+	color: #fff;
+}
+.logo{height: 30px;margin-top: 50px;}
+.logo img{float: left;margin-right: 15px}
+.logo a{display: block;height: 30px;line-height: 35px;float: left;}
+.tm{margin-top: 195px;overflow: hidden;}
+.tm p:nth-child(1){width: 500px;line-height: 60px;font-size: 48px;}
+.tm p:nth-child(2){margin-top:50px;width: 620px;
+	line-height: 24px;font-size: 16px;}
