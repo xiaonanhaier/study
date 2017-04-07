@@ -12,7 +12,7 @@
     #fs{width: 60px;height: 40px;background: orange;margin: 0 auto;margin-top: 20px;text-align: center;
         line-height: 40px;border-radius: 10px;font-weight: bold;font-size: 20px;color: #fff;}
     #tc{width: 300px;height: 200px;position: absolute;background: tan;border: 4px solid #eee;
-      top: 50%;left: 50%;margin-left: -150px;margin-top: -100px;text-align: center;color: #eee;display: none;}
+      top: 50%;left: 50%;margin-left: -150px;margin-top: -100px;text-align: center;color: #eee;}
     #tc p:nth-child(1){margin-top: 50px;font-size: 30px;font-weight: bold;}
     #tc p:nth-child(2){width: 200px;height: 50px;text-align: center;line-height: 50px;
       margin: 0 auto;border: 1px solid #eee; border-radius: 25px;}
@@ -21,14 +21,14 @@
 </head>
 <body>
   <div id="colbox">
-    <!-- <div id="win"></div> -->
     <div id="tc">
-      <p>Game Over!</p>
-      <p id="over">开始游戏</p>
+      <p>play happpy!</p>
+      <p id="over">开始游戏！</p>
     </div>
   </div>
   <p id="fs">0</p>
   <script type="text/javascript">
+      var num = 0;
       var cors =['yellow','blue','orange','black','purple','green','brown','tan','syan','gray','pink'];
       function getrandom(num1,num2) {
         var ca = num2 - num1 + 1;
@@ -36,11 +36,11 @@
       };
       function move(obj,Num,func){
 				clearInterval(obj.time);
-        console.log(obj)
+        // console.log(obj)
 				obj.time = setInterval(function(){
 					var speet = 10;
 					var left = obj.offsetTop;
-          console.log(left);
+          // console.log(left);
 					if (left > Num) {
 						speet = -10;
 					}else{
@@ -55,7 +55,7 @@
               func();
             }
 					}
-				},10)
+				},50)
 			}
       function creatdiv(fu) {
         var el = document.createElement('div');
@@ -70,6 +70,7 @@
         box.onclick = function(){
           colbox.removeChild(box);
           num++;
+          fs.innerHTML = num;
           render();
         };
         move(box,550,function(){
@@ -77,6 +78,8 @@
           if (num<=0) {
             num=0;
             box.style.top = '550px';
+            over.innerHTML = '重新开始！';
+            tc.style.display = 'block';
           }else {
             colbox.removeChild(box);
             render();
@@ -89,8 +92,18 @@
         var tc = document.getElementById('tc');
         var over = document.getElementById('over');
         var colbox = document.getElementById('colbox');
-        var num = 0;
-        render();
+        // render();
+        var first = true;
+        over.onclick = function(){
+          if (first) {
+            render();
+          }else {
+            colbox.removeChild(box);
+            render();
+          }
+          first = false;
+          tc.style.display = 'none';
+        }
       }
   </script>
 </body>
