@@ -19,7 +19,7 @@ a{text-decoration: none;color: inherit;}
 text-align: center;line-height: 55px;
 border: 2px solid #fff;
 }
-.second{width: 100%;height: 890px;background: #f6f6f6;overflow: hidden;}
+.second{width: 100%;height: 1200px;background: #f6f6f6;overflow: hidden;position: relative;}
 .scon{width: 1214px;margin: 0 auto;margin-top: 290px;color: #333333;position: relative;}
 .scon p:nth-child(1){font-size: 53px;font-weight: bold;
 }
@@ -40,3 +40,33 @@ border: 2px solid #fff;
 }
 .lcon img{margin-top: 50px;margin-bottom: 10px;}
 .lconp{text-align: center;}
+.secfot{width: 100%;height:310px;background: #fff;position: absolute;bottom: 0;}
+.seccon{width: 1214px;margin:0 auto;height: 100%;display: flex;}
+.seclist{flex: 1;}
+.seclist span{display: block;width: 420px;margin-top: 120px;line-height: 26px;
+font-size: 18px;}
+.tit{font-size: 53px;margin-top:120px;font-weight: bold;}
+.line{margin-top:30px;margin-bottom:30px;width: 25px;border-bottom: 1px solid #333;}
+.three{width: 100%;height: 890px;background: #28282e;overflow:hidden;}
+.thrcon{width: 1214px;margin: 0 auto;margin-top: 240px;height: 650px;overflow:hidden;
+display: flex;color: #fff;}
+.thrlin{border-bottom: 1px solid #fff;margin-bottom: 50px;}
+.thrma{margin: 0;}
+.thrword{flex: 1;}
+.bg{width: 415px;line-height: 26px;font-size: 18px;}
+.btn{width: 130px;height: 50px;margin-top: 70px;
+text-align: center;line-height: 50px;
+border: 2px solid #fff;}
+.img{text-align:center;position: relative;height: 380px;width: 695px;}
+#imgc{height: 270px;}
+.limglist{position: absolute;bottom: 0;left: 50%;margin-left: -113px;}
+.four{height: 890px;}
+.photo{display: block;width: 276px;height: 276px;transform: rotate(-45deg);
+position: absolute;top: -41px;;left: -41px;}
+.lii{width: 195px;height: 195px;overflow:hidden;
+	transform:rotate(45deg);background: #fff;
+	float: left;margin-left:95px;position: relative;}
+.lii:hover{cursor: pointer;}
+.tan{background: rgba(255,0,0,0.5);width: 275px;top: 40px;left: 50px;color: #fff;position: absolute;top: 150px;left: 150px;
+transition: all 1s;}
+.hove:hover .tan{top: 58px;left: 56px;}
