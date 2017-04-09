@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cookie</title>
+  <style>
+    span{display: block;width: 100px;height: 50px;text-align: center;line-height: 50px;background: yellow;}
+  </style>
+</head>
+<body>
+  <span id="red">red</span>
+  <span id="mr">默认</span>
+  <script type="text/javascript">
+    window.onload = function(){
+      var redd = document.getElementById('red');
+      var mr = document.getElementById('mr');
+      var mrc = 'blue';
+      var redc = 'red';
+      mr.onclick = function(){
+        setcookie('skin',mrc,10);
+        document.body.style.backgroundColor = getcookie('skin');
+      }
+      redd.onclick = function(){
+        setcookie('skin',redc,10);
+        // console.log(getcookie('skin'));
+        document.body.style.backgroundColor = getcookie('skin');
+      }
+      // console.log(date);
+      // console.log(document.cookie);
+      // var txt = document.cookie;
+      // var ss = txt.split(';');
+      // console.log(ss);
+      function getcookie(key) {
+        var txt1 =[];
+        var txt = document.cookie.split(';');
+        for (var i = 0; i < txt.length; i++) {
+          txt1[i] = txt[i].split('=');
+          if (trim(txt1[i][0]) == key) {
+            return txt1[i][1];
+          }
+        }
+        return '';
+      }
+      function setcookie(name,value,dates) {
+        var date = new Date();
+        date.setDate(date.getDate()+dates);
+        date.toGMTString();
+        document.cookie = name +'='+ value +';expires ='+date;
+      }
+      function trim(str) {
+        var reg1 = /(\s*)|(\s*$)/g;
+        return str.replace(reg1,'');
+      }
+    }
+  </script>
+</body>
+</html>

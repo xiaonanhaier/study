@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cookie</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload = function(){
+      var date = new Date();
+      date.setDate(date.getDate()+30);
+      date.toGMTString();
+      document.cookie = 'user = fang;expires = '+date;
+      document.cookie = 'age = 10'
+      // console.log(date);
+      // console.log(document.cookie);
+      // var txt = document.cookie;
+      // var ss = txt.split(';');
+      // console.log(ss);
+      console.log(getcookie('age'));
+      function getcookie(key) {
+        var txt1 =[];
+        var txt = document.cookie.split(';');
+        for (var i = 0; i < txt.length; i++) {
+          txt1[i] = txt[i].split('=');
+          console.log(txt1[i]);
+
+          if (trim(txt1[i][0]) == key) {
+            return txt1[i][1];
+          }
+        }
+        return '';
+      }
+      function trim(str) {
+        var reg1 = /(\s*)|(\s*$)/g;
+        return str.replace(reg1,'');
+      }
+    }
+  </script>
+</body>
+</html>
