@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery</title>
+  <style>
+    #tab-wrap{margin: 0 auto;width: 600px;}
+    #tab-nav{width: 600px;height: 60px;text-align: center;line-height: 60px;}
+    #tab-nav span{display: block;width: 200px;height: 60px;float: left;}
+    #tab-nav span:nth-child(1){background: red;}
+    #tab-nav span:nth-child(2){background: green;}
+    #tab-nav span:nth-child(3){background: yellow;}
+    .tab{width: 600px;height: 300px;display: none;background: red;}
+    .active{display: block;}
+  </style>
+</head>
+<body>
+  <div id="tab-wrap">
+		<div id="tab-nav">
+			<span>Tab1</span>
+			<span>Tab2</span>
+			<span>Tab3</span>
+		</div>
+    <div id="tab-con">
+			<div class="tab active"></div>
+			<div class="tab"></div>
+			<div class="tab"></div>
+		</div>
+	</div>
+  <script type="text/javascript" src = '../../jquery-1.8.3.min.js'></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#tab-nav').children('span').click(function() {
+        $('#tab-con').children().removeClass('active');
+        $('#tab-con').children().eq($(this).index()).css({background:$(this).css('background')})
+        $('#tab-con').children().eq($(this).index()).addClass('active');
+      })
+    })
+  </script>
+</body>
+</html>

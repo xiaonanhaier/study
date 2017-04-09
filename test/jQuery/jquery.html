@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery</title>
+</head>
+<body>
+  <ul>
+  <li>John</li>
+  <li>Karl</li>
+  <li>Brandon</li>
+</ul>
+<ul>
+  <li>Glen</li>
+  <li>Tane</li>
+  <li>Ralph</li>
+</ul>
+  <script type="text/javascript" src = '../../jquery-1.8.3.min.js'></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      // alert('ddd');
+      $("body").css({background:"red"});
+      $('ul li:even').css({background:'blue'}).height(40)
+    })
+  </script>
+</body>
+</html>
