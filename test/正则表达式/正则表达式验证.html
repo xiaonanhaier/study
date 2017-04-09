@@ -12,16 +12,24 @@
 </head>
 <body>
   <div class="bigbox">
-    <div class="list">
+    <!-- <div class="list">
       <p id="phone"></p>
       <p id="emil"></p>
       <p id="diy"></p>
-    </div>
+    </div> -->
+    <input type="text" name="" value="" id="emil">
   </div>
 <script type="text/javascript">
   function trim(str) {
     var reg1 = /(\s*)|(\s*$)/g;
     return str.replace()
+  }
+  window.onload = function(){
+    var inp = document.getElementById('emil');
+    inp.onblur = function () {
+      var txt = trim(inp.value);
+      console.log(txt);
+    }
   }
 </script>
 </body>
