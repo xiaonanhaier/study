@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>电影</title>
+  <script type="text/javascript" src = '../../data.js'></script>
+  <style>
+    *{margin:0;padding: 0;}
+    #box{width: 1280px;margin:0 auto;}
+    .list{width: 600px;margin-top: 30px;float: left;height: 420px;margin-left: 40px;}
+    .word{width: 280px;height: 420px;float: left;margin-left:20px; border-bottom: 1px solid #ddd;}
+    .list img{display: block;float: left;width: 300px;height: 420px;}
+    .name{font-size: 35px;margin-top: 60px;}
+    .enname{font-size: 20px;color: #bbb;margin-top: 5px;}
+    .fen{font-size: 40px;font-weight: bold;color: orange;
+    margin-top: 30px;margin-bottom: 30px;}
+    .type{font-size: 20px;}
+    .times{font-size: 20px;color: #aaa;margin-top: 10px;}
+  </style>
+</head>
+<body>
+  <div id="box">
+    <!-- <div class="list">
+      <img src="https://img3.doubanio.com/view/movie_poster_cover/lpst/public/p2417948644.webp" alt="">
+      <div class="word">
+        <h3 class="name">美女与野兽</h3>
+        <h3 class="enname">heheheheh</h3>
+        <p class="fen">8.2</p>
+        <p class="type">科幻，奇幻</p>
+        <p class="time">shijian</p>
+      </div>
+    </div> -->
+  </div>
+  <script type="text/javascript">
+    var box = document.getElementById('box');
+    for (var i = 0; i < data.subjects.length; i++) {
+      var list = document.createElement('div');
+      list.className = 'list';
+      var img = document.createElement('img');
+      img.src = data.subjects[i].images.large;
+      var word = document.createElement('div');
+      word.className = 'word';
+      var namee = document.createElement('h4');
+      namee.innerHTML = data.subjects[i].title;
+      namee.className = 'name';
+      var enname = document.createElement('h3');
+      enname.innerHTML = data.subjects[i].original_title;
+      enname.className = 'enname';
+      var num = document.createElement('p');
+      num.innerHTML = data.subjects[i].rating.average;
+      num.className = 'fen';
+      var type = document.createElement('p');
+      type.innerHTML = data.subjects[i].genres.join(',');
+      type.className = 'type';
+      var time = document.createElement('p');
+      time.innerHTML = data.subjects[i].year;
+      time.className = 'time';
+      word.appendChild(namee);
+      word.appendChild(enname);
+      word.appendChild(num);
+      word.appendChild(type);
+      word.appendChild(time);
+      list.appendChild(img);
+      list.appendChild(word);
+      box.appendChild(list);
+    }
+  </script>
+</body>
+</html>
