@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html>
+	<meta charset="utf-8">
+	<head>
+		<title>表单验证</title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			.box{margin: 0 auto;width: 276px;}
+			.amin{display: block;float: left;width: 90px;height:30px;border: 1px solid #fff;border-bottom-color: orange;
+				text-decoration: none;color: black;line-height: 30px;font-weight: bold;font-size: 12px;text-align: center;}
+			.amin{display: block;float: left;width: 90px;height:30px;border: 1px solid #fff;border-bottom-color: orange;
+				text-decoration: none;color: black;line-height: 30px;font-weight: bold;font-size: 12px;text-align: center;}
+			.one{border-top-color: #bbb;border-left-color: #bbb;}
+			.two{border-top-color: #bbb;}
+			.three{border-top-color: #bbb;border-right-color: #bbb;}
+			.conlist{height: 300px;width: 274px;border: 1px solid #bbb;border-top: none;}
+			.borco{border-color: orange;border-bottom-color: #fff;}
+			.inmain{width: 260px;margin-left:6px;border: 1px solid #bbb;height: 30px;margin-top: 20px;font-size: 10px;outline: none;}
+			.ts{display: block;font-size: 10px;color: orange;display: none;}
+			.co{border-color: orange;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="nav">
+				<a href="#" class="amin one">手机注册</a>
+				<a href="#" class="amin two">邮箱注册</a>
+				<a href="#" class="amin three">个性注册</a>
+			</div>
+			<div class="conlist">
+				<div class="ab">
+					<input class="inmain" type="" name="" placeholder="邮箱">
+					<span class="ts">*您输入的邮箱格式错误</span>
+				</div>
+				<div class="ab">
+					<input class="inmain" type="" name="" placeholder="手机">
+					<span class="ts">*您输入的手机号格式错误</span>
+				</div>
+				<div class="ab">
+					<input class="inmain" type="" name="" placeholder="身份证">
+					<span class="ts">*您输入的身份证号格式错误</span>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src = '../../jquery-3.2.0.min.js'></script>
+		<script type="text/javascript">
+			// $(document).ready(
+			var emil = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
+			var phone = /0?(13|14|15|18)[0-9]{9}/;
+			var idcard = /\d{17}[\d|x]|\d{15}/;
+			var sz = [emil,phone,idcard]
+				$('.nav a').click(function(){
+					$(this).siblings().removeClass('borco');
+					$(this).addClass('borco');
+					$('.conlist').css('border-color','orange')
+				})
+				$('.ab').children('input').focus(function(){
+					$(this).parent().siblings().children('input').removeClass('co');
+					$(this).addClass('co')
+				})
+				$('.ab').children('input').focusout(function(){
+					var text = $(this).val();
+					var reg = sz[$(this).parent().index()]
+					if (!(reg.test(text))) {
+						$(this).siblings().css('display','block')
+					}else{
+						$(this).siblings().css('display','none')
+					}
+
+				})
+			// )
+		</script>
+	</body>
+</html>
