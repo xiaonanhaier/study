@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>轮播图</title>
+  <style media="screen">
+    *{margin:0;padding: 0;}
+    #box{width: 960px;height: 460px;margin:0 auto;margin-top: 200px;
+    position: relative;}
+    #img{position: relative;width: 100%;height: 100%;}
+    #img a{display: block;position: absolute;width: 100%;height: 100%;top: 0;opacity: 0;}
+    img{display: block;height: 100%;width: 100%}
+    .btn{display: block;position: absolute;top: 200px;z-index: 40;display: none;}
+    .next{right: 0;}
+    .shang{left: 0;}
+    #dian{position: absolute;right: 0;bottom: 20px;;list-style: none;z-index: 41;}
+    #dian li{float: left;width: 10px;height: 10px;border: 2px solid #fff;border-radius: 10px;
+    margin-right: 20px;}
+    .new{background: none;}
+  </style>
+  <script type="text/javascript" src = '../../../jquery-1.8.3.min.js'></script>
+  <script type="text/javascript" src = '../../../jquery.cycle.all.min.js'></script>
+</head>
+<body>
+  <div id="box">
+    <div id="img">
+      <a href="#">
+        <img src="images/slide-img1.jpg" alt="">
+      </a>
+      <a href="#">
+        <img src="images/slide-img2.jpg" alt="">
+      </a>
+      <a href="#">
+        <img src="images/slide-img3.jpg" alt="">
+      </a>
+      <a href="#">
+        <img src="images/slide-img4.jpg" alt="">
+      </a>
+      <a href="#">
+        <img src="images/slide-img3.jpg" alt="">
+      </a>
+      <a href="#">
+        <img src="images/slide-img4.jpg" alt="">
+      </a>
+    </div>
+    <a class= 'btn shang' href="#">
+      <img src="images/prev-btn.png" alt="">
+    </a>
+    <a class= 'btn next' href="#">
+      <img src="images/next-btn.png" alt="">
+    </a>
+    <ul id="dian">
+      <!-- <li></li>
+      <li></li>
+      <li></li>
+      <li></li> -->
+    </ul>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#img').cycle({
+          fx:'slideY',
+          timeout:1500
+        })
+    })
+  </script>
+</body>
+</html>
