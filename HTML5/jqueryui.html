@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jqueryui使用</title>
+</head>
+<style>
+
+</style>
+<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.min.css">
+<body>
+  <audio id='music' src="aotuman.mp3"></audio>
+  <div class="my-slider"></div>
+<script type="text/javascript" src='jquery-ui-1.12.1/external/jquery/jquery.js'></script>
+<script type="text/javascript" src='jquery-ui-1.12.1/jquery-ui.min.js'></script>
+<script type="text/javascript">
+  window.onload = function(){
+    var music = document.getElementById('music')
+    var alltime = music.duration;
+    var newtime = music.currentTime;
+    var bl = Math.floor(alltime/newtime*100);
+    music.addEventListener('timeupdate',function(){
+      newtime = music.currentTime;
+      bl = Math.floor(newtime/alltime*100);
+      $('.my-slider').slider('option','value',bl)
+    })
+      $('.my-slider').slider({
+        min: 0,
+        max: 100,
+        slide:function(event,ui){
+          music.pause();
+        },
+        stop:function(event,ui){
+          music.currentTime = alltime*(ui.value/100)
+          music.play()
+        }
+      })
+  }
+</script>
+</body>
+</html>
