@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>播放器</title>
+</head>
+<style>
+#pla{width: 300px;height: 60px;background-color: red;}
+  @font-face {
+    font-family: 'iconfont';
+    src: url('font/iconfont.eot');
+    src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('font/iconfont.woff') format('woff'),
+    url('font/iconfont.ttf') format('truetype'),
+    url('font/iconfont.svg#iconfont') format('svg');
+  }
+  .iconfont{
+    font-family:"iconfont" !important;
+    font-size:40px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+  }
+  i:hover{cursor: pointer;}
+</style>
+<body>
+  <!-- <input type="email" > -->
+  <audio id='music' src="aotuman.mp3" controls></audio>
+  <div id="pla">
+    <i id='pre' class="iconfont">&#xe62c;</i>
+    <i id='playoff' class="iconfont">&#xe62e;</i>
+    <i id='nxt' class="iconfont">&#xe62f;</i>
+  </div>
+<script type="text/javascript">
+window.onload = function(){
+  var music = document.getElementById('music')
+  var pla = document.getElementById('playoff')
+  // var alltime = music.duration;
+  // var min = Math.floor(alltime/60);
+  // var sic = Math.floor(alltime)%60;
+  // var time = min+':'+sic;
+  music.currentTime = 2;
+  console.log(music.currentTime);
+  pla.onclick = function(){
+    if(music.paused){
+      music.play()
+      this.innerHTML ='&#xe62d;'
+    }else{
+      music.pause()
+      this.innerHTML ='&#xe62e;'
+    }
+  }
+}
+</script>
+</body>
+</html>
