@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>音乐播放器</title>
+  <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+  <style type="text/css">
+  @font-face {
+    font-family: 'iconfont';
+    src: url('font/iconfont.eot');
+    src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('font/iconfont.woff') format('woff'),
+    url('font/iconfont.ttf') format('truetype'),
+    url('font/iconfont.svg#iconfont') format('svg');
+  }
+  .iconfont{
+  font-family:"iconfont" !important;
+  font-size:40px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  }
+  .iconfont:hover{cursor: pointer;}
+  .list{width: 400px;height: 600px;border: 1px solid red;position: relative;
+    margin:0 auto;margin-top:50px;overflow: hidden;}
+    ul{padding:0;list-style: none;margin: 0;}
+    li{height: 40px;line-height: 40px;border-bottom: 1px solid #eee;
+      border-left: 4px solid #fff;padding-left: 10px;}
+    li:hover{border-left: 4px solid orange;cursor:pointer;}
+    .list-play{width: 100%;height: 680px;background: red;position: absolute;top:520px;
+    background:url(images/huihuxi.jpg) center no-repeat;background-size: 100% 100%;}
+    .zhao{width: 100%;height: 100%;position: absolute;top: 0;background: rgba(255,0,0,0.3);}
+    .top{height: 80px;width: 100%;position: absolute;top: 0;}
+    .top img{display: block;float: left;height: 80px;width: 80px;}
+    .top h4{padding-left: 20px;float: left;}
+    .xinxi h2:hover{cursor: pointer;}
+    .top p{width: 40px;height: 40px;margin-top: 20px;float: left;padding: 0;margin: 0;
+      margin-left: 130px;line-height: 80px;}
+      .top p:hover{cursor: pointer;}
+    .con{position: absolute;height: 600px;width: 100%;top: 80px;}
+    .huakuai{width: 240px;height: 1px;margin: 0 auto;margin-top: 50px;}
+    .cdimg{width: 200px;height: 200px;margin: 0 auto;margin-top: 100px;position: relative;}
+    .cdimg i{position: absolute;top: 50%;left: 50%;margin-left: -20px;margin-top: -20px;}
+    .cdimg img{width: 100%;height: 100%;}
+    .xinxi{text-align: center;}
+    .ti{width: 50px;height: 30px;line-height: 30px;font-size: 10px;color: #fff;
+      position: absolute;top: 470px;}
+    .newti{left: 45px;}
+    .sumti{left: 340px;}
+    .huakuai span{width: 8px !important;height: 8px !important;
+      border: none !important;top: -4px !important;left: -4px ;border-radius: 8px !important;margin-left: 0em !important;}
+  </style>
+</head>
+<body>
+  <div class="list">
+    <audio id='music' src="aotuman.mp3"></audio>
+    <div class="list-con">
+      <ul id="list">
+        <li>梁静茹 - 会呼吸的痛</li>
+        <li>金玟岐 - 小幸运（Cover 田馥甄）</li>
+        <li>毛毛 - 奇迹再现</li>
+        <li>徐薇 - 发如雪－徐薇（Cover 周杰伦）</li>
+        <li>周二珂 - 匆匆那年</li>
+      </ul>
+    </div>
+    <div class="list-play">
+      <div class="zhao"></div>
+      <div class="top">
+        <img id='simg' src="images/huihuxi.jpg" alt="">
+        <h4>会呼吸的痛</h4>
+        <p><i class="iconfont playoff">&#xe62e;</i></p>
+      </div>
+      <div class="con">
+        <div class="xinxi">
+          <h2 id='fh'>返回</h2>
+          <h3>会呼吸的痛</h3>
+          <p>梁静茹</p>
+        </div>
+        <div class="cdimg">
+          <img id='cd' src="images/huihuxi.jpg" alt="">
+          <i class="iconfont playoff">&#xe62e;</i>
+        </div>
+        <div class="my-slider huakuai"></div>
+        <div class="ti newti">0</div>
+        <div class="ti sumti">fdsfsd</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src='jquery-ui-1.12.1/external/jquery/jquery.js'></script>
+  <script type="text/javascript" src='jquery-ui-1.12.1/jquery-ui.min.js'></script>
+  <script type="text/javascript">
+    window.onload = function(){
+      var music = $('#music')[0];
+      var alltime = music.duration;
+      var min = Math.floor(alltime/60);
+      var sic = Math.floor(alltime)%60;
+      var tim = min+':'+sic;
+      var newtime = music.currentTime;
+      console.log(newtime);
+      var bl = Math.floor(alltime/newtime*100);
+      $('.sumti').html(tim);
+      $('.playoff').click(function() {
+        if(music.paused){
+          music.play()
+          $('.playoff').html('&#xe62d;');
+        }else{
+          music.pause()
+          $('.playoff').html('&#xe62e;');
+        }
+      })
+      $('#simg').click(function(){
+        $('.list-play').animate({
+          top:'-80px',
+        })
+      })
+      $('#fh').click(function(){
+        $('.list-play').animate({
+          top:'520px',
+        })
+      })
+      music.addEventListener('timeupdate',function(){
+        newtime = music.currentTime;
+        bl = Math.floor(newtime/alltime*100);
+        $('.my-slider').slider('option','value',bl)
+        var min = Math.floor(newtime/60);
+        var sic = Math.floor(newtime)%60;
+        var tim2 = min+':'+sic;
+        $('.newti').html(tim2);
+      })
+      $('.my-slider').slider({
+        min: 0,
+        max: 100,
+        slide:function(event,ui){
+          music.pause();
+        },
+        stop:function(event,ui){
+          music.currentTime = alltime*(ui.value/100)
+          music.play()
+        }
+      })
+    }
+  </script>
+</body>
+</html>
