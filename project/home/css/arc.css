@@ -1,0 +1,49 @@
+div,h2,h3,p,body{margin: 0;padding:0;max-height: 100000px;}
+body{background: #ccc;}
+a{text-decoration: none;}
+.header{width: 100%;height: 0.85rem;background: #d01922;
+  color: #fff;font-weight: bold;font-size:0.32rem;
+text-align: center;line-height: 0.85rem;position:relative;}
+.list{width: 100%;background: #fff;  border-bottom: 0.01rem solid #787878;}
+.list-con{width: 95%;background: #fff;margin:0 auto;}
+.list-con img{display: block;margin: 0;width: 100%;}
+.title{font-size: 0.38rem;line-height: 0.92rem;}
+.msg{line-height: 0.6rem;font-size: 0.23rem;color: #787878;}
+.msg span{border-radius: 0.1rem;margin-right: 0.1rem;
+  padding:0.05rem 0.1rem;border: 0.01rem solid #787878;}
+.gz{line-height: 0.85rem;
+  height: 0.85rem;width:100%;font-size: 0.23rem;}
+.gz p{float:right;}
+.sj{margin-top: 0.15rem;margin-right: 0.1rem;display: block;float:right;width: 0;height: 0;border: 0.2rem solid #ea5414;
+border-top-color:transparent; border-left-color:transparent;border-right-color:transparent; }
+.fot{
+
+  height: 0.88rem;line-height: 0.88rem;font-size: 0.26rem;
+}
+.fot a{
+  font-size: 0.2rem;float: right;
+}
+
+.info{padding-top: 0.3rem;width:100%;background: #fff;  border-bottom: 0.01rem solid #787878;}
+.info-con{width: 95%;margin:0 auto;}
+.bordernone{border: none;}
+.info-con h3{line-height: 1rem;font-size: 0.2rem;}
+.info-con h3>span{padding: 0.05rem 0.1rem;background: #f1f1f1;margin-right: 0.1rem;
+font-weight: none;}
+.info-con p{font-size:0.22rem;line-height: 0.38rem;}
+.info-tit{font-size: 0.28rem;color: #d90c0d;line-height: 0.75rem;}
+
+
+.footer{width: 100%;background: #fff;padding-top: 0.7rem;padding-bottom: 1.4rem;}
+.footer-con{padding-top:0.3rem;width: 95%;margin:0 auto;background:url(../images/3-end.png) top center no-repeat;}
+.footer-con>p{line-height: 0.33rem;text-align: center;font-size: 0.22rem;}
+.footer-img{display: flex;margin-top:0.2rem;}
+.img-r{flex: 1; padding-right: 0.2rem;}
+.img-r img{float: right;}
+.img-l{flex: 1;padding-left: 0.2rem;}
+
+.lx{width: 100%;position: fixed;bottom: 0;height: 0.7rem;display: flex;line-height: 0.7rem;
+  color:#fff;font-size: 0.24rem;text-align: center;}
+.lx a{color: inherit;}
+.y{flex: 1;background: #f1851a;}
+.r{flex: 1;background: #d01922;}

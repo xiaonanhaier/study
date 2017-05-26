@@ -1,0 +1,16 @@
+div,h2,h3,p,body{margin: 0;padding:0;max-height: 100000px;}
+body{background: #ccc;}
+.header{width: 100%;height: 0.85rem;background: #d01922;
+  color: #fff;font-weight: bold;font-size:0.32rem;
+text-align: center;line-height: 0.85rem;position:relative;}
+.list{width: 100%;border-bottom:0.01rem solid #aaa;background: #fff;}
+.list-con{width: 93%;padding:0.25rem 0;
+  background: #fff;margin:0 auto;display: flex;}
+  .r{flex:1}
+.r img{width: 100%;height: 100%;display: block;margin: 0;}
+.l{flex:2;padding-left: 0.2rem;}
+.l h2{font-size: 0.3rem;margin-bottom: 0.15rem;}
+.l h3{font-size: 0.2rem;line-height: 0.3rem;color: #ccc;margin-bottom: 0.2rem;}
+.l p{font-size: 0.2rem;color: #aaa;}
+.l p>span{display: block;margin-right: 0.05rem;border-radius: 0.02rem;
+  float: left;padding: 0.08rem;background: #f0f3f5;}
