@@ -1,0 +1,19 @@
+body,div,p,h2{
+  padding: 0;margin:0;
+}
+a{text-decoration: none;color: inherit;}
+#btn{font-size: 0.3rem;}
+.di{width: 100%;background: red;height: 4rem;}
+.zhao{display: none;position: fixed;top: 0;background: rgba(145,142,142,0.5);}
+.content{width: 5.04rem;height: 5.1rem;
+position: absolute;top: 50%;left: 50%;border-radius: 0.15rem;overflow:hidden;
+margin-left:-2.52rem;margin-top: -2.55rem;background: #fff;}
+.title{width: 100%;height: 0.79rem;text-align: center;font-size: 0.28rem;
+line-height: 0.79rem;background: #f7f7f7;margin-bottom: 0.2rem;}
+label{display: block;color: #d1d1d1;width: 4.5rem;margin:0 auto;border-bottom:0.01rem solid #d1d1d1;
+  padding: 0.2rem 0;font-size: 0.24rem;}
+label input{width: 3rem;font-size: 0.2rem;border: none;outline: none;}
+label span{margin-left: 0.2rem;color: #d01922;}
+form>input{display: block;border: 0;padding:0;width: 3.8rem;height: 0.55rem;text-align: center;line-height: 0.55rem;
+color: #fff;font-size: 0.24rem;margin: 0 auto;margin-top: 0.3rem;
+background: #d01922;border-radius: 0.15rem;}

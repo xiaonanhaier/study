@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=a/2*s*n+"px"},e.exports=t["default"]}]);
+      flex(100, 1);</script>
+    <link rel="stylesheet" href="css/login.css">
+  <title>地产</title>
+</head>
+<body>
+<div class="di">
+  <input type="button" id='btn' name="" value="完善信息">
+  <div class="zhao">
+    <div class="content">
+      <p class="title">完善个人信息</p>
+      <form action="">
+        <label for="name">
+          姓&nbsp;&nbsp;&nbsp;名
+          <input id='name' type="text"></input>
+        </label>
+        <label for="idcard">
+          身份证
+          <input id='idcard' type="text"></input>
+        </label>
+        <label for="yan">
+          <input id='yan' type="text"></input>|
+          <span><a href="#">验证码</a></span>
+        </label>
+        <label for="inyan">
+          验证码
+          <input id='inyan' type="text"></input>
+        </label>
+        <input type="submit" name="" value="提交信息">
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  window.onload = function() {
+    var btn = document.getElementById('btn');
+    var zhao = document.getElementsByClassName('zhao');
+    zhao[0].style.width = document.documentElement.clientWidth+'px';
+    zhao[0].style.height = document.documentElement.clientHeight+'px';
+    btn.onclick = function(){
+      zhao[0].style.display = 'block';
+    }
+    window.onresize = function(){
+      zhao[0].style.width = document.documentElement.clientWidth+'px';
+      zhao[0].style.height= document.documentElement.clientHeight+'px';
+    }
+  }
+</script>
+</html>
