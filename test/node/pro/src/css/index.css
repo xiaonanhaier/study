@@ -1,0 +1,47 @@
+.slider_wrap{position:relative;width:1000px;margin:0 auto;overflow: hidden;}
+.slider{height:364px;overflow: hidden;}
+.slider_wrap .num{position:absolute;left:50%;bottom: 16px;z-index:12;overflow: hidden;}
+.slider_wrap .num a{cursor:pointer;float:left;display:inline;text-indent:-9999px;margin-right:10px;width:8px;height:8px;background:url(../images/slider_num.jpg) no-repeat;}
+.slider_wrap .num .on{background-image:url(../images/slider_num_on.jpg);}
+
+.main{width:998px;margin:0 auto;overflow: hidden;border:1px solid #DDDDDD;border-top:none;}
+
+.service_wrap{width:100%;height:110px;margin:0 auto;border-top:6px solid #868686;background:url(../images/service_bg.jpg) repeat-x 0 bottom;overflow: hidden;}
+.service_wrap a{float: left;width:168px;padding-left:80px;height:110px;display:inline;}
+.service_wrap a:hover{background-color: #868686;color:#FFFFFF;}
+.service_wrap h4{font-size: 16px;margin-top:24px;font-family: "微软雅黑";}
+.service_wrap p{width:160px;margin-top:8px;line-height:20px;}
+.service1{background:url(../images/service1.jpg) no-repeat 16px 30px;}
+.service1:hover{background-image: url(../images/service1_hover.jpg);}
+.service2{background:url(../images/service2.jpg) no-repeat 16px 30px;}
+.service2:hover{background-image: url(../images/service2_hover.jpg);}
+.service3{background:url(../images/service3.jpg) no-repeat 16px 30px;}
+.service3:hover{background-image: url(../images/service3_hover.jpg);}
+.service4{background:url(../images/service4.jpg) no-repeat 16px 30px;}
+.service4:hover{background-image: url(../images/service4_hover.jpg);}
+
+
+.main_con{margin-top:22px;overflow: hidden;}
+.side_bar,.con_wrap{float: left;display: inline;}
+.con_wrap{width:734px;margin-bottom:20px;}
+.list{margin-left:18px;margin-bottom:30px;overflow:hidden;}
+.list li{float:left;width:230px;height:180px;border-bottom:1px dotted #868686;display:inline;overflow:hidden;}
+.list a{width:230px;height:180px;text-align:center;}
+.list span{display:block;text-align: center;}
+.list img{display:block;margin:20px auto;}
+
+
+
+.vi_wrap{clear:both;width:100%;}
+.vi_wrap .title{width:980px;}
+.vi_slider_wrap{position:relative;overflow: hidden;}
+.vi_slider{position:relative;left:10px;margin-top:30px;margin-bottom:30px;width:970px;overflow:hidden;}
+.vi_slider dl{overflow: hidden;}
+.vi_slider dt,.vi_slider dd{float:left;height:150px;margin-left:14px;display:inline;}
+.vi_slider dt{width:246px;background:url(../images/vi_arrow.jpg) no-repeat right 10px;}
+.vi_slider dd{width:216px;}
+.vi_num{position:absolute;right:20px;top:50%;width:10px;z-index:12;}
+.vi_num a{display:block;width:6px;height:6px;overflow:hidden;text-indent:-9999px;cursor:pointer;margin:8px auto;background-color:#999E9F;text-align:center;}
+.vi_num .active{background-color: #73D01F;}
+
+
