@@ -28,9 +28,9 @@ gulp.task('browser-sync',function(){
 
 // 压缩css
 gulp.task('css',function(){
-  return gulp.src('./src/css/*.css')
+  return gulp.src('./home/css/*.css')
   .pipe(miniCss())
-  .pipe(gulp.dest('./dist/css'))
+  .pipe(gulp.dest('./home/dist/css'))
 })
 
 // 压缩js
@@ -44,8 +44,8 @@ gulp.task('default',seq('js','css'));
 
 //移动html
 gulp.task('copyhtml',function(){
-  return gulp.src('./*.html')
-  .pipe(gulp.dest('./dist'))
+  return gulp.src('./home/images/*')
+  .pipe(gulp.dest('./home/dist/images'))
 })
 
 //修改文件路径
