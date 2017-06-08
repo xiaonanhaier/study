@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>session</title>
+</head>
+<body>
+  <textarea id='txt' style="width:200px;height:200px;" rows="8" cols="80"></textarea>
+  <button id="btn"> add </button>
+  <script type="text/javascript">
+    var txt;
+    var btn;
+    window.onload = function(){
+      txt = document.getElementById('txt');
+      btn = document.getElementById('btn');
+      if (localStorage.text) {
+        txt.value = localStorage.text;
+      }
+      btn.onclick = function(){
+        localStorage.text = txt.value;
+      }
+    }
+  </script>
+</body>
+</html>
