@@ -93,16 +93,18 @@
 
 	</div>
 	<div class="obx"></div>
-	<script type="text/javascript" src = '../../jquery-1.8.3.min.js'>
+	<script type="text/javascript" src = '../../public/jquery-1.8.3.min.js'>
 
 	</script>
 <script>
 $(document).ready(function(){
-	$('.main-nav').mouseover(function(){
-		$('.sub-nav',$(this)).slideDown()
+	$('.main-nav').mousemove(function(){
+		if($(this).find('div').is(":animated")==false){
+			$('.sub-nav',$(this)).slideDown()
+		}
 	})
-	$('.main-nav').mouseout(function(){
-		$('.sub-nav',$(this)).fadeOut()
+	$('.main-nav').mouseleave(function(){
+		$('.sub-nav',$(this)).slideUp()
 	})
 })
 	// window.onload = function(){
