@@ -3,14 +3,21 @@ $(document).ready(function(){
   // 怎么有种知乎变成 StackOverflow 的感觉……这是因为鼠标事件多次触发之后，节点的动画队列里堆积了多次 slideDown 和 slideUp，
   // 改成 $('#showPurchase').stop(true).slideDown() 应该就好了。参考链接：.stop() | jQuery API Documentation
   //
-  $('.main-nav').mouseover(function() {
+  $('.main-nav').mousemove(function() {
     $(this).children('a').css('backgroundColor','rgba(255,171,51,0.7)')
-    $(this).children('div').stop(true).slideDown()
+    if($(this).children('div').is(':animated')==false){
+          $(this).children('div').slideDown()
+    }
   })
-  $('.main-nav').mouseout(function(){
-      $(this).children('a').css('backgroundColor','#fff')
-      $(this).children('div').stop(true).slideUp()
+  $('.main-nav').mouseleave(function(){
+      $(this).children('div').slideUp()
+      var aaa = $(this)
+      var aa=setTimeout(function() {
+        aaa.children('a').css('backgroundColor','rgb(255,255,255)')
+      },500)
   })
+//setTimeout中this指向window
+
   $('.eve-nav-list').first().css('display','block')
   $('.eve-nav').children().first().css({
     backgroundColor:'#ff9701',
