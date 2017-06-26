@@ -55,6 +55,18 @@ module.exports = {
         ]
       },
 
+      // 4 css中的iconfont
+      {
+        test: /\.(ttf|woff|svg|eot)\??.*$/,
+        use:[
+          {
+            loader:'file-loader',
+            options:{
+              name:'fonts/[hash:8].[name].[ext]'
+            }
+          }
+        ]
+      },
     ]
 
   },
