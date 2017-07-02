@@ -1,0 +1,6 @@
+div,body{padding: 0;margin: 0;}
+#app{padding: 0; margin: 0;}
+.header{width: 7rem;height: 0.65rem;background: #00a2ea;font-size: 0.3rem;position: fixed;
+color:white;padding:0.25rem;padding-bottom: 0;box-shadow: 0 0.01rem 0.03rem #aaa;top: 0;}
+.header-bg{width: 7rem;height: 0.9rem;}
+.bodyy{width: 100%;background: #f3f3f3;}
