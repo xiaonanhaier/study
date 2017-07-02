@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>React</title>
+    <script type="text/javascript">
+      !
+      function(a) {
+        function b() {
+          var b = a.document,
+            c = b.documentElement,
+            d = c.getBoundingClientRect().width;
+          document.documentElement.style.fontSize = 100 * (d / 750) + "px"
+        }
+        window.addEventListener("DOMContentLoaded", function() {
+          b()
+        }, !1), window.addEventListener("resize", function() {
+          b()
+        }), b()
+      }(window);
+    </script>
 </head>
 <body>
   <div id="app"></div>
