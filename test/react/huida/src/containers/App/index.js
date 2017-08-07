@@ -1,5 +1,6 @@
 import React,{Component,PropTypes} from'react';
-import {Tabbar} from '../../components';
+import {Tabbar,Fl,Tit} from '../../components';
+import './index.css';
 
 class App extends Component{
   constructor(props) {
@@ -9,6 +10,9 @@ class App extends Component{
   render(){
     return(
       <div>
+        <Fl/>
+        <Tit/>
+        {this.props.children}
         <Tabbar/>
       </div>
     )
