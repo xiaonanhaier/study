@@ -83,10 +83,6 @@ module.exports =  {
     port: 8080,
     disableHostCheck: true, //解决Invalid Host header问题
   },
-  watchOptions: {
-       aggregateTimeout: 300,
-       poll: 1000
-  },
 
   // plugins 放置所使用的插件
   plugins: [

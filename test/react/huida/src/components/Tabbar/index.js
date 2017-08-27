@@ -19,11 +19,14 @@ class Tabbar extends Component {
     this.refs.ddd.state={click:'none'}
     this.refs.eee.state={click:'none'}
     // console.log('444');
+    // console.log(this.refs.tab)
+    // var img = this.refs.tab.children[0].children;
+    // console.log(img);
     // console.log(this.refs.ccc.state);
   }
   render(){
     return(
-      <div className='tabbar'>
+      <div className='tabbar' ref='tab'>
         <Icon ref='aaa' id='aaa' imgurl={require("../../img/tab1.png")} click={this.getid.bind(this)} word='首页'/>
         <Icon ref='bbb' id='bbb' imgurl={require("../../img/tab4.png")} click={this.getid.bind(this)} word='玩具城'/>
         <Icon ref='ccc' id='ccc' imgurl={require("../../img/tab3.png")} click={this.getid.bind(this)} word='购物车'/>

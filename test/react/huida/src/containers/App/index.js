@@ -1,7 +1,6 @@
 import React,{Component,PropTypes} from'react';
-import {Tabbar,Fl,Tit,ShopList} from '../../components';
+import {Tabbar,Fl,Tit,ShopList,Lunbo} from '../../components';
 import './index.css';
-
 class App extends Component{
   constructor(props) {
     super(props);
@@ -10,6 +9,7 @@ class App extends Component{
   render(){
     return(
       <div>
+        <Lunbo/>
         <Fl/>
         <Tit tit="最新玩具"/>
         <ShopList img1="zxwj-1" img2="zxwj-2" img3="zxwj-3" height='5rem' word1="婴儿认知套装" word2="婴儿认知套装" word3="婴儿认知套装"/>

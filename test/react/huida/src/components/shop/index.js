@@ -15,6 +15,9 @@ class Shop extends Component {
     imgbot:"12%"
   }
   render(){
+    //es6对象赋值
+    //let{imgurl,word,sm,imgsize,imgbot} = this.props;
+    
     let img = require("../../img/"+this.props.imgurl+".png");
     return(
       <div className="shop">
