@@ -1,0 +1,9 @@
+.detail{height: 3.83rem;width: 100%;background: url(http://cms-bucket.nosdn.127.net/catchpic/6/6d/6db6367688469ea1525d1c6a70f315bb.jpg?imageView&thumbnail=550x0) center no-repeat;
+background-size: 100% auto;}
+.detail-con{height: 3.83rem;width: 100%;display: flex;overflow: hidden;
+  background:rgba(70, 70, 70, 0.6);box-shadow: 0px 0px 1rem #fff inset;}
+.detail-img{height: 100%;text-align: center;margin: 20px;}
+.detail-img img{width: 2.3rem;height: 3.2rem;display: block;margin:0 auto;}
+.detail-word{flex: 1;font-size:0.28rem;line-height: 0.28rem;margin: 0.05rem 0;color: #fff;}
+.detail-word p:nth-child(1){font-size: 0.35rem;}
+.detail-word p:nth-child(3){color: yellow;}
