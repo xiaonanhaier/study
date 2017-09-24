@@ -23,6 +23,7 @@ class Slick extends Component {
         <div key={imgurl.id}><img src={imgurl.imgurl} alt=""/></div>
       )
     })
+
     // console.log(nodes);
     return (
       <Slider {...settings} className='slider'>

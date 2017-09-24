@@ -5,7 +5,9 @@ class App extends Component {
   constructor(props) {
     super(props)
   }
-
+  componentWillMount(){
+    console.log(this.props.children)
+  }
   render(){
     return(
       <div className='bodyy'>

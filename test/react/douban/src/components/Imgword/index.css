@@ -1,0 +1,10 @@
+.imgword{display: flex;width: 90%;border-bottom: 0.01rem solid rgba(255,0,0,0.2);
+  margin: 0 auto;height: 2.2rem;padding: 0.2rem 0;}
+.imgword-img{flex: 1;}
+.imgword-img img{width: 1.4rem;height: 2rem;display: block;margin: 0 auto;}
+.imgword-word{flex: 3;font-size: 0.25rem;line-height: 0.45rem;color: #999;overflow: hidden;}
+.imgword-word p{margin: 0;text-overflow:ellipsis;white-space:nowrap;width: 100%;
+  overflow: hidden;height: 0.45rem;padding-left: 0.15rem;}
+.imgword-word p:nth-child(1){font-size: 0.3rem;color: black;}
+.imgword-btn{font-size: 0.3rem;color: red;flex: 0.8;text-align: center;height: 0.5rem;
+border:1px solid red;line-height: 0.5rem;border-radius: 0.2rem;}

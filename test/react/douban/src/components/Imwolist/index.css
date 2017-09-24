@@ -1,6 +1,7 @@
-.list{width: 100%;display: flex;flex-wrap: wrap;}
 .more{font-size: 0.3rem;text-align: center;line-height: 0.7rem;border:1px solid red;display: none;
   width: 50%;height: 0.7rem;margin: 0 auto;border-radius: 0.3rem;margin-top: 0.2rem;margin-bottom: 0.2rem;}
+.more p{padding: 0;margin: 0;}
+
 .loading{
             width: 0.8rem;
             height: 0.4rem;
