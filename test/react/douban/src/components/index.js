@@ -5,3 +5,5 @@ export {default as List} from './List';
 export {default as Cover} from './Cover';
 export {default as Imgword} from './Imgword';
 export {default as Imwolist} from "./Imwolist";
+export {default as Ping} from "./Ping";
+export {default as Pinglist} from "./Pinglist";

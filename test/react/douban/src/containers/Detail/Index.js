@@ -1,5 +1,5 @@
 import React,{Component,PropTypes} from 'react';
-import {Icon,Header} from '../../components';
+import {Icon,Header,Pinglist} from '../../components';
 import './index.css';
 import axios from 'axios';
 import {Link} from 'react-router';
@@ -22,7 +22,8 @@ class Detail extends Component {
       jq:'',
       zk:true,
       jqh:'1.6rem',
-      jqimg:'down.png'
+      jqimg:'down.png',
+      pl:[],
     }
   }
 
@@ -33,9 +34,6 @@ class Detail extends Component {
     let url = `/api/movie/subject/${id.split(',')[0]}?apikey=0b2bdeda43b5688921839c8ecb20399b`
     axios.get(url)
     .then((movie) => {
-      console.log(movie.data.trailers);
-      console.log(movie.data);
-
       this.setState({
         xg:movie.data.aka[0],
         fen:movie.data.rating.average,
@@ -49,7 +47,12 @@ class Detail extends Component {
         hx:movie.data.trailers,
         loding:'none',
       })
-
+    })
+    let plurl = `/api/movie/subject/${id.split(',')[0]}/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=5`
+    axios.get(plurl)
+    .then((pl) => {
+      // console.log(pl.data.reviews);
+      this.setState({pl:pl.data.reviews})
     })
   }
 
@@ -103,7 +106,7 @@ class Detail extends Component {
     let huaxu = this.state.hx.map((list,index)=>{
       return (
         <div key={list.id} className="imgper hx">
-          <Link to={{pathname:"video", query:{movie: this.props.params.id,name:list.title, hxid:index},state:{data:list}}}><img src={list.medium} alt=""/></Link>
+          <Link to={{pathname:"/video/0,"+list.title, query:{movie: this.props.params.id,name:list.title, hxid:index},state:{data:list}}}><img src={list.medium} alt=""/></Link>
           <p>{list.title}</p>
         </div>
       )
@@ -116,7 +119,6 @@ class Detail extends Component {
     // console.log(bgimg)
     return(
       <div>
-          <Header word={this.state.name}/>
           <div className="zhezhao"  style = {yczz}>
               <div className="loading">
                       <span></span>
@@ -174,6 +176,12 @@ class Detail extends Component {
                   </div>
               </div>
            </div>
+           <div className="kuai">
+              <div className="kuai-tit">
+                短评
+              </div>
+           </div>
+           <Pinglist data={this.state.pl}/>
            <div className="pl">
                 <p>查看豆瓣评论</p>
            </div>

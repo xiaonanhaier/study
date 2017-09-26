@@ -12,10 +12,14 @@ class Header extends Component {
   render(){
     return(
       <div className="header">
-        <Icon type='category' rig='0.5rem'/>
+        <Icon type='category' rig='0.5rem' left='0.25rem'/>
         <div className='tit'><Link to='home'>{this.props.word}</Link></div>
         <Icon type='search'/>
         <Icon type='account' left='0.5rem'/>
+        <div className="head-nav">
+          <div className="nav-con">
+          </div>
+        </div>
       </div>
     )
   }

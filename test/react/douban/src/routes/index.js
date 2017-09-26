@@ -7,8 +7,8 @@ export default (
     <IndexRoute component={Home}/>
     <Route path='detail/:id' component={Detail}/>
     <Route path='home' component={Home}/>
-    <Route path='alllist/:type' component={Alllist}/>
-    <Route path='video' component={Video}/>
+    <Route path='alllist/:id' component={Alllist}/>
+    <Route path='video/:id' component={Video}/>
   </Route>
 )
 

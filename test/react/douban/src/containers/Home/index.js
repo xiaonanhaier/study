@@ -43,7 +43,6 @@ class Home extends Component {
   render(){
     return(
       <div>
-        <Header/>
         <Slick  da={this.state.ban}/>
         <List data={this.state.movie} loading={this.state.mloading} word="更多热映" style='0'/>
         <List data={this.state.moviewill} loading={this.state.willloding} word="更多即将上映" style='1'/>

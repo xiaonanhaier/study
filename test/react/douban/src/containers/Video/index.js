@@ -19,7 +19,6 @@ class Video extends Component {
   render(){
     return(
       <div>
-        <Header word={this.state.header}/>
         <video src={this.state.mp4} width="100%" controls="controls">
           您的浏览器不支持 video 标签。
         </video>

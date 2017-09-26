@@ -13,7 +13,7 @@ class Imwolist extends Component{
   }
   mores(){
     let type = this.props.type;
-    console.log(type)
+    // console.log(type)
     let url ='';
     // console.log(type);
     if(type == '0'){
@@ -21,7 +21,7 @@ class Imwolist extends Component{
     }else{
       url = `/api/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b&start=${this.state.start}&count=6`
     }
-    console.log(url)
+    // console.log(url)
     axios.get(url)
     .then((movie) => {
       console.log(movie.data.subjects);

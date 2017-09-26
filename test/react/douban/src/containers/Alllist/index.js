@@ -11,7 +11,7 @@ class Alllist extends Component {
     }
   }
   componentWillMount(){
-    let type = this.props.params.type;
+    let type = this.props.params.id;
     let url ='';
 
     if(type == '0'){
@@ -29,7 +29,6 @@ class Alllist extends Component {
   render(){
     return(
       <div className="alllist">
-        <Header word='全部电影'/>
         <Imwolist data = {this.state.movie} loading={this.state.mloading} type ={this.props.params.type}/>
       </div>
     )
