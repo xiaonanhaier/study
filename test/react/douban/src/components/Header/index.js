@@ -5,19 +5,56 @@ import Icon from '../Icon'
 class Header extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      tc:true,
+      tcvalue:'-100%',
+      headh:'0.9rem',
+    }
   }
   static defaultProps={
     word:'芝麻电影'
   }
+  tc(){
+    if(this.state.tc){
+        this.setState({
+          tcvalue:'0',
+          headh:'100%',
+          tc:false
+        })
+    }else {
+      this.setState({
+        tcvalue:'-100%',
+        tc:true,
+      })
+      setTimeout(
+        () => { this.setState({
+                  headh:'0.9rem',
+                })
+        },800
+      );
+    }
+  }
   render(){
+    let tcstyle ={
+      left:this.state.tcvalue
+    }
+    let hestyle ={
+      height:this.state.headh
+    }
     return(
-      <div className="header">
-        <Icon type='category' rig='0.5rem' left='0.25rem'/>
-        <div className='tit'><Link to='home'>{this.props.word}</Link></div>
-        <Icon type='search'/>
-        <Icon type='account' left='0.5rem'/>
-        <div className="head-nav">
-          <div className="nav-con">
+      <div className="header" style ={hestyle}>
+        <div className="head-con">
+          <Icon onClick={this.tc.bind(this)} type='category' rig='0.5rem' left='0.25rem'/>
+          <div className='tit'><Link to='home'>{this.props.word}</Link></div>
+          <Icon type='search'/>
+          <Icon type='account' left='0.5rem'/>
+        </div>
+
+        <div className="nav" style={tcstyle}>
+          <div className="nav-list">
+            <p>首页</p>
+            <p>搜索</p>
+            <p>我的</p>
           </div>
         </div>
       </div>

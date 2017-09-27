@@ -18,7 +18,7 @@ class Icon extends Component {
       marginRight:this.props.rig
     }
     return(
-      <i className={type} style={styleData}></i>
+      <i onClick={this.props.onClick} className={type} style={styleData}></i>
     )
   }
 }
