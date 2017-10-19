@@ -1,0 +1,41 @@
+.serbtn{padding:0.15rem 0.4rem;background: red;font-size: 0.3rem;
+color: #fff;border-radius: 0.2rem;}
+.serinp{width:4.8rem;margin:0 0.3rem;height: 0.5rem;line-height: 0.5rem;font-size: 0.3rem;
+border: none;border-bottom: 0.02rem solid red;outline: none;padding: 0 0.2rem;}
+.loading{
+            width: 0.8rem;
+            height: 0.4rem;
+            margin: 0 auto;
+            margin-top:1rem;
+        }
+        .loading span{
+            display: inline-block;
+            width: 0.08rem;
+            height: 100%;
+            border-radius: 0.04rem;
+            background: lightgreen;
+            -webkit-animation: load 1s ease infinite;
+        }
+        @-webkit-keyframes load{
+            0%,100%{
+                height: 0.4rem;
+                background: lightgreen;
+            }
+            50%{
+                height: 0.7rem;
+                margin: -0.15rem 0;
+                background: lightblue;
+            }
+        }
+        .loading span:nth-child(2){
+            -webkit-animation-delay:0.2s;
+        }
+        .loading span:nth-child(3){
+            -webkit-animation-delay:0.4s;
+        }
+        .loading span:nth-child(4){
+            -webkit-animation-delay:0.6s;
+        }
+        .loading span:nth-child(5){
+            -webkit-animation-delay:0.8s;
+        }

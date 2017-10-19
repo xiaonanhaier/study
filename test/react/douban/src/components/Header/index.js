@@ -46,15 +46,14 @@ class Header extends Component {
         <div className="head-con">
           <Icon onClick={this.tc.bind(this)} type='category' rig='0.5rem' left='0.25rem'/>
           <div className='tit'><Link to='home'>{this.props.word}</Link></div>
-          <Icon type='search'/>
+          <Link to='Search'><Icon type='search'/></Link>
           <Icon type='account' left='0.5rem'/>
         </div>
 
         <div className="nav" style={tcstyle}>
           <div className="nav-list">
-            <p>首页</p>
-            <p>搜索</p>
-            <p>我的</p>
+            <Link onClick={this.tc.bind(this)} to='home'><p>首页</p></Link>
+            <Link onClick={this.tc.bind(this)} to='Search'><p>搜索</p></Link>
           </div>
         </div>
       </div>
