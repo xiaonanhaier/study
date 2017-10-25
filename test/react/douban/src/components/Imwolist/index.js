@@ -26,6 +26,12 @@ class Imwolist extends Component{
     .then((movie) => {
       console.log(movie.data.subjects);
       let node = movie.data.subjects.map((list,index)=>{
+        let name = '';
+        if(list.directors.length>0){
+          name =list.directors[0].name
+        }else {
+          name ='暂无';
+        }
 
         let ids = `${list.id},${list.title}`;
         let types = list.genres.join(' / ') ;
@@ -35,7 +41,7 @@ class Imwolist extends Component{
         let person = persons.join(' / ')
         // console.log(person);
         return(
-          <Imgword key={list.id} type={types} dates = {list.pubdates[0]} dy= {list.directors[0].name}
+          <Imgword key={list.id} type={types} dates = {list.year} dy= {name}
            id={ids} imgurl = {list.images.medium} title={list.title} persons={person}/>
         )
       });
@@ -61,6 +67,12 @@ class Imwolist extends Component{
       more = 'none';
     }
       let nodes = this.props.data.map((list,index)=>{
+        let name = '';
+        if(list.directors.length>0){
+          name =list.directors[0].name
+        }else {
+          name ='暂无';
+        }
       let ids = `${list.id},${list.title}`;
       let types = list.genres.join(' / ') ;
       let persons = list.casts.map((re,index)=>{
@@ -69,7 +81,7 @@ class Imwolist extends Component{
       let person = persons.join(' / ')
       // console.log(person);
       return(
-        <Imgword key={list.id} type={types} dates = {list.pubdates[0]} dy= {list.directors[0].name}
+        <Imgword key={list.id} type={types} dates = {list.pubdates[0]} dy= {name}
          id={ids} imgurl = {list.images.medium} title={list.title} persons={person}/>
       )
     });
