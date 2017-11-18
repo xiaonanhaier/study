@@ -16,7 +16,7 @@ module.exports =  {
 
   //entry 入口源文件
   entry: {
-    app: './src/index.js',
+    app: './index.js',
   },
 
   // output 输出路径

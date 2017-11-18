@@ -1,6 +1,7 @@
 import React,{Component,PropTypes} from 'react';
 import Icon from './../Icon';
 import './tabbar.css';
+import axios from 'axios';
 
 class Tabbar extends Component {
   constructor(props) {
@@ -23,6 +24,12 @@ class Tabbar extends Component {
     // var img = this.refs.tab.children[0].children;
     // console.log(img);
     // console.log(this.refs.ccc.state);
+  }
+  componentDidMount(){
+    axios.get('/api/movie/in_theaters')
+    .then(function (response) {
+      console.log(response.data.subjects);
+    })
   }
   render(){
     return(

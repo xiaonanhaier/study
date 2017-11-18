@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import './index.css';
+import './mock/'
 //import Test from './components/Test/'
 // import Input1 from './components/Input1/'
 // import Liuyan from './components/Liuyan/'
-import Rb from './components/rb';
-//import Button from './components/button/'
+// import Rb from './components/rb';
+import Button from './components/button/'
 //import List from './components/List/'
 // import Button from './components/Button/'
 const roote1 = document.getElementById('app');
@@ -18,6 +19,6 @@ const roote1 = document.getElementById('app');
 //留言板
 // ReactDom.render(<Liuyan/>,roote1);
 
-ReactDom.render(<Rb/>,roote1);
-// ReactDom.render(<Button/>,roote2);
+// ReactDom.render(<Rb/>,roote1);
+ReactDom.render(<Button/>,roote1);
 // ReactDom.render(<List/>,roote3);

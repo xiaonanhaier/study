@@ -82,6 +82,14 @@ module.exports =  {
     quiet: true,
     port: 8080,
     disableHostCheck: true, //解决Invalid Host header问题
+    proxy:{
+      '/api':{
+        target:"https://api.douban.com/v2/",
+        changeOrigin:true,
+        secure:false,
+        pathRewrite:{"^/api":""}
+      }
+    }
   },
 
   // plugins 放置所使用的插件
