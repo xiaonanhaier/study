@@ -10,10 +10,16 @@ export function login(data) {
             key:'user',
             promise:()=>api.post('adminuser/login',data,
             ).then((res)=>{
-                return res.data
+                localStorage.setItem("user",JSON.stringify(res.data));
+                return res.data;
             }).catch((res)=>{
-                return res.data
+                return res.data;
             })
         }
     }
+}
+
+export function signOut() {
+    localStorage.removeItem("user");
+    return {type:"SIGNOUT"}
 }

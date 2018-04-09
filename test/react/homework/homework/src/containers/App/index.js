@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 // import {PropTypes} from 'prop-types';
-// import { Link} from 'react-router-dom';
+import { HashRouter as Router, Route,Switch} from 'react-router-dom';
+
+import {Header,Nav} from "../../components/index";
+import {Shouye} from "../index";
+import "./App.css"
+
 class App extends Component {
     render(){
+        let imgListPath = `${this.props.match.path}/`;
         return(
             <div>
-                <h1>首页</h1>
+                <Header></Header>
+                <Nav></Nav>
 
-                {this.props.children}
+                <div className="content">
+                    <Router>
+                        <Switch>
+                            <Route path={imgListPath} component={Shouye} />
+                        </Switch>
+                    </Router>
+                </div>
             </div>
             )
 

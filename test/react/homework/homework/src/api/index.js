@@ -38,7 +38,7 @@ axiosIns.interceptors.request.use(function (config) {
         return config;
 });
 axiosIns.interceptors.response.use(function (response) {
-    setTimeout(hide,2000);
+    setTimeout(hide,500);
     // let data = response.data;
     let status = response.status;
     if (status === 200) {

@@ -1,0 +1,24 @@
+.headerbg{
+    width: 100%;
+    height: 100px;
+}
+.headerlogo img{
+    height: 50px;
+}
+.headerlogo{
+    flex: 1;
+    line-height:100px;
+}
+.headercontent{
+    display: flex;
+    width: 1100px;
+    height: 100%;
+    margin: 0 auto;
+}
+.headerinfo div{
+    height: 50%;
+}
+.headerlogin{
+    text-align: right;
+    line-height: 50px;
+}
