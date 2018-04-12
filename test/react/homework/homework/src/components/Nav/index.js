@@ -1,10 +1,12 @@
 import React,{Component} from 'react';
 import "./nav.css";
+import { Affix} from 'antd';
 import {NavLink} from 'react-router-dom';
 
 class Nav extends Component{
     render(){
         return(
+            <Affix offsetTop = {0}>
             <div className="nav">
                 <div className="navcon">
                     <ul className='navul'>
@@ -15,6 +17,7 @@ class Nav extends Component{
                     </ul>
                 </div>
             </div>
+            </Affix>
         )
     }
 }

@@ -1,6 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
+import React from 'react';
 // import qs from 'qs'
-import { Message } from 'antd';
+import { Message ,Modal, Button ,notification } from 'antd';
 let axiosIns = axios.create({});
 
 // if (process.env.NODE_ENV == 'development') {
@@ -14,6 +15,8 @@ axiosIns.defaults.baseURL = '/homeworkapi/api/web/index.php/v1';
 axiosIns.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 axiosIns.defaults.headers.post['Content-Type'] = 'application/json';
 axiosIns.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
+// axiosIns.defaults.headers.get['Authorization'] = "Bearer "+ JSON.parse(localStorage.user).data.access_token;
+
 // axiosIns.defaults.responseType = 'json';
 axiosIns.defaults.transformRequest = [function (data) {
     //数据序列化
@@ -26,8 +29,14 @@ axiosIns.defaults.validateStatus = function (status) {
 };
 let hide = {};
 axiosIns.interceptors.request.use(function (config) {
-    hide = Message.loading("加载中...",0);
+    hide = Message.loading("中...",0);
     //配置config
+    if(localStorage.getItem('user')){
+        let user = JSON.parse(localStorage.user);
+        if (user.code === 200){
+            config.headers.Authorization = "Bearer "+ user.data.access_token;
+        }
+    }
     // config.headers.Accept = 'application/json';
     // config.headers.Content-Type = 'application/json';
     // config.headers.System = 'index';
@@ -48,7 +57,7 @@ axiosIns.interceptors.response.use(function (response) {
     }
 });
 
-let ajaxMethod = ['get', 'post'];
+let ajaxMethod = ['get', 'post','put','delete'];
 let api = {};
 ajaxMethod.forEach((method)=> {
     //数组取值的两种方式
@@ -62,24 +71,30 @@ ajaxMethod.forEach((method)=> {
                  * ......
                  */
                 resolve(response);
-                // if (response.data.StatusCode) {
-                //     //toast封装：  参考ele-mint-ui
-                //     Toast({
-                //         message: response.data.Message,
-                //         position: 'top',
-                //         duration: 2000
-                //     });
-                //     if (response.data.Message === '未登录') {
-                //         Toast({
-                //             message: response.data.Message,
-                //             position: '',
-                //             duration: 2000
-                //         });
-                //     }
-                // } else {
-                //     resolve(response);
-                // }
+
             }).catch((response)=> {
+                if (response.data.code == 401) {
+                    Modal.info({
+                        title: '拒绝访问',
+                        wrapClassName:"vertical-center-modal",
+                        content: (
+                            <div>
+                                <p>1，未登录</p>
+                                <p>2，没有权限</p>
+                            </div>
+                        ),
+                        onOk() {
+                            localStorage.removeItem('user');
+                            window.location.reload()
+                        },
+                    });
+                }
+                if (response.data.code == 422) {
+                    notification.error({
+                        message: '用户名密码错误',
+                        description: '无效的用户名或密码！'
+                    })
+                }
                 reject(response);
                 //alert('xiuxiu，限你10分钟到我面前来,不然...');
             })

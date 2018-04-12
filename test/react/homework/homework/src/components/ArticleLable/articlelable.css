@@ -1,0 +1,71 @@
+.articlelable{
+    padding: 20px 35px;
+}
+.articlelable>h3{
+    font-size: 22px;
+    color: #393939;
+    line-height: 40px;
+    margin-bottom: 15px;
+}
+.articlelable>a{
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.articlelable>a>img{
+    width: 100%;
+    border-radius: 5px;
+}
+.articlelable>p{
+    font-size: 14px;
+    color: #666666;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+.article_info {
+    color: #c5c5c5;
+    font-size: 12px;
+    line-height: 22px;
+}
+.article_info_left {
+    color: #c5c5c5;
+    width: 400px;
+    float: left;
+}
+.article_info_left>a {
+    color: #c5c5c5;
+}
+.article_info_left img {
+    float: left;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+}
+.article_info_right {
+    color: #c5c5c5;
+    float: right;
+    width: 190px;
+    height: 16px;
+    line-height: 16px;
+    text-align: right;
+}
+.author {
+    padding: 0 8px 0 5px;
+}
+.article_info_right span {
+    display: inline-block;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+.article_info_right span>i{
+    margin-right: 3px;
+}
+.clearfix::after {
+    display: block;
+    content: " 20";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}

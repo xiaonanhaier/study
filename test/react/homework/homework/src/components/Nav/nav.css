@@ -11,12 +11,13 @@
 .navul{
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 .navul> a{
     padding: 0 20px;
     float: left;
     line-height: 48px;
-    color: #fff;
+    color: #fff !important;
 }
 .active{
     background: #0056b3;

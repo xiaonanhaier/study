@@ -30,7 +30,7 @@ class Login extends Component{
         }
     }
 
-    componentDidMount(){
+    componentWillUpdate(){
         if(localStorage.getItem("user")){
             let user = JSON.parse(localStorage.user);
             if (user.code === 200){
