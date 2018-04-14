@@ -48,9 +48,31 @@ class App extends Component {
                     </Router>
                 </div>
                 <BackTop />
+                <div id="ft" className="cl">
+                    <div className="wp" id="footer">
+                        <div id="flk">
+                            <div style={{float: 'left'}}>
+                                <img src="https://static.bbs.miui.com/static/image/miui/base/footer_title.png"/>
+                            </div>
+                            <div style={{display: 'inline'}}>
+                                <a href="http://www.miui.com/" target="_blank">MIUI官方网站</a>
+                                <span className="pipe">|</span><a href="http://www.mi.com" target="_blank">小米旗下网站</a>
+                                <span className="pipe">|</span><a href="http://jobs.miui.com/"  target="_blank">加入小米</a>
+                                <span className="pipe">|</span><a href="a-69.html" target="_blank">免责声明</a>
+                                <span className="pipe">|</span><a target="_blank" href="http://www.miui.com/res/doc/privacy/cn.html">隐私政策</a>
+                                <span className="pipe">|</span><a href="http://www.miui.com/forum.php?mod=newindex&amp;mobile=yes">手机版</a>
+                            </div>
+                            <div style={{float: 'right',color: '#7e7e7e'}}>
+                                Copyright © 2017 MIUI
+                            </div>
+                            {/*<div style={{paddingLeft: '28px',color: '#7e7e7e'}}>*/}
+                                {/*京ICP备10046444号 | 京公网安备11010802020134号 | 京ICP证110507号*/}
+                            {/*</div>*/}
+                        </div>
+                    </div>
+                </div>
             </div>
-            )
-
+        )
     }
 }
 

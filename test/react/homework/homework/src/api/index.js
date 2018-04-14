@@ -73,7 +73,7 @@ ajaxMethod.forEach((method)=> {
                 resolve(response);
 
             }).catch((response)=> {
-                if (response.data.code == 401) {
+                if (response.data.code === 401) {
                     Modal.info({
                         title: '拒绝访问',
                         wrapClassName:"vertical-center-modal",
@@ -89,7 +89,7 @@ ajaxMethod.forEach((method)=> {
                         },
                     });
                 }
-                if (response.data.code == 422) {
+                if (response.data.code === 422) {
                     notification.error({
                         message: '用户名密码错误',
                         description: '无效的用户名或密码！'
