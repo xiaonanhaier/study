@@ -23,7 +23,7 @@ class Login extends Component{
     }
 
     componentDidUpdate(){
-        // console.log(this.props.history);
+        console.log(this.props.history);
         if(this.props.state.async.user.code === 200){
             this.setState({user:this.props.state.async.user})
             this.props.history.push("/app")
@@ -31,6 +31,16 @@ class Login extends Component{
     }
 
     componentWillUpdate(){
+        if(localStorage.getItem("user")){
+            let user = JSON.parse(localStorage.user);
+            if (user.code === 200){
+                this.setState({user:this.props.state.async.user})
+                this.props.history.push("/app");
+            }
+        }
+
+    }
+    componentWillMount(){
         if(localStorage.getItem("user")){
             let user = JSON.parse(localStorage.user);
             if (user.code === 200){
