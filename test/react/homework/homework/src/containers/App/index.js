@@ -4,7 +4,7 @@ import { BackTop } from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
-import {Shouye} from "../index";
+import {Shouye,Detail} from "../index";
 import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
@@ -34,7 +34,7 @@ class App extends Component {
         this.setState({user:this.props.state.async.user})
     }
     render(){
-        let imgListPath = `${this.props.match.path}/`;
+        let imgListPath = `${this.props.match.path}`;
         return(
             <div>
                 <Header></Header>
@@ -43,7 +43,8 @@ class App extends Component {
                 <div className="content">
                     <Router>
                         <Switch>
-                            <Route path={imgListPath} component={Shouye} />
+                            <Route path={imgListPath} exact component={Shouye} />
+                            <Route path={imgListPath+'/detail/:id'} component={Detail} />
                         </Switch>
                     </Router>
                 </div>

@@ -3,3 +3,20 @@
     margin: 0 auto;
     overflow: hidden;
 }
+.detail-baread{
+    padding: 10px 0;
+}
+.detail-btn{
+    margin-bottom: 10px;
+}
+.detail-btn button{
+    margin-right: 20px;
+}
+.detail-con{
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #ebeaea;
+    margin-bottom: 100px;
+    overflow: hidden;
+    min-height: 340px;
+}

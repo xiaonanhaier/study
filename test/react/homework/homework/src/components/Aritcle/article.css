@@ -1,0 +1,27 @@
+.article{
+    min-height: 300px;
+    background: #fff;
+    display: flex;
+    margin-bottom: 5px;
+}
+.article-user{
+    width: 160px;
+    background-color:#fdfdfd;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.article-user>img{
+    width: 120px;
+    border-radius: 5px;
+}
+.article-con{
+    flex: 1;
+    padding: 20px;
+}
+.user-name{
+    font-size: 14px;
+    color: #909090;
+    height:40px;
+    line-height: 40px;
+}
