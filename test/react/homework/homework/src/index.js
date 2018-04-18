@@ -7,6 +7,7 @@ import {history} from './constants';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import {ConnectedRouter} from 'react-router-redux';
+import 'babel-polyfill';
 const store = configureStore();
 ReactDOM.render(
     <Provider store={store}>

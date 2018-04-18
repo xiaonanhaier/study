@@ -56,12 +56,12 @@ class App extends Component {
                                 <img src="https://static.bbs.miui.com/static/image/miui/base/footer_title.png"/>
                             </div>
                             <div style={{display: 'inline'}}>
-                                <a href="http://www.miui.com/" target="_blank">MIUI官方网站</a>
-                                <span className="pipe">|</span><a href="http://www.mi.com" target="_blank">小米旗下网站</a>
-                                <span className="pipe">|</span><a href="http://jobs.miui.com/"  target="_blank">加入小米</a>
-                                <span className="pipe">|</span><a href="a-69.html" target="_blank">免责声明</a>
-                                <span className="pipe">|</span><a target="_blank" href="http://www.miui.com/res/doc/privacy/cn.html">隐私政策</a>
-                                <span className="pipe">|</span><a href="http://www.miui.com/forum.php?mod=newindex&amp;mobile=yes">手机版</a>
+                                <a href="http://www.miui.com/" target="_blank" rel="noopener noreferrer">MIUI官方网站</a>
+                                <span className="pipe">|</span><a href="http://www.mi.com" rel="noopener noreferrer" target="_blank">小米旗下网站</a>
+                                <span className="pipe">|</span><a href="http://jobs.miui.com/" rel="noopener noreferrer"  target="_blank">加入小米</a>
+                                <span className="pipe">|</span><a href="a-69.html" target="_blank" rel="noopener noreferrer">免责声明</a>
+                                <span className="pipe">|</span><a target="_blank" href="http://www.miui.com/res/doc/privacy/cn.html" rel="noopener noreferrer">隐私政策</a>
+                                <span className="pipe">|</span><a href="http://www.miui.com/forum.php?mod=newindex&amp;mobile=yes" rel="noopener noreferrer">手机版</a>
                             </div>
                             <div style={{float: 'right',color: '#7e7e7e'}}>
                                 Copyright © 2017 MIUI

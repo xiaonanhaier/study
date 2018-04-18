@@ -25,3 +25,20 @@
     height:40px;
     line-height: 40px;
 }
+.article-tit{
+    font: 700 20px 'Microsoft Yahei','Hei',Tahoma,'SimHei',sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.article-count{
+    overflow: hidden;
+    padding: 5px 0;
+    border-bottom: 0px dashed #CDCDCD;
+}
+.article-count label{
+    margin-right: 15px;
+}
+.article-count i{
+    margin-right: 5px;
+    font-weight: bold;
+}

@@ -3,6 +3,16 @@ import './detail.css';
 import { Breadcrumb,Icon,Button } from 'antd';
 import {Article} from '../../components';
 class Detail extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            articleid:"",
+        }
+    }
+    componentWillMount(){
+        let articleid = this.props.match.params.id;
+        this.setState({articleid:articleid});
+    }
     render(){
         return(
             <div className="detail">
@@ -26,7 +36,7 @@ class Detail extends Component{
                 </div>
 
                 <div className="detail-con">
-                    <Article/>
+                    <Article id={this.state.articleid}/>
                     <Article/>
                 </div>
             </div>
