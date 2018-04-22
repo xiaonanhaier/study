@@ -20,3 +20,7 @@
     overflow: hidden;
     min-height: 340px;
 }
+.detail a{
+    color: inherit;
+    text-decoration: none;
+}

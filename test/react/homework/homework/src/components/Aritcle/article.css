@@ -35,10 +35,13 @@
     padding: 5px 0;
     border-bottom: 0px dashed #CDCDCD;
 }
-.article-count label{
+.article-count>label{
     margin-right: 15px;
 }
-.article-count i{
+.article-coun>span{
+    color: #ffffff;
+}
+.article-count>label>i{
     margin-right: 5px;
     font-weight: bold;
 }

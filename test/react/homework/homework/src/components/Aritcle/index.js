@@ -54,7 +54,7 @@ class Article extends Component{
                     <div className="article-count">
                         <label><Icon type = 'eye-o'/>{this.state.lookcont}</label>
                         <label><Icon type = 'message'/>{this.state.commentcont}</label>
-                        <span>{moment(moment(this.state.create_at).format("YYYY-MM-DD HH:mm:ss"),"YYYYMMDD").fromNow()}</span>
+                        <span>{moment(moment(this.state.create_at).format("YYYY-MM-DD"),"YYYYMMDD").fromNow()}</span>
                     </div>
                     {this.state.content}
                 </div>

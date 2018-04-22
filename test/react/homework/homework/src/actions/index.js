@@ -23,3 +23,12 @@ export function signOut() {
     localStorage.removeItem("user");
     return {type:"SIGNOUT"}
 }
+
+export function plateSelecct(data) {
+    return {
+        [ASYNC]:{
+            key:'plate',
+            promise:()=>Promise.resolve(data)
+        }
+    }
+}

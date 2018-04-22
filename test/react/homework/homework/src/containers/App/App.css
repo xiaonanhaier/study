@@ -37,6 +37,9 @@
   color: #7E7E7E;
   background-color: #2F2F2F;
 }
+#ft a{
+  color: #7E7E7E;
+}
 
 #ft .wp, #category_lk .wp {
   width: 1100px;

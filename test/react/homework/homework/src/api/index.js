@@ -29,7 +29,7 @@ axiosIns.defaults.validateStatus = function (status) {
 };
 let hide = {};
 axiosIns.interceptors.request.use(function (config) {
-    hide = Message.loading("中...",0);
+    // hide = Message.loading("中...",0);
     //配置config
     if(localStorage.getItem('user')){
         let user = JSON.parse(localStorage.user);
@@ -47,7 +47,7 @@ axiosIns.interceptors.request.use(function (config) {
         return config;
 });
 axiosIns.interceptors.response.use(function (response) {
-    setTimeout(hide,500);
+    // setTimeout(hide,500);
     // let data = response.data;
     let status = response.status;
     if (status === 200) {

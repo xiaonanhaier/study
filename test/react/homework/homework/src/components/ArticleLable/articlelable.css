@@ -3,9 +3,12 @@
 }
 .articlelable>h3{
     font-size: 22px;
-    color: #393939;
+    color: #000000;
     line-height: 40px;
     margin-bottom: 15px;
+}
+.articlelable>h3>a{
+    color: #000000;
 }
 .articlelable>a{
     display: block;

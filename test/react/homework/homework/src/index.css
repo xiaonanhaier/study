@@ -7,9 +7,17 @@ body {
 }
 a{
   text-decoration: none;
-  color: inherit !important;
+  /*color: inherit !important;*/
 }
 #root{
   width: 100%;
   height: 100%;
 }
+/*ul,li{*/
+  /*list-style: none;*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+/*}*/
+/*p,h1,h2,h3,ul,li{*/
+  /*cursor: default;*/
+/*}*/

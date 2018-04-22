@@ -1,4 +1,8 @@
 .edit{
     border: 1px solid #0068d3;
     border-radius: 5px;
+    min-height: 500px;
+}
+.edit a{
+    color: inherit !important;
 }

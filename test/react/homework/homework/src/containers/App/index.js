@@ -4,7 +4,7 @@ import { BackTop } from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
-import {Shouye,Detail} from "../index";
+import {Shouye,Detail,Edit} from "../index";
 import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
@@ -45,6 +45,7 @@ class App extends Component {
                         <Switch>
                             <Route path={imgListPath} exact component={Shouye} />
                             <Route path={imgListPath+'/detail/:id'} component={Detail} />
+                            <Route path={imgListPath+'/Edit'} exact component={Edit} />
                         </Switch>
                     </Router>
                 </div>
@@ -53,7 +54,7 @@ class App extends Component {
                     <div className="wp" id="footer">
                         <div id="flk">
                             <div style={{float: 'left'}}>
-                                <img src="https://static.bbs.miui.com/static/image/miui/base/footer_title.png"/>
+                                <img src="https://static.bbs.miui.com/static/image/miui/base/footer_title.png" alt="aa"/>
                             </div>
                             <div style={{display: 'inline'}}>
                                 <a href="http://www.miui.com/" target="_blank" rel="noopener noreferrer">MIUI官方网站</a>
