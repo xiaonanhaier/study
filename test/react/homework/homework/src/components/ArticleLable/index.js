@@ -19,10 +19,10 @@ class ArticleLable extends Component{
                 <div className="article_info clearfix">
                     <p className="article_info_left">
                         <a href="space-uid-1597041971.html">
-                            <img src={this.props.data.userInfo.headpicurl} alt={"aa"} />
-                                <span className="author">{this.props.data.userInfo.nickname}</span>
+                            <img src={this.props.data.userinfo.headpicurl} alt={"aa"} />
+                                <span className="author">{this.props.data.userinfo.nickname}</span>
                         </a>
-                        <span>发布于 {moment(this.props.data.create_time).format("YYYY-MM-DD HH:mm:ss")}</span>
+                        <span>发布于 {moment(this.props.data.create_time*1000).format('YYYY-MM-DD HH:mm:ss')}</span>
                     </p>
                     <p className="article_info_right">
                         <span className="article_info_right_0"><Icon type="eye-o" /> {this.props.data.lookcont}</span>

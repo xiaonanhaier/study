@@ -95,6 +95,12 @@ ajaxMethod.forEach((method)=> {
                         description: '无效的用户名或密码！'
                     })
                 }
+                if (response.data.code === 201) {
+                    notification.success({
+                        message: '保存成功！',
+                    })
+                    resolve(response);
+                }
                 reject(response);
                 //alert('xiuxiu，限你10分钟到我面前来,不然...');
             })

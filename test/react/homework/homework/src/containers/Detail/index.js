@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
 import './detail.css';
-import {Breadcrumb,Icon,Button } from 'antd';
+import {Breadcrumb,Icon,Button, Modal, Input } from 'antd';
 import {Link} from 'react-router-dom';
 import {Article} from '../../components';
 import {axiosapi as api} from "../../api";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+const { TextArea } = Input;
 class Detail extends Component{
     constructor(props){
         super(props);
@@ -15,8 +16,14 @@ class Detail extends Component{
             parentplate:"",
             parentplatename:"",
             smallplate:"",
-            smallplatename:""
+            smallplatename:"",
+            visible: false,
+            confirmLoading: false,
+            ModalText: 'Content of the modal',
         }
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleOk = this.handleOk.bind(this);
+        this.showModal = this.showModal.bind(this);
     }
     componentWillMount(){
         let articleid = this.props.match.params.id;
@@ -32,6 +39,29 @@ class Detail extends Component{
                 this.props.actions.plateSelecct(re.data.data.id);
             })
         })
+    }
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+    handleOk = () => {
+        this.setState({
+            ModalText: 'The modal will be closed after two seconds',
+            confirmLoading: true,
+        });
+        setTimeout(() => {
+            this.setState({
+                visible: false,
+                confirmLoading: false,
+            });
+        }, 2000);
+    };
+    handleCancel = () => {
+        console.log('Clicked cancel button');
+        this.setState({
+            visible: false,
+        });
     }
     render(){
         return(
@@ -51,11 +81,19 @@ class Detail extends Component{
                 </div>
                 <div className="detail-btn">
                     <Link to={'/app/edit'}><Button type="primary" icon="edit">发布新帖</Button></Link>
-                    <Button type="primary" icon="message">回复</Button>
+                    <Button type="primary" icon="message" onClick={this.showModal}>回复</Button>
+                    <Modal title="回复内容："
+                           visible={this.state.visible}
+                           onOk={this.handleOk}
+                           confirmLoading={this.state.confirmLoading}
+                           onCancel={this.handleCancel}
+                    >
+                        <p><TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} /></p>
+                    </Modal>
                 </div>
 
                 <div className="detail-con">
-                    <Article id={this.state.articleid}/>
+                    <Article id={this.state.articleid} ifreply = {true}/>
                     <Article/>
                 </div>
             </div>

@@ -19,21 +19,23 @@ class Article extends Component{
         }
     }
     componentDidMount(){
-        if(this.props.id){
+        if(this.props.ifreply){
             api.get(`/posts/${this.props.id}`).then((res)=>{
                 let article = res.data.data;
                 this.setState({
                     content:article.content.content,
                     id:article.content.id,
                     postsid:article.content.postsid,
-                    username:article.userInfo.nickname,
-                    userimg:article.userInfo.headpicurl,
+                    username:article.userinfo.nickname,
+                    userimg:article.userinfo.headpicurl,
                     title:article.title,
                     lookcont:article.lookcont,
                     commentcont:article.commentcont,
-                    create_at:article.create_at
+                    create_at:article.create_time
                 });
             })
+        }else {
+
         }
     }
     render(){
@@ -54,9 +56,14 @@ class Article extends Component{
                     <div className="article-count">
                         <label><Icon type = 'eye-o'/>{this.state.lookcont}</label>
                         <label><Icon type = 'message'/>{this.state.commentcont}</label>
-                        <span>{moment(moment(this.state.create_at).format("YYYY-MM-DD"),"YYYYMMDD").fromNow()}</span>
+                        <span>{moment(moment(this.state.create_at*1000).format("YYYY-MM-DD"),"YYYY-MM-DD").fromNow()}</span>
                     </div>
-                    {this.state.content}
+                    <div className="article-content">
+                        {this.state.content}
+                    </div>
+                    <div className="article-reply">
+                        回复
+                    </div>
                 </div>
             </div>
         )

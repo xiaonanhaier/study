@@ -12,6 +12,7 @@ class Editor extends Component{
         this.uploadFn = this.uploadFn.bind(this);
     }
     handleHTMLChange = (htmlContent) => {
+        this.props.content(htmlContent);
         this.setState({ htmlContent })
     };
     uploadFn = (param) => {

@@ -19,12 +19,15 @@ class Edit extends Component{
             parentplatename:"",
             smallplate:"",
             smallplatename:"",
-            topics:[]
+            topics:[],
+            zhuti:0,
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+        this.contentChange = this.contentChange.bind(this);
+        this.submitTopic = this.submitTopic.bind(this);
     }
     onTitleChange(e){
         this.setState({title:e.target.value,length:this.state.length-e.target.value.length});
@@ -43,6 +46,21 @@ class Edit extends Component{
                 topics:re.data.data.topics,
             })
         })
+    }
+    submitTopic() {
+        let data = {
+          plateid:this.state.parentplate,
+          title:this.state.title,
+          smplate:this.state.smallplate,
+          topicid:this.state.zhuti,
+        };
+        api.post('/posts/create',data).then((res)=>{
+            console.log(res);
+        })
+        // console.log(data);
+    }
+    contentChange (value){
+        this.setState({content:value});
     }
     handleChange(value) {
         this.setState({zhuti:value});
@@ -97,9 +115,9 @@ class Edit extends Component{
                     </div>
                     <div className="inputbox"></div>
                 </div>
-                <Editor/>
+                <Editor content={this.contentChange}/>
                 <div className="edit-btn">
-                    <Link to={'/app/edit'}><Button type="primary">发表新帖</Button></Link>
+                    <Button type="primary" onClick={this.submitTopic}>发表新帖</Button>
                     <Button type="primary">保存草稿</Button>
                 </div>
             </div>
