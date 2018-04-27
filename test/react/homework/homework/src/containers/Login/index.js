@@ -4,6 +4,7 @@ import { Button, Form, Input } from 'antd';
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
 import { bindActionCreators } from 'redux';
+import {SignUp, UserInfo} from "../../components";
 import bgimg from '../../common/images/69968.jpg';
 import './login.css';
 const createForm = Form.create;
@@ -16,57 +17,73 @@ class Login extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            user:""
+            user:"",
+            lognshow:"fromdiv",
+            signuppass:"signup",
+            signupuserinfo:"signup",
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.checkPass = this.checkPass.bind(this);
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.checkLoginPass = this.checkLoginPass.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+        this.signup = this.signup.bind(this);
+        this.userLoginExists = this.userLoginExists.bind(this);
+        this.signupinfo = this.signupinfo.bind(this);
     }
 
     componentDidUpdate(){
-        console.log(this.props.history);
-        if(this.props.state.async.user.code === 200){
-            this.setState({user:this.props.state.async.user})
-            this.props.history.push("/app")
-        }
+        // if(this.props.state.async.user.code === 200){
+        //     this.setState({user:this.props.state.async.user})
+        //     this.props.history.push("/app")
+        // }
     }
 
     componentWillUpdate(){
-        if(localStorage.getItem("user")){
-            let user = JSON.parse(localStorage.user);
-            if (user.code === 200){
-                this.setState({user:this.props.state.async.user})
-                this.props.history.push("/app");
-            }
-        }
+        // if(localStorage.getItem("user")){
+        //     let user = JSON.parse(localStorage.user);
+        //     if (user.code === 200){
+        //         this.setState({user:this.props.state.async.user})
+        //         this.props.history.push("/app");
+        //     }
+        // }
 
     }
     componentWillMount(){
-        if(localStorage.getItem("user")){
-            let user = JSON.parse(localStorage.user);
-            if (user.code === 200){
-                this.setState({user:this.props.state.async.user})
-                this.props.history.push("/app");
-            }
-        }
+        // if(localStorage.getItem("user")){
+        //     let user = JSON.parse(localStorage.user);
+        //     if (user.code === 200){
+        //         this.setState({user:this.props.state.async.user})
+        //         this.props.history.push("/app");
+        //     }
+        // }
     }
 
     handleReset(e) {
         e.preventDefault();
         this.props.form.resetFields();
     }
-
-    handleSubmit(e) {
+    signup() {
+        this.setState({
+            lognshow:"fromdiv ifshow",
+            signuppass:"signup signupshow"
+        })
+    }
+    signupinfo() {
+        this.setState({
+            signuppass:"signup ifshow",
+            signupuserinfo:"signup signupshowinfo"
+        })
+    }
+    handleLoginSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((errors, values) => {
             if (!!errors) {
-                console.log('Errors in form!!!');
                 return;
             }
             this.props.actions.login(values);
         });
     }
 
-    userExists(rule, value, callback) {
+    userLoginExists(rule, value, callback) {
         if (!value) {
             callback();
         } else {
@@ -80,7 +97,7 @@ class Login extends Component{
         }
     }
 
-    checkPass(rule, value, callback) {
+    checkLoginPass(rule, value, callback) {
         const { validateFields } = this.props.form
         if (value) {
             validateFields(['rePasswd'], { force: true });
@@ -90,26 +107,28 @@ class Login extends Component{
 
     render() {
         const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
-        const nameProps = getFieldProps('username', {
+
+        //登录
+        const nameLloginProps = getFieldProps('username', {
             rules: [
-                { required: true, min: 2, message: '用户名至少为 5 个字符' },
-                { validator: this.userExists },
+                { required: true,message: '用户名' },
+                { validator: this.userLoginExists },
             ],
         });
-        const passwdProps = getFieldProps('password', {
+        const passwdLoginProps = getFieldProps('password', {
             rules: [
                 { required: true, whitespace: true, message: '请填写密码' },
-                { validator: this.checkPass },
+                { validator: this.checkLoginPass },
             ],
         });
         const formItemLayout = {
             labelCol: { span: 7 },
             wrapperCol: { span: 12 },
         };
-        let styles = {backgroundImage:`url(${bgimg})`}
+        let styles = {backgroundImage:`url(${bgimg})`};
         return (
             <div className="bg" style={styles}>
-                <div className="fromdiv" >
+                <div className={this.state.lognshow}>
                     <Form horizontal form={this.props.form}>
                         <FormItem
                             {...formItemLayout}
@@ -117,26 +136,31 @@ class Login extends Component{
                             hasFeedback
                             help={isFieldValidating('name') ? '校验中...' : (getFieldError('name') || []).join(', ')}
                         >
-                            <Input {...nameProps} placeholder="学号" />
+                            <Input {...nameLloginProps} placeholder="用户名" type="username" />
                         </FormItem>
-
-
                         <FormItem
                             {...formItemLayout}
                             label="密码"
                             hasFeedback
                         >
-                            <Input {...passwdProps} type="password" autoComplete="off"
+                            <Input {...passwdLoginProps} type="password" autoComplete="off"
                                    onContextMenu={noop} onPaste={noop} onCopy={noop} onCut={noop}
                             />
                         </FormItem>
-
                         <FormItem wrapperCol={{ span: 12, offset: 7 }}>
-                            <Button type="primary" onClick={this.handleSubmit}>确定</Button>
+                            <Button type="primary" onClick={this.handleLoginSubmit}>登录</Button>
                             &nbsp;&nbsp;&nbsp;
                             <Button type="ghost" onClick={this.handleReset}>重置</Button>
+                            &nbsp;&nbsp;&nbsp;
+                            <Button type="ghost" onClick={this.signup}>注册</Button>
                         </FormItem>
                     </Form>
+                </div>
+                <div className={this.state.signuppass}>
+                    <SignUp onClick={this.signupinfo}/>
+                </div>
+                <div className={this.state.signupuserinfo}>
+                    <UserInfo/>
                 </div>
             </div>
         );
@@ -145,7 +169,7 @@ class Login extends Component{
 
 Login = createForm()(Login);
 Login.propTypes = {
-    user:PropTypes.object,
+    user: PropTypes.object,
     actions: PropTypes.object.isRequired,
 }
 function mapStateToProps(state) {

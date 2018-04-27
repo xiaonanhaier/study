@@ -13,21 +13,30 @@ class Shouye extends Component{
         this.state = {
             article:[],
             page:1,
-        }
+            totalcount:0,
+            pagesize:0,
+        };
         this.onChange = this.onChange.bind(this);
     }
     componentDidMount(){
-        api.get('posts/top20',).then((res)=>{
+        api.get(`posts/top20?page=${this.state.page}`).then((res)=>{
             if(res.data.code === 200){
                 let articles = res.data.data.map((item,index)=>{return item});
-                this.setState({article:articles})
+                this.setState({article:articles,
+                pagesize:res.headers["x-pagination-per-page"],
+                totalcount:res.headers['x-pagination-total-count']});
             }
             // console.log(res.data.data);
         })
     }
     onChange(page){
-        console.log(page)
         this.setState({page:page})
+        api.get(`posts/top20?page=${page}`).then((res)=>{
+            if(res.data.code === 200){
+                let articles = res.data.data.map((item,index)=>{return item});
+                this.setState({article:articles});
+            }
+        })
     }
     render(){
         let articlelist = this.state.article.map((item,index)=>{
@@ -48,7 +57,7 @@ class Shouye extends Component{
                 <div className="shouyeconlist">
                     <div className="shouyelist">
                         {articlelist}
-                        <Pages onChange={this.onChange}/>
+                        <Pages pagesize={this.state.pagesize} page={this.state.page} total={this.state.totalcount} onChange={this.onChange}/>
                     </div>
                     <div className="shouyebtn"></div>
                 </div>

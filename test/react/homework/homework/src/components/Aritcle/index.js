@@ -10,13 +10,22 @@ class Article extends Component{
             content:"稍等。。。",
             id:"",
             postsid:"",
-            title:"河北科技师范学院",
+            title:"",
             username:"河北科技师范学院",
             lookcont:0,
             commentcont:0,
             create_at:0,
+            ifreply:"article-count",
+            replyshow:"article-replys isshow",
+            replyusername:"",
+            replytime:"",
+            replycontent:"",
             userimg:"https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=5bcc72b5f503918fc3dc359830544df2/f7246b600c338744d3130a29530fd9f9d62aa094.jpg"
         }
+        this.reply = this.reply.bind(this);
+    }
+    reply() {
+        this.props.replybtn(this.props.replyid);
     }
     componentDidMount(){
         if(this.props.ifreply){
@@ -35,7 +44,33 @@ class Article extends Component{
                 });
             })
         }else {
+            api.get(`/reply?id=${this.props.replyid}`).then((res)=>{
+                if(!res.data.data[0].replycontent && typeof(res.data.data[0].replycontent)!="undefined") {
+                    this.setState({
+                        title: "",
+                        content: res.data.data[0].content,
+                        ifreply: "article-count reply",
+                        create_at: res.data.data[0].createtime,
+                        username: res.data.data[0].userinfo.nickname,
+                        userimg: res.data.data[0].userinfo.headpicurl
+                    })
+                }else {
+                    this.setState({
+                        title:"",
+                        content:res.data.data[0].content,
+                        ifreply:"article-count reply",
+                        create_at:res.data.data[0].createtime,
+                        username:res.data.data[0].userinfo.nickname,
+                        userimg:res.data.data[0].userinfo.headpicurl,
+                        replyusername:res.data.data[0].replycontent.userinfo.nickname,
+                        replycontent:res.data.data[0].replycontent.content,
+                        replytime:res.data.data[0].replycontent.createtime,
+                        replyshow:"article-replys"
+                    });
 
+                }
+
+            })
         }
     }
     render(){
@@ -53,16 +88,26 @@ class Article extends Component{
                     <h1 className="article-tit">
                         {this.state.title}
                     </h1>
-                    <div className="article-count">
+                    <div className={this.state.ifreply}>
                         <label><Icon type = 'eye-o'/>{this.state.lookcont}</label>
                         <label><Icon type = 'message'/>{this.state.commentcont}</label>
-                        <span>{moment(moment(this.state.create_at*1000).format("YYYY-MM-DD"),"YYYY-MM-DD").fromNow()}</span>
+                        <label><span>{moment(moment(this.state.create_at*1000).format("YYYY-MM-DD"),"YYYY-MM-DD").fromNow()}</span></label>
+                        <span>{moment(this.state.create_at*1000).format("YYYY-MM-DD HH:mm:ss")}</span>
                     </div>
                     <div className="article-content">
+                        <div className={this.state.replyshow}>
+                            <div className="article-reply-user">
+                                {this.state.replyusername}<span></span>
+                                {moment(this.state.replytime*1000).format("YYYY-MM-DD HH:mm:ss")}
+                            </div>
+                            <div className="article-reply-con">
+                                {this.state.replycontent}
+                            </div>
+                        </div>
                         {this.state.content}
                     </div>
                     <div className="article-reply">
-                        回复
+                        <label onClick={this.reply}>回复</label>
                     </div>
                 </div>
             </div>

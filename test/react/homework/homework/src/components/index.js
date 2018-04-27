@@ -4,3 +4,5 @@ export {default as Editor} from './Editor';
 export {default as ArticleLable} from './ArticleLable';
 export {default as Pages} from './Pages';
 export {default as Article} from './Aritcle';
+export {default as SignUp} from './SignUp';
+export {default as UserInfo} from './UserInfo';

@@ -34,11 +34,14 @@
     overflow: hidden;
     padding: 5px 0;
     border-bottom: 0px dashed #CDCDCD;
+    color: #909090;
+    font-size: 13px;
+    transition: all 1s;
 }
 .article-count>label{
     margin-right: 15px;
 }
-.article-coun>span{
+.article-count>span{
     color: #ffffff;
 }
 .article-count>label>i{
@@ -48,6 +51,7 @@
 .article-content{
     min-height: 200px;
     margin-bottom: 10px;
+    color: black;
 }
 .article-reply{
     width: 100%;
@@ -62,4 +66,30 @@
 .article:hover .article-reply{
     color: #909090;
     border-top: dashed 1px #909090;
+}
+.reply label{
+    display: none;
+}
+.reply span {
+    color: #909090;
+}
+.article-replys{
+    background-color: #ededed;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.article-reply-user{
+    color: #909090;
+    font-size: 13px;
+}
+.article-reply-user>span{
+    margin: 0 10px;
+}
+.isshow{
+    display: none;
+}
+.article-reply-con{
+    color: #535353;
+    font-size: 14px;
 }

@@ -8,7 +8,7 @@ class ArticleLable extends Component{
         return(
             <div className="articlelable">
                 <h3>
-                    <a href="https://www.miui.com/thread-13733456-1-1.html?from=bbsindex">{this.props.data.title}</a>
+                    <Link to={`/app/detail/${this.props.data.id}`}>{this.props.data.title}</Link>
                 </h3>
                 <Link to={`/app/detail/${this.props.data.id}`}>
                     <img src={this.props.data.titleimg} alt={this.props.data.title} title={this.props.data.title} width="627" alt="a"/>
