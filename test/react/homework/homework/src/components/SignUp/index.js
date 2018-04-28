@@ -1,5 +1,9 @@
 import React,{Component} from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message} from 'antd';
+import { connect } from 'react-redux';
+import * as TodoActions from '../../actions';
+import { bindActionCreators } from 'redux';
+import {PropTypes} from "prop-types";
 const createForm = Form.create;
 const FormItem = Form.Item;
 function noop() {
@@ -10,6 +14,7 @@ class SignUp extends Component{
         super(props);
         this.state = {
             user:"",
+            iconLoading:false
         };
         //注册
         this.checkSignPass2 = this.checkSignPass2.bind(this);
@@ -21,17 +26,28 @@ class SignUp extends Component{
     //注册
     handleSignSubmit(e) {
         e.preventDefault();
+        this.setState({iconLoading:true});
         this.props.form.validateFields((errors, values) => {
             if (!!errors) {
-                console.log('Errors in form!!!');
+                message.error('出错啦。。。');
                 return;
             }
-            console.log('Submit!!!');
-            console.log(values);
-            this.props.onClick();
+            let data = {
+                "username":values.name,
+                "email":values.email,
+                "password":values.rePasswd,
+            };
+            this.props.actions.SignUp(data);
         });
     }
-
+    componentDidUpdate() {
+        if(localStorage.getItem("user")){
+            let user = JSON.parse(localStorage.user);
+            if (user.code === 200){
+                this.props.onClick();
+            }
+        }
+    }
     userSignExists(rule, value, callback) {
         if (!value) {
             callback();
@@ -64,6 +80,7 @@ class SignUp extends Component{
     handleReset(e) {
         e.preventDefault();
         this.props.form.resetFields();
+        this.setState({iconLoading:false});
     }
     render(){
         const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
@@ -146,7 +163,7 @@ class SignUp extends Component{
                     </FormItem>
 
                     <FormItem wrapperCol={{ span: 12, offset: 7 }}>
-                        <Button type="primary" onClick={this.handleSignSubmit}>确定</Button>
+                        <Button type="primary" onClick={this.handleSignSubmit} loading={this.state.iconLoading}>确定</Button>
                         &nbsp;&nbsp;&nbsp;
                         <Button type="ghost" onClick={this.handleReset}>重置</Button>
                     </FormItem>
@@ -156,4 +173,22 @@ class SignUp extends Component{
     }
 }
 SignUp = createForm()(SignUp);
-export default SignUp;
+SignUp.propTypes = {
+    user: PropTypes.object,
+    actions: PropTypes.object.isRequired,
+}
+function mapStateToProps(state) {
+    return {
+        state
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(TodoActions, dispatch),
+    };
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignUp);

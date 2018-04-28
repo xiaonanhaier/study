@@ -21,6 +21,7 @@ class Login extends Component{
             lognshow:"fromdiv",
             signuppass:"signup",
             signupuserinfo:"signup",
+            userinfo:"",
         }
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.checkLoginPass = this.checkLoginPass.bind(this);
@@ -48,13 +49,13 @@ class Login extends Component{
 
     }
     componentWillMount(){
-        // if(localStorage.getItem("user")){
-        //     let user = JSON.parse(localStorage.user);
-        //     if (user.code === 200){
-        //         this.setState({user:this.props.state.async.user})
-        //         this.props.history.push("/app");
-        //     }
-        // }
+        if(localStorage.getItem("user")){
+            let user = JSON.parse(localStorage.user);
+            if (user.code === 200){
+                this.setState({user:this.props.state.async.user})
+                this.props.history.push("/app");
+            }
+        }
     }
 
     handleReset(e) {
@@ -70,6 +71,7 @@ class Login extends Component{
     signupinfo() {
         this.setState({
             signuppass:"signup ifshow",
+            userinfo:<UserInfo history={this.props.history}/>,
             signupuserinfo:"signup signupshowinfo"
         })
     }
@@ -160,7 +162,8 @@ class Login extends Component{
                     <SignUp onClick={this.signupinfo}/>
                 </div>
                 <div className={this.state.signupuserinfo}>
-                    <UserInfo/>
+                    {/*<UserInfo/>*/}
+                    {this.state.userinfo}
                 </div>
             </div>
         );

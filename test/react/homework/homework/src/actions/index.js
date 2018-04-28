@@ -1,6 +1,7 @@
 // import * as types from '../constants/ActionTypes';
 import {ASYNC} from 'redux-amrc';
 import { axiosapi as api} from "../api/index";
+import { message } from 'antd';
 export function loginauth(info) {
     return {type:"LOGIN",info}
 }
@@ -12,6 +13,25 @@ export function login(data) {
             ).then((res)=>{
                 localStorage.setItem("user",JSON.stringify(res.data));
                 return res.data;
+            }).catch((res)=>{
+                return res.data;
+            })
+        }
+    }
+}
+
+export function SignUp(data) {
+    return {
+        [ASYNC]:{
+            key:'user',
+            promise:()=>api.post('adminuser/signup',data,
+            ).then((res)=>{
+                if(res.data.code === 200){
+                    localStorage.setItem("user",JSON.stringify(res.data));
+                    return res.data;
+                }else {
+                    message.error(res.data.code);
+                }
             }).catch((res)=>{
                 return res.data;
             })

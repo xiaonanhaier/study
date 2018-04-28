@@ -1,0 +1,13 @@
+.fileList{
+    height: auto;
+    opacity: 1;
+    overflow: hidden;
+    transition: all 1s;
+}
+.fileListshow{
+    height: 0;
+    opacity: 0;
+}
+.userinfo .ant-form-item{
+    margin-bottom: 8px;
+}
