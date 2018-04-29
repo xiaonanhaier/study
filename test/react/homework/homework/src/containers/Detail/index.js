@@ -55,6 +55,9 @@ class Detail extends Component{
                 replypagesize:res.headers["x-pagination-per-page"],
                 replytotal:res.headers['x-pagination-total-count']})
         })
+
+        let lookdata = {id:this.props.match.params.id};
+        api.post('/posts/look',lookdata).then(res=>{})
     }
     showModal = () => {
         this.setState({
@@ -86,12 +89,14 @@ class Detail extends Component{
             articleid:this.state.articleid,
             content:this.state.replytext,
             replyid:this.state.replyid
-        }
+        };
         api.post('/reply/create',data).then((res)=>{
             this.setState({
                 visible: false,
                 confirmLoading: false,
             });
+            let replydata = {id:this.props.match.params.id};
+            api.post('/posts/reply',replydata).then(resd=>{})
             api.get(`/reply?fields=id&articleid=${this.state.articleid}`).then((res)=>{
                 this.setState({replycon:res.data.data})
             })

@@ -4,12 +4,12 @@ import { BackTop } from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
-import {Shouye,Detail,Edit} from "../index";
+import {Shouye,Detail,Edit,PlateList} from "../index";
 import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
 import { bindActionCreators } from 'redux';
-import { axiosapi as api} from "../../api/index";
+// import { axiosapi as api} from "../../api/index";
 class App extends Component {
 
     constructor(props) {
@@ -32,6 +32,9 @@ class App extends Component {
 
     componentDidMount(){
         this.setState({user:this.props.state.async.user})
+        if(this.props.match.path === "/App"){
+            this.props.history.push("/app/shouye");
+        }
     }
     render(){
         let imgListPath = `${this.props.match.path}`;
@@ -43,9 +46,11 @@ class App extends Component {
                 <div className="content">
                     <Router>
                         <Switch>
-                            <Route path={imgListPath} exact component={Shouye} />
+                            <Route path={imgListPath+'/platelist/:id'} exact component={PlateList} />
                             <Route path={imgListPath+'/detail/:id'} component={Detail} />
                             <Route path={imgListPath+'/Edit'} exact component={Edit} />
+                            {/*<Route path={imgListPath+'/shouye'} exact component={Shouye} />*/}
+                            <Route path={imgListPath} component={Shouye} />
                         </Switch>
                     </Router>
                 </div>

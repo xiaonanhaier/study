@@ -18,7 +18,9 @@
     float: left;
     line-height: 48px;
     color: #fff !important;
+    text-decoration: none;
 }
 .navul .active{
     background: #0056b3;
+    text-decoration: none;
 }

@@ -10,8 +10,8 @@ class Nav extends Component{
             <div className="nav">
                 <div className="navcon">
                     <ul className='navul'>
-                        <NavLink to="/app"><li>首页</li></NavLink>
-                        <NavLink to="/login"><li>新闻速递</li></NavLink>
+                        <NavLink to="/app/shouye"><li>首页</li></NavLink>
+                        <NavLink to="/app/platelist/1"><li>校园新闻</li></NavLink>
                         <NavLink to="/login"><li>校园公告</li></NavLink>
                         <NavLink to="/login"><li>社团活动</li></NavLink>
                     </ul>

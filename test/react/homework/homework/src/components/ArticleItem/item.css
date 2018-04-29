@@ -1,0 +1,51 @@
+.articleitem{
+  width: 100%;
+  padding: 13px 8px;
+  text-align: left;
+  font-weight: 400;
+  border-radius: 5px;
+  margin-top: -1px;
+  border: 1px dotted #ffffff;
+  border-bottom: 1px dotted #bebebe;
+}
+.articleitem:hover{
+  background-color: #fafafa;
+  border-bottom: 1px solid #f2f2f2;
+  border-radius: 5px;
+}
+.articleitem a:hover {
+  color: #ff6f3d !important;
+  text-decoration: none;
+}
+.avatarbox {
+  float: left;
+  margin-right: 8px;
+}
+.sub-tit {
+  padding: 0 0 3px;
+  font-family: 'Microsoft YaHei';
+  color: black;
+  font-size: 16px;
+  word-break: break-all;
+}
+.avatarbox-info {
+  margin-left: 51px;
+  position: static;
+}
+.sub-infos, .sub-infos a, table .avatarbox-info .sub-infos a:visited {
+  color: #c7c7c7;
+  font-size: 12px;
+}
+.b_rad_8 {
+  border-radius: 8px;
+}
+/*.avatarbox-info .sub-tit span.icon {*/
+  /*display: inline-block;*/
+  /**display: inline;*/
+  /**zoom: 1;*/
+  /*vertical-align: middle;*/
+/*}*/
+.sub-tit .xst {
+  font-family: 'Microsoft YaHei';
+  font-size: 16px;
+}

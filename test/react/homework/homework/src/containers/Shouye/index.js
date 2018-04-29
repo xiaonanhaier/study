@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import "./shouye.css";
-import { Carousel } from 'antd';
+import { Carousel, Icon } from 'antd';
 import b123 from '../../common/images/123.jpg';
 import b456 from '../../common/images/456.jpg';
 import b789 from '../../common/images/789.jpg';
@@ -59,7 +59,11 @@ class Shouye extends Component{
                         {articlelist}
                         <Pages pagesize={this.state.pagesize} page={this.state.page} total={this.state.totalcount} onChange={this.onChange}/>
                     </div>
-                    <div className="shouyebtn"></div>
+                    <div className="shouyebtn">
+                        <div className="shouyenew">
+                            <Icon type="edit" />  发表新帖
+                        </div>
+                    </div>
                 </div>
             </div>
         )

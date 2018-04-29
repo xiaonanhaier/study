@@ -92,7 +92,7 @@ class UserInfo extends  Component{
                         if (ress.data.code === 201) {
                             api.post('file/create',filedata).then(fileres=>{
                                 if (fileres.data.code === 201) {
-                                    this.props.history.push("/app");
+                                    this.props.history.push("/app/shouye");
                                 }else {
                                     message.error(fileres.data.code);
                                 }
@@ -104,7 +104,7 @@ class UserInfo extends  Component{
                 }else {
                     api.post('file/create',filedata).then(fileres=>{
                         if (fileres.data.code === 201) {
-                            this.props.history.push("/app");
+                            this.props.history.push("/app/shouye");
                         }else {
                             message.error(fileres.data.code);
                         }

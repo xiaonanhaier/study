@@ -53,7 +53,7 @@ class Login extends Component{
             let user = JSON.parse(localStorage.user);
             if (user.code === 200){
                 this.setState({user:this.props.state.async.user})
-                this.props.history.push("/app");
+                this.props.history.push("/app/shouye");
             }
         }
     }
