@@ -48,13 +48,13 @@ class Detail extends Component{
                 })
                 this.props.actions.plateSelecct(re.data.data.id);
             })
-        })
+        });
         //获取评论
         api.get(`/reply?articleid=${articleid}&page=${this.state.page}&fields=id`).then((res)=>{
             this.setState({replycon:res.data.data,
                 replypagesize:res.headers["x-pagination-per-page"],
                 replytotal:res.headers['x-pagination-total-count']})
-        })
+        });
 
         let lookdata = {id:this.props.match.params.id};
         api.post('/posts/look',lookdata).then(res=>{})

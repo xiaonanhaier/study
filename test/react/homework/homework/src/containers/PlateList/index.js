@@ -29,6 +29,7 @@ class PlateList extends Component{
         const articleitems = this.state.articlelist.map(item=>{
            return(
                <ArticleItem
+                    key={item.id}
                     articleid = {item.id}
                     articlename = {item.title}
                     articlesmplateid = {item.smplate}

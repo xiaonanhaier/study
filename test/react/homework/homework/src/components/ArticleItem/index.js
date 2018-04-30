@@ -27,7 +27,7 @@ class ArticleItem extends Component{
             <div className="articleitem">
                 <div className="avatarbox b_rad_8">
                     <a href="space-uid-1125852175.html">
-                        <img className="b_rad_8"  src={this.props.articleuserimg}  onError="this.onerror=null;this.src='https://avatar.bbs.miui.com/images/noavatar_small.gif'"  width="40" height="40"/>
+                        <img className="b_rad_8"  src={this.props.articleuserimg}   width="40" height="40"/>
                     </a>
                 </div>
                 <div className="avatarbox-info">

@@ -39,13 +39,16 @@ class Login extends Component{
     }
 
     componentWillUpdate(){
-        // if(localStorage.getItem("user")){
-        //     let user = JSON.parse(localStorage.user);
-        //     if (user.code === 200){
-        //         this.setState({user:this.props.state.async.user})
-        //         this.props.history.push("/app");
-        //     }
-        // }
+        if(localStorage.getItem("user")){
+            let user = JSON.parse(localStorage.user);
+            if (user.code === 200){
+                // console.log(user.data.id);
+                if(user.data.id === undefined){
+                    this.setState({user:this.props.state.async.user})
+                    this.props.history.push("/app");
+                }
+            }
+        }
 
     }
     componentWillMount(){
@@ -84,7 +87,6 @@ class Login extends Component{
             this.props.actions.login(values);
         });
     }
-
     userLoginExists(rule, value, callback) {
         if (!value) {
             callback();

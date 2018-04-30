@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {PropTypes} from 'prop-types';
-import { BackTop } from 'antd';
+import { BackTop} from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
@@ -30,6 +30,17 @@ class App extends Component {
         }
     }
 
+    componentDidUpdate(){
+        if(localStorage.getItem("user")){
+            let user = JSON.parse(localStorage.user);
+            if (user.code !== 200){
+                this.props.history.push("/login");
+            }
+        }else {
+            this.props.history.push("/login");
+        }
+    }
+
     componentDidMount(){
         this.setState({user:this.props.state.async.user})
         if(this.props.match.path === "/App"){
@@ -49,8 +60,8 @@ class App extends Component {
                             <Route path={imgListPath+'/platelist/:id'} exact component={PlateList} />
                             <Route path={imgListPath+'/detail/:id'} component={Detail} />
                             <Route path={imgListPath+'/Edit'} exact component={Edit} />
-                            {/*<Route path={imgListPath+'/shouye'} exact component={Shouye} />*/}
-                            <Route path={imgListPath} component={Shouye} />
+                            <Route path={imgListPath+'/shouye'} component={Shouye} />
+                            <Route path={imgListPath+'/'} component={Shouye} />
                         </Switch>
                     </Router>
                 </div>
