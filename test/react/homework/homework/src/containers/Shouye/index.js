@@ -7,6 +7,9 @@ import b789 from '../../common/images/789.jpg';
 // import {Editor} from "../../components/index";
 import {ArticleLable,Pages} from "../../components/index";
 import { axiosapi as api} from "../../api/index";
+import * as TodoActions from '../../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 class Shouye extends Component{
     constructor(props){
         super(props);
@@ -17,6 +20,7 @@ class Shouye extends Component{
             pagesize:0,
         };
         this.onChange = this.onChange.bind(this);
+        this.newposts = this.newposts.bind(this);
     }
     componentDidMount(){
         api.get(`posts/top20?page=${this.state.page}`).then((res)=>{
@@ -28,6 +32,9 @@ class Shouye extends Component{
             }
             // console.log(res.data.data);
         })
+    }
+    newposts(){
+        this.props.actions.newposts(true);
     }
     onChange(page){
         this.setState({page:page})
@@ -60,7 +67,7 @@ class Shouye extends Component{
                         <Pages pagesize={this.state.pagesize} page={this.state.page} total={this.state.totalcount} onChange={this.onChange}/>
                     </div>
                     <div className="shouyebtn">
-                        <div className="shouyenew">
+                        <div className="shouyenew" onClick={this.newposts}>
                             <Icon type="edit" />  发表新帖
                         </div>
                     </div>
@@ -69,4 +76,18 @@ class Shouye extends Component{
         )
     }
 }
-export default Shouye;
+function mapStateToProps(state) {
+    return {
+        state
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(TodoActions, dispatch),
+    };
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Shouye);

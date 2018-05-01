@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import './edit.css';
 import { Editor } from "../../components";
 import {Link} from 'react-router-dom';
-import { Breadcrumb, Select, Button, Icon, Input} from 'antd';
+import { Breadcrumb, Select, Button, Icon, Input, Modal} from 'antd';
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,6 +21,8 @@ class Edit extends Component{
             smallplatename:"",
             topics:[],
             zhuti:0,
+            loading: false,
+            visible: false,
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.handleChange = this.handleChange.bind(this);

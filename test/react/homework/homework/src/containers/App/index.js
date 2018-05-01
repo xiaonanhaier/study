@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {PropTypes} from 'prop-types';
-import { BackTop} from 'antd';
+import { BackTop, Modal, Button, Cascader } from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
@@ -9,16 +9,39 @@ import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
 import { bindActionCreators } from 'redux';
-// import { axiosapi as api} from "../../api/index";
+import { axiosapi as api} from "../../api/index";
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user:""
-        }
+            user:"",
+            platelist:[],
+            smallplate:0,
+        };
+        this.handleOk = this.handleOk.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.onNewChange = this.onNewChange.bind(this);
+        this.displayRender = this.displayRender.bind(this);
     }
-
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+    handleOk = () => {
+        this.props.actions.newposts(false);
+        this.props.actions.plateSelecct(this.state.smallplate);
+        this.props.history.push('/app/edit');
+        // setTimeout(() => {
+        //     this.setState({ loading: false, visible: false });
+        // }, 3000);
+    };
+    handleCancel = () => {
+        this.props.actions.newposts(false);
+        // this.setState({ visible: false });
+    };
     componentWillMount(){
         if(localStorage.getItem("user")){
             let user = JSON.parse(localStorage.user);
@@ -46,6 +69,30 @@ class App extends Component {
         if(this.props.match.path === "/App"){
             this.props.history.push("/app/shouye");
         }
+        api.get('/plate').then(res=>{
+            let platelist =  res.data.data.map(item=>{
+                return {
+                    value:item.id,
+                    label:item.title,
+                    children:item.smallPlate.map(items=>{
+                        return {
+                            value:items.id,
+                            label:items.title
+                        }
+                    })
+                }
+            });
+            this.setState({platelist:platelist});
+        });
+    }
+
+    onNewChange(value) {
+        this.setState({smallplate:value[1]});
+        // console.log(value);
+    }
+
+    displayRender(label) {
+        return label[label.length - 1];
     }
     render(){
         let imgListPath = `${this.props.match.path}`;
@@ -66,6 +113,25 @@ class App extends Component {
                     </Router>
                 </div>
                 <BackTop />
+                <Modal
+                    visible={this.props.state.async.newposts}
+                    title="网站导航"
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>取消</Button>,
+                        <Button key="submit" type="primary" onClick={this.handleOk}>
+                            发表新帖
+                        </Button>,
+                    ]}
+                >
+                    <Cascader
+                        options={this.state.platelist}
+                        expandTrigger="hover"
+                        displayRender={this.displayRender}
+                        onChange={this.onNewChange}
+                    />
+                </Modal>
                 <div id="ft" className="cl">
                     <div className="wp" id="footer">
                         <div id="flk">

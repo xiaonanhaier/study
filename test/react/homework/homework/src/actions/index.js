@@ -52,3 +52,11 @@ export function plateSelecct(data) {
         }
     }
 }
+export function newposts(data) {
+    return {
+        [ASYNC]:{
+            key:'newposts',
+            promise:()=>Promise.resolve(data)
+        }
+    }
+}

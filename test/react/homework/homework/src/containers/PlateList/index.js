@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import "./platelist.css";
-import {axiosapi as api} from "../../api";
+import { Icon } from 'antd';
 import {Pages, ArticleItem} from "../../components/index";
+import { axiosapi as api} from "../../api/index";
+import * as TodoActions from '../../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 class PlateList extends Component{
     constructor(props) {
         super(props);
@@ -12,6 +16,7 @@ class PlateList extends Component{
             articlelist:[]
         };
         this.onChange = this.onChange.bind(this);
+        this.newposts = this.newposts.bind(this);
     }
     componentDidMount() {
         api.get(`/posts?plateid=${this.props.match.params.id}`).then(res=>{
@@ -24,6 +29,9 @@ class PlateList extends Component{
         api.get(`posts/?page=${page}`).then((res)=>{
             this.setState({articlelist:res.data.data});
         })
+    }
+    newposts(){
+        this.props.actions.newposts(true);
     }
     render(){
         const articleitems = this.state.articlelist.map(item=>{
@@ -52,10 +60,28 @@ class PlateList extends Component{
                         {articleitems}
                         <Pages pagesize={this.state.pagesize} page={this.state.page} total={this.state.totalcount} onChange={this.onChange}/>
                     </div>
-                    <div className="platelistbtn"></div>
+                    <div className="platelistbtn">
+                        <div className="shouyenew" onClick={this.newposts}>
+                            <Icon type="edit" />  发表新帖
+                        </div>
+                    </div>
                 </div>
             </div>
         )
     }
 }
-export default PlateList;
+function mapStateToProps(state) {
+    return {
+        state
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(TodoActions, dispatch),
+    };
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PlateList);
