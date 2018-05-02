@@ -44,6 +44,7 @@ class Login extends Component{
             if (user.code === 200){
                 // console.log(user.data.id);
                 if(user.data.id === undefined){
+                    this.props.actions.userinfo();
                     this.setState({user:this.props.state.async.user})
                     this.props.history.push("/app");
                 }

@@ -42,6 +42,7 @@ class Article extends Component{
                     commentcont:article.commentcont,
                     create_at:article.create_time
                 });
+                this.refs['article-neirong'].innerHTML=this.state.content
             })
         }else {
             api.get(`/reply?id=${this.props.replyid}`).then((res)=>{
@@ -54,6 +55,7 @@ class Article extends Component{
                         username: res.data.data[0].userinfo.nickname,
                         userimg: res.data.data[0].userinfo.headpicurl
                     })
+                    this.refs['article-neirong'].innerHTML=this.state.content
                 }else {
                     this.setState({
                         title:"",
@@ -67,7 +69,7 @@ class Article extends Component{
                         replytime:res.data.data[0].replycontent.createtime,
                         replyshow:"article-replys"
                     });
-
+                    this.refs['article-neirong'].innerHTML=this.state.content
                 }
 
             })
@@ -104,7 +106,8 @@ class Article extends Component{
                                 {this.state.replycontent}
                             </div>
                         </div>
-                        {this.state.content}
+                        <div ref="article-neirong" className="article-neirong">
+                        </div>
                     </div>
                     <div className="article-reply">
                         <label onClick={this.reply}>回复</label>

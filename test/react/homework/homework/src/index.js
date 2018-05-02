@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import {ConnectedRouter} from 'react-router-redux';
 import 'babel-polyfill';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 const store = configureStore();
 ReactDOM.render(
     <Provider store={store}>

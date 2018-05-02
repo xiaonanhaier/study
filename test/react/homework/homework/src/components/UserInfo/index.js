@@ -3,6 +3,9 @@ import {  Form, Select, InputNumber, DatePicker, TimePicker, Switch, Radio,
     Cascader, Slider, Button, Col, Upload, Icon, Input, message } from 'antd';
 import { axiosapi as api} from "../../api/index";
 import './userinfo.css';
+import { connect } from 'react-redux';
+import * as TodoActions from '../../actions';
+import { bindActionCreators } from 'redux';
 const createForm = Form.create;
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -92,6 +95,7 @@ class UserInfo extends  Component{
                         if (ress.data.code === 201) {
                             api.post('file/create',filedata).then(fileres=>{
                                 if (fileres.data.code === 201) {
+                                    this.props.actions.userinfo();
                                     this.props.history.push("/app/shouye");
                                 }else {
                                     message.error(fileres.data.code);
@@ -104,6 +108,7 @@ class UserInfo extends  Component{
                 }else {
                     api.post('file/create',filedata).then(fileres=>{
                         if (fileres.data.code === 201) {
+                            this.props.actions.userinfo();
                             this.props.history.push("/app/shouye");
                         }else {
                             message.error(fileres.data.code);
@@ -434,6 +439,7 @@ class UserInfo extends  Component{
                                 <Option value="4">教师</Option>
                                 <Option value="5">班主任</Option>
                                 <Option value="6">院系</Option>
+                                <Option value="7">学校</Option>
                             </Select>
                         )}
                     </FormItem>
@@ -583,4 +589,18 @@ class UserInfo extends  Component{
     }
 }
 UserInfo = createForm()(UserInfo);
-export default UserInfo;
+function mapStateToProps(state) {
+    return {
+        state
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(TodoActions, dispatch),
+    };
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UserInfo);

@@ -27,6 +27,7 @@ class Editor extends Component{
             let responseMsg = JSON.parse(xhr.responseText);
             if(responseMsg.code === 200){
                 let url = 'http://120.79.133.95/homeworkapi/api/web/'+responseMsg.data.url;
+                this.props.imglist(url);
                 param.success({
                     url: url,
                 })

@@ -33,7 +33,7 @@ export function SignUp(data) {
                     message.error(res.data.code);
                 }
             }).catch((res)=>{
-                return res.data;
+                message.error(res.data.code);
             })
         }
     }
@@ -57,6 +57,23 @@ export function newposts(data) {
         [ASYNC]:{
             key:'newposts',
             promise:()=>Promise.resolve(data)
+        }
+    }
+}
+export function userinfo() {
+    return {
+        [ASYNC]:{
+            key:'userinfo',
+            promise:()=>api.get('adminuserinfo').then((res)=>{
+                if(res.data.code === 200){
+                    localStorage.setItem("userinfo",JSON.stringify(res.data));
+                    return res.data;
+                }else {
+                    message.error(res.data.code);
+                }
+            }).catch((res)=>{
+                message.error(res.data.code);
+            })
         }
     }
 }

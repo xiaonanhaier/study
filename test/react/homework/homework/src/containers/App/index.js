@@ -65,12 +65,44 @@ class App extends Component {
     }
 
     componentDidMount(){
+        this.props.actions.userinfo();
         this.setState({user:this.props.state.async.user})
         if(this.props.match.path === "/App"){
             this.props.history.push("/app/shouye");
         }
         api.get('/plate').then(res=>{
             let platelist =  res.data.data.map(item=>{
+                let userinfo = JSON.parse(localStorage.userinfo);
+                if(item.id === 2){
+                    if (userinfo.data[0].identity !== 3) {
+                        return {
+                            value:item.id,
+                            label:item.title,
+                            disabled: true,
+                            children:item.smallPlate.map(items=>{
+                                return {
+                                    value:items.id,
+                                    label:items.title
+                                }
+                            })
+                        }
+                    }
+                }
+                if(item.id === 3 || item.id === 1){
+                    if (userinfo.data[0].identity !== 6 && userinfo.data[0].identity !== 7) {
+                        return {
+                            value:item.id,
+                            label:item.title,
+                            disabled: true,
+                            children:item.smallPlate.map(items=>{
+                                return {
+                                    value:items.id,
+                                    label:items.title
+                                }
+                            })
+                        }
+                    }
+                }
                 return {
                     value:item.id,
                     label:item.title,
