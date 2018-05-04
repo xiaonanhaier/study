@@ -83,7 +83,7 @@ class UserInfo extends  Component{
             url:values.upload[0].response.data.url,
             type:values.upload[0].response.data.type,
             usetype:"usertitle"
-        }
+        };
         api.post(`/adminuserinfo/create`,data).then(res=>{
             if(res.data.code === 201){
                 if(this.state.identity === "5"){

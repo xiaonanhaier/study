@@ -25,7 +25,8 @@ class Detail extends Component{
             replycon:[],
             replypagesize:0,
             replytotal:0,
-            page:1
+            page:1,
+            fileList:[]
         }
         this.handleCancel = this.handleCancel.bind(this);
         this.handleOk = this.handleOk.bind(this);
@@ -45,7 +46,7 @@ class Detail extends Component{
                     parentplatename:re.data.data.parent.title,
                     smallplate:re.data.data.id,
                     smallplatename:re.data.data.title,
-                })
+                });
                 this.props.actions.plateSelecct(re.data.data.id);
             })
         });
@@ -54,6 +55,11 @@ class Detail extends Component{
             this.setState({replycon:res.data.data,
                 replypagesize:res.headers["x-pagination-per-page"],
                 replytotal:res.headers['x-pagination-total-count']})
+        });
+
+        //获取文件列表
+        api.get(`/file?articleid=${articleid}&usetype=file`).then(filelist=>{
+            this.setState({fileList:filelist.data.data});
         });
 
         let lookdata = {id:this.props.match.params.id};
@@ -103,7 +109,6 @@ class Detail extends Component{
         })
     };
     handleCancel = () => {
-        console.log('Clicked cancel button');
         this.setState({
             visible: false,
         });
@@ -111,7 +116,7 @@ class Detail extends Component{
     render(){
         let replyarr = this.state.replycon.map(item=>{
             return(
-                <Article replyid={item.id} key={item.id} ifreply = {false} replybtn={this.childShowModal}/>
+                <Article replyid={item.id} filelist={this.state.fileList} key={item.id} ifreply = {false} replybtn={this.childShowModal}/>
             )
         })
         return(
@@ -143,7 +148,7 @@ class Detail extends Component{
                 </div>
 
                 <div className="detail-con">
-                    <Article id={this.state.articleid} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
+                    <Article id={this.state.articleid} filelist={this.state.fileList} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
                     {replyarr}
                 </div>
                 <div className="detail-footer-page">

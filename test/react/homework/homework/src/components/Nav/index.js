@@ -12,8 +12,11 @@ class Nav extends Component{
                     <ul className='navul'>
                         <NavLink to="/app/shouye"><li>首页</li></NavLink>
                         <NavLink to="/app/platelist/1"><li>校园新闻</li></NavLink>
-                        <NavLink to="/login"><li>校园公告</li></NavLink>
-                        <NavLink to="/login"><li>社团活动</li></NavLink>
+                        <NavLink to="/app/gonggao"><li>校园公告</li></NavLink>
+                        <NavLink to="/app/shetuan"><li>社团活动</li></NavLink>
+                        <NavLink to="/login"><li>失物招领</li></NavLink>
+                        <NavLink to="/login"><li>校园论坛</li></NavLink>
+                        <NavLink to="/login"><li>附加功能</li></NavLink>
                     </ul>
                 </div>
             </div>

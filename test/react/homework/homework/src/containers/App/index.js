@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {PropTypes} from 'prop-types';
-import { BackTop, Modal, Button, Cascader } from 'antd';
+import { BackTop, Modal, Button, Cascader,} from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
-import {Shouye,Detail,Edit,PlateList} from "../index";
+import {Shouye,Detail,Edit,PlateList,GongGao,SheTuan} from "../index";
 import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
@@ -140,6 +140,8 @@ class App extends Component {
                             <Route path={imgListPath+'/detail/:id'} component={Detail} />
                             <Route path={imgListPath+'/Edit'} exact component={Edit} />
                             <Route path={imgListPath+'/shouye'} component={Shouye} />
+                            <Route path={imgListPath+'/shetuan'} component={SheTuan} />
+                            <Route path={imgListPath+'/gonggao'} component={GongGao} />
                             <Route path={imgListPath+'/'} component={Shouye} />
                         </Switch>
                     </Router>

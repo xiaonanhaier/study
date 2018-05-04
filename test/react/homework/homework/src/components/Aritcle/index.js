@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './article.css';
 import {axiosapi as api} from "../../api";
-import {Icon} from 'antd';
+import { Table, Icon, Divider} from 'antd';
 import moment from 'moment';
 class Article extends Component{
     constructor(props){
@@ -20,12 +20,36 @@ class Article extends Component{
             replyusername:"",
             replytime:"",
             replycontent:"",
-            userimg:"https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=5bcc72b5f503918fc3dc359830544df2/f7246b600c338744d3130a29530fd9f9d62aa094.jpg"
-        }
+            userimg:"https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=5bcc72b5f503918fc3dc359830544df2/f7246b600c338744d3130a29530fd9f9d62aa094.jpg",
+            fileList:[],
+            tablecol:[{
+                title: '文件名',
+                dataIndex: 'name',
+                key: 'name',
+                render: text => <a href="javascript:;">{text}</a>,
+            }, {
+                title: '',
+                key: 'action',
+                width:100,
+                className:"article-table-col",
+                render: (text, record) => (
+                    <span>
+                        {/*<a href="javascript:;">Action 一 {record.name}</a>*/}
+                        {/*<Divider type="vertical" />*/}
+                        <a href={`http://120.79.133.95/homeworkapi/api/web/${record.key}`} download={record.name}>下载</a>
+                        {/*<Divider type="vertical" />*/}
+                    </span>
+                ),
+            }],
+        };
         this.reply = this.reply.bind(this);
+        this.downLoad = this.downLoad.bind(this);
     }
     reply() {
         this.props.replybtn(this.props.replyid);
+    }
+    downLoad(e){
+        console.log(e.key);
     }
     componentDidMount(){
         if(this.props.ifreply){
@@ -40,7 +64,7 @@ class Article extends Component{
                     title:article.title,
                     lookcont:article.lookcont,
                     commentcont:article.commentcont,
-                    create_at:article.create_time
+                    create_at:article.create_time,
                 });
                 this.refs['article-neirong'].innerHTML=this.state.content
             })
@@ -54,7 +78,7 @@ class Article extends Component{
                         create_at: res.data.data[0].createtime,
                         username: res.data.data[0].userinfo.nickname,
                         userimg: res.data.data[0].userinfo.headpicurl
-                    })
+                    });
                     this.refs['article-neirong'].innerHTML=this.state.content
                 }else {
                     this.setState({
@@ -71,11 +95,36 @@ class Article extends Component{
                     });
                     this.refs['article-neirong'].innerHTML=this.state.content
                 }
-
             })
         }
     }
     render(){
+        let table ="";
+        if(this.props.filelist.length>0){
+            let tabledata = this.props.filelist.map(item=>{
+                return {
+                    key:item.url,
+                    name:item.filename,
+                }
+            });
+            table =  <Table className={'article-table'}
+                            pagination={false}
+                            columns={this.state.tablecol}
+                            dataSource={tabledata}
+                            // onRow={(record) => {
+                            //     return {
+                            //         onClick:()=>{
+                            //             api.get(`/file/download?id=${record.key}`).then(
+                            //                 res=>{
+                            //                     console.log(res.data)
+                            //                 }
+                            //             )
+                            //             // console.log(record)
+                            //         },       // 点击行
+                            //     };
+                            // }}
+            />
+        }
         return(
             <div className="article">
                 <div className="article-user">
@@ -109,6 +158,7 @@ class Article extends Component{
                         <div ref="article-neirong" className="article-neirong">
                         </div>
                     </div>
+                    {table}
                     <div className="article-reply">
                         <label onClick={this.reply}>回复</label>
                     </div>

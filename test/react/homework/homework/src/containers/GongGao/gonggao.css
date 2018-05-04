@@ -1,0 +1,25 @@
+.gonggao{
+    width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+.gonggaolistlist{
+    flex: 1;
+    padding-top: 1px;
+    /*border: 1px solid #eaeaea;*/
+    /*background-color: white;*/
+    border-radius: 5px;
+}
+.gonggaolist{
+    width: 1100px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+.gonggaolist::after {
+    display: block;
+    content: " 20";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}

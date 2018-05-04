@@ -28,7 +28,9 @@ class Edit extends Component{
             visible: false,
             imglist:[],
             fileList:[],
-            titleimg:""
+            titleimg:"",
+            introduction:"",
+            articleid:0,
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -42,6 +44,7 @@ class Edit extends Component{
         this.onAddressChange = this.onAddressChange.bind(this);
         this.onFilesChange = this.onFilesChange.bind(this);
         this.onFiles1Change = this.onFiles1Change.bind(this);
+        this.onIntroChange = this.onIntroChange.bind(this);
     }
     onTitleChange(e){
         this.setState({title:e.target.value,length:this.state.length-e.target.value.length});
@@ -72,12 +75,15 @@ class Edit extends Component{
     }
     submitTopic() {
         let data = {
-          plateid:this.state.parentplate,
-          title:this.state.title,
-          smplate:this.state.smallplate,
-          topicid:this.state.zhuti,
+            plateid:this.state.parentplate,
+            title:this.state.title,
+            smplate:this.state.smallplate,
+            topicid:this.state.zhuti,
+            titleimg:this.state.titleimg,
+            introduction:this.state.introduction,
         };
         api.post('/posts/create',data).then((res)=>{
+            this.setState({articleid:res.data.data.id});
             let contentdata = {
                 postsid:res.data.data.id,
                 content:this.state.content
@@ -85,6 +91,40 @@ class Edit extends Component{
             api.post('postcontent/create',contentdata).then(ress=>{
                 console.log(ress);
             });
+            this.state.imglist.map(item=>{
+                let filedata = {
+                    filename:item.filename,
+                    randname:item.randName,
+                    url:item.url,
+                    type:item.type,
+                    usetype:"article",
+                    articleid:this.state.articleid,
+                };
+                api.post('file/create',filedata).then(fileres=>{
+                    if (fileres.data.code === 201) {
+
+                    }else {
+                        message.error(fileres.data.code);
+                    }
+                });
+            });
+            this.state.fileList.map(item=>{
+                let filedata = {
+                    filename:item.response.data.filename,
+                    randname:item.response.data.randName,
+                    url:item.response.data.url,
+                    type:item.response.data.type,
+                    usetype:"file",
+                    articleid:this.state.articleid,
+                };
+                api.post('file/create',filedata).then(fileres=>{
+                    if (fileres.data.code === 201) {
+
+                    }else {
+                        message.error(fileres.data.code);
+                    }
+                });
+            })
         })
         // console.log(data);
     }
@@ -109,6 +149,9 @@ class Edit extends Component{
         } else if (status === 'error') {
             message.error(`${info.file.name} 上传失败`);
         }
+    }
+    onIntroChange(e) {
+        this.setState({introduction:e.target.value});
     }
     onFiles1Change(info){
         const status = info.file.status;
@@ -179,6 +222,45 @@ class Edit extends Component{
             // },
         };
         let topics = this.state.topics.map(item=> <Option key={item.id}>{item.title}</Option>);
+        let others = "";
+        if(this.state.parentplate !== 4){
+            if(this.state.parentplate === 2){
+                others = <div>
+                    <Editor content={this.contentChange} imglist={this.imglist}/>
+                    <Dragger {...files2}>
+                        <p className="ant-upload-drag-icon">
+                            <Icon type="inbox" />
+                        </p>
+                        <p className="ant-upload-text">附件</p>
+                        <p className="ant-upload-hint">点击或拖拽上传</p>
+                    </Dragger>
+                    <div className='edit-item'>
+                        时间：<RangePicker onChange={this.onDateRandChange} />
+                    </div>
+                </div>
+            }else {
+                others = <div>
+                    <Editor content={this.contentChange} imglist={this.imglist}/>
+                    <Dragger {...files2}>
+                        <p className="ant-upload-drag-icon">
+                            <Icon type="inbox" />
+                        </p>
+                        <p className="ant-upload-text">附件</p>
+                        <p className="ant-upload-hint">点击或拖拽上传</p>
+                    </Dragger>
+                </div>
+            }
+
+        }else {
+            others = <div>
+                <div className='edit-item'>
+                    时间：<DatePicker onChange={this.onDayChange} />
+                </div>
+                <div className="edit-item">
+                    <Input placeholder="地点" onChange={this.onAddressChange} />
+                </div>
+            </div>
+        }
         return(
             <div className="editcon">
                 <div className="detail-baread">
@@ -225,24 +307,8 @@ class Edit extends Component{
                     <p className="ant-upload-text">封面图</p>
                     <p className="ant-upload-hint">点击或拖拽上传</p>
                 </Dragger>
-                <TextArea style={{marginTop:'10px'}} placeholder="简单介绍" autosize />
-                <Editor content={this.contentChange} imglist={this.imglist}/>
-                <Dragger {...files2}>
-                    <p className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
-                    </p>
-                    <p className="ant-upload-text">附件</p>
-                    <p className="ant-upload-hint">点击或拖拽上传</p>
-                </Dragger>
-                <div className='edit-item'>
-                    时间：<RangePicker onChange={this.onDateRandChange} />
-                </div>
-                <div className='edit-item'>
-                    时间：<DatePicker onChange={this.onDayChange} />
-                </div>
-                <div className="edit-item">
-                    <Input placeholder="地点" onChange={this.onAddressChange} />
-                </div>
+                <TextArea style={{marginTop:'10px'}} onChange={this.onIntroChange} placeholder="简单介绍" autosize />
+                {others}
                 <div className="edit-btn">
                     <Button type="primary" onClick={this.submitTopic}>发表新帖</Button>
                     <Button type="primary">保存草稿</Button>
