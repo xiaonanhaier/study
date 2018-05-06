@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './detail.css';
-import {Breadcrumb,Icon,Button, Modal, Input} from 'antd';
+import {Breadcrumb,Icon,Button, Modal, Input, message} from 'antd';
 import {Link} from 'react-router-dom';
 import {Article, Pages} from '../../components';
 import {axiosapi as api} from "../../api";
@@ -26,20 +26,28 @@ class Detail extends Component{
             replypagesize:0,
             replytotal:0,
             page:1,
-            fileList:[]
-        }
+            fileList:[],
+            ifbaoming:false,
+            activityone:0,
+            activitytwo:0,
+            activitythree:0,
+            activityothers:0,
+        };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleOk = this.handleOk.bind(this);
         this.showModal = this.showModal.bind(this);
         this.reply = this.reply.bind(this);
         this.childShowModal = this.childShowModal.bind(this);
         this.pageChange = this.pageChange.bind(this);
+        this.baoMing = this.baoMing.bind(this);
+        this.edit = this.edit.bind(this);
     }
     componentWillMount(){
         let articleid = this.props.match.params.id;
         this.setState({articleid:articleid});
         //获取文章
         api.get(`/posts/${articleid}`).then((res)=>{
+            this.setState({userid:res.data.data.userid});
             api.get(`/smallplate/${res.data.data.smplate}`).then((re)=>{
                 this.setState({
                     parentplate:re.data.data.parent.id,
@@ -48,6 +56,26 @@ class Detail extends Component{
                     smallplatename:re.data.data.title,
                 });
                 this.props.actions.plateSelecct(re.data.data.id);
+                if (re.data.data.parent.id === 2){
+                    api.get(`/clubactivity?articleid=${articleid}`).then(activiy=>{
+                        this.setState({
+                           activityid:activiy.data.data[0].id,
+                           activitystart:activiy.data.data[0].starttime,
+                           activityend:activiy.data.data[0].endtime,
+                            activityone:activiy.data.data[0].firstprize,
+                            activitytwo:activiy.data.data[0].secondaward,
+                            activitythree:activiy.data.data[0].thirdaward,
+                            activityothers:activiy.data.data[0].award,
+                        });
+                        console.log(activiy);
+                        api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${this.props.state.async.userinfo.data[0].userid}`).then(baoming=>{
+                            if(baoming.data.data >= 1){
+                                this.setState({ifbaoming:true})
+                            }
+                        })
+                    })
+
+                }
             })
         });
         //获取评论
@@ -108,17 +136,59 @@ class Detail extends Component{
             })
         })
     };
+    baoMing() {
+        let baomingdata = {
+            activityid:this.state.articleid
+        };
+        api.post('personactivity',baomingdata).then(baoming=>{
+            if (baoming.data.code === 201){
+                this.setState({ifbaoming:true})
+            }
+        })
+    };
     handleCancel = () => {
         this.setState({
             visible: false,
         });
+    };
+    edit(){
+        this.props.history.push(`/app/editupdate/${this.state.articleid}`)
     }
     render(){
+        let userinfo = JSON.parse(localStorage.userinfo);
+        let edit = "";
+        if (userinfo.data[0].userid === this.state.userid) {
+            edit = <Button type="primary" onClick={this.edit}>编辑</Button>
+        }
         let replyarr = this.state.replycon.map(item=>{
             return(
                 <Article replyid={item.id} filelist={this.state.fileList} key={item.id} ifreply = {false} replybtn={this.childShowModal}/>
             )
-        })
+        });
+        let baoming = "";
+        let activetyinfo = "";
+        if(this.state.parentplate === 2){
+            if(this.state.ifbaoming){
+                baoming = <Button type="primary" disabled>已报名</Button>
+            }else{
+                baoming = <Button type="primary" onClick={this.baoMing}>报名</Button>
+            }
+            activetyinfo = <div>
+                <strong style={{color:"#1890ff"}}>
+                    活动时间
+                </strong>
+                <p>
+                    {this.state.activitystart} - {this.state.activityend}
+                </p>
+                <strong style={{color:"#1890ff"}}>
+                    奖项设置<br/>
+                </strong>
+                一等奖：{this.state.activityone} 个<br/>
+                二等奖：{this.state.activitytwo} 个<br/>
+                三等奖：{this.state.activitythree} 个<br/>
+                优秀奖：{this.state.activityothers} 个<br/>
+            </div>
+        }
         return(
             <div className="detail">
                 <div className="detail-baread">
@@ -137,6 +207,7 @@ class Detail extends Component{
                 <div className="detail-btn">
                     <Link to={'/app/edit'}><Button type="primary" icon="edit">发布新帖</Button></Link>
                     <Button type="primary" icon="message" onClick={this.showModal}>回复</Button>
+                    {baoming}{edit}
                     <Modal title="回复内容："
                            visible={this.state.visible}
                            onOk={this.handleOk}
@@ -148,7 +219,7 @@ class Detail extends Component{
                 </div>
 
                 <div className="detail-con">
-                    <Article id={this.state.articleid} filelist={this.state.fileList} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
+                    <Article activityinfo={activetyinfo} id={this.state.articleid} filelist={this.state.fileList} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
                     {replyarr}
                 </div>
                 <div className="detail-footer-page">

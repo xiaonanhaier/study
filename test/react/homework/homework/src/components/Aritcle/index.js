@@ -23,7 +23,7 @@ class Article extends Component{
             userimg:"https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=5bcc72b5f503918fc3dc359830544df2/f7246b600c338744d3130a29530fd9f9d62aa094.jpg",
             fileList:[],
             tablecol:[{
-                title: '文件名',
+                title: '文件列表',
                 dataIndex: 'name',
                 key: 'name',
                 render: text => <a href="javascript:;">{text}</a>,
@@ -65,6 +65,7 @@ class Article extends Component{
                     lookcont:article.lookcont,
                     commentcont:article.commentcont,
                     create_at:article.create_time,
+                    introduction:article.introduction,
                 });
                 this.refs['article-neirong'].innerHTML=this.state.content
             })
@@ -125,6 +126,12 @@ class Article extends Component{
                             // }}
             />
         }
+        let introduction = "";
+        if(this.props.ifreply){
+            introduction =  <div className="article-introduction">
+                {this.state.introduction}
+            </div>
+        }
         return(
             <div className="article">
                 <div className="article-user">
@@ -155,10 +162,13 @@ class Article extends Component{
                                 {this.state.replycontent}
                             </div>
                         </div>
+                        {introduction}
                         <div ref="article-neirong" className="article-neirong">
+
                         </div>
                     </div>
                     {table}
+                    {this.props.activityinfo}
                     <div className="article-reply">
                         <label onClick={this.reply}>回复</label>
                     </div>

@@ -20,7 +20,6 @@ class Editor extends Component{
         const xhr = new XMLHttpRequest;
         const fd = new FormData();
         // libraryId可用于通过mediaLibrary示例来操作对应的媒体内容
-        console.log(param.libraryId);
         const successFn = (response) => {
             // 假设服务端直接返回文件上传后的地址
             // 上传成功后调用param.success并传入上传后的文件地址
@@ -70,6 +69,8 @@ class Editor extends Component{
                 '#c0392b', '#d35400', '#f39c12', '#fdda00', '#7f8c8d', '#2c3e50'
             ],
             tabIndents: 2,
+            contentFormat:"html",
+            initialContent:this.props.contentinfo,
             onHTMLChange: this.handleHTMLChange,
             viewWrapper: '.edit',
             media:{

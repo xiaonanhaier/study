@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import './edit.css';
 import { Editor } from "../../components";
 import {Link} from 'react-router-dom';
-import { Breadcrumb, Select, Button, Icon, Input, Upload, message, DatePicker, Radio} from 'antd';
+import { Breadcrumb, Select, Button, Icon, Input, Upload, message, DatePicker, Radio, InputNumber} from 'antd';
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,6 +31,10 @@ class Edit extends Component{
             titleimg:"",
             introduction:"",
             articleid:0,
+            one:1,
+            two:1,
+            three:1,
+            othernum:0
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -45,6 +49,11 @@ class Edit extends Component{
         this.onFilesChange = this.onFilesChange.bind(this);
         this.onFiles1Change = this.onFiles1Change.bind(this);
         this.onIntroChange = this.onIntroChange.bind(this);
+        this.handleOneChange = this.handleOneChange.bind(this);
+        this.handleTwoChange = this.handleTwoChange.bind(this);
+        this.handleThreeChange = this.handleThreeChange.bind(this);
+        this.handleOthernumChange = this.handleOthernumChange.bind(this);
+        this.onTelChange = this.onTelChange.bind(this);
     }
     onTitleChange(e){
         this.setState({title:e.target.value,length:this.state.length-e.target.value.length});
@@ -65,12 +74,21 @@ class Edit extends Component{
         })
     }
     onDayChange(date, dateString) {
+        this.setState({losttime:dateString});
         console.log(date, dateString);
     }
     onDateRandChange(date, dateString) {
-        console.log(date, dateString);
+        this.setState({
+            starttime:dateString[0],
+            endtime:dateString[1]
+        });
     }
     onAddressChange(e){
+        this.setState({lostadd:e.target.value});
+        console.log(e.target.value);
+    }
+    onTelChange(e){
+        this.setState({losttel:e.target.value});
         console.log(e.target.value);
     }
     submitTopic() {
@@ -88,9 +106,53 @@ class Edit extends Component{
                 postsid:res.data.data.id,
                 content:this.state.content
             };
-            api.post('postcontent/create',contentdata).then(ress=>{
-                console.log(ress);
-            });
+            //上传文章主体内容
+            if (this.state.parentplate !== 4){
+                api.post('postcontent/create',contentdata).then(ress=>{
+                    console.log(ress);
+                });
+            }
+            //失物招领
+            if (this.state.parentplate === 4){
+                let lostdata = {
+                    articleid:this.state.articleid,
+                    address:this.state.lostadd,
+                    time:this.state.losttime,
+                    tel:this.state.losttel,
+                    type:1,
+                };
+                if(this.state.smallplate === 6){
+                    lostdata.type = 2;
+                }
+
+                api.post('lostfound/create',lostdata).then(lostdata=>{
+                    if (lostdata.data.data.code === 201) {
+                        console.log(lostdata.data.data);
+                    }
+                })
+            }
+            //上传活动信息
+            if(this.state.parentplate === 2){
+                let userinfo = JSON.parse(localStorage.userinfo);
+                var identidy = 1;
+                if(userinfo !== 0){
+                    identidy = 2;
+                }
+                let activitydata = {
+                    starttime:this.state.starttime,
+                    endtime:this.state.endtime,
+                    grade:identidy,
+                    firstprize:this.state.one,
+                    secondaward:this.state.two,
+                    thirdaward:this.state.three,
+                    award:this.state.othernum,
+                    articleid:this.state.articleid,
+                };
+                api.post('clubactivity/create',activitydata).then(activityinfo=>{
+                    console.log(activityinfo);
+                })
+            }
+            //上传图片信息
             this.state.imglist.map(item=>{
                 let filedata = {
                     filename:item.filename,
@@ -108,6 +170,7 @@ class Edit extends Component{
                     }
                 });
             });
+            //上传文件信息
             this.state.fileList.map(item=>{
                 let filedata = {
                     filename:item.response.data.filename,
@@ -165,6 +228,18 @@ class Edit extends Component{
             message.error(`${info.file.name} 上传失败`);
         }
     }
+    handleOneChange = (value) => {
+        this.setState({one:value});
+    };
+    handleTwoChange = (value) => {
+        this.setState({two:value});
+    };
+    handleThreeChange = (value) => {
+        this.setState({three:value});
+    };
+    handleOthernumChange = (value) => {
+        this.setState({othernum:value});
+    };
     imglist(value) {
         this.state.imglist.push(value)
     }
@@ -226,7 +301,7 @@ class Edit extends Component{
         if(this.state.parentplate !== 4){
             if(this.state.parentplate === 2){
                 others = <div>
-                    <Editor content={this.contentChange} imglist={this.imglist}/>
+                    <Editor content={this.contentChange} content={this.contentChange} imglist={this.imglist}/>
                     <Dragger {...files2}>
                         <p className="ant-upload-drag-icon">
                             <Icon type="inbox" />
@@ -237,6 +312,19 @@ class Edit extends Component{
                     <div className='edit-item'>
                         时间：<RangePicker onChange={this.onDateRandChange} />
                     </div>
+                    <div className='edit-item'>
+                        一等奖： <InputNumber min={1} max={30} value={this.state.one} onChange={this.handleOneChange} />
+                    </div>
+                    <div className='edit-item'>
+                        二等奖： <InputNumber min={1} max={30} value={this.state.two} onChange={this.handleTwoChange} />
+                    </div>
+                    <div className='edit-item'>
+                        三等奖： <InputNumber min={1} max={30} value={this.state.three} onChange={this.handleThreeChange} />
+                    </div>
+                    <div className='edit-item'>
+                        优秀奖： <InputNumber min={0} max={30} value={this.state.othernum} onChange={this.handleOthernumChange} />
+                    </div>
+
                 </div>
             }else {
                 others = <div>
@@ -258,6 +346,9 @@ class Edit extends Component{
                 </div>
                 <div className="edit-item">
                     <Input placeholder="地点" onChange={this.onAddressChange} />
+                </div>
+                <div className="edit-item">
+                    <Input placeholder="联系方式" onChange={this.onTelChange} />
                 </div>
             </div>
         }

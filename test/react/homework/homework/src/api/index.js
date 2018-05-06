@@ -14,6 +14,7 @@ let axiosIns = axios.create({});
 axiosIns.defaults.baseURL = '/homeworkapi/api/web/index.php/v1';
 axiosIns.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 axiosIns.defaults.headers.post['Content-Type'] = 'application/json';
+axiosIns.defaults.headers.put['Content-Type'] = 'application/json';
 axiosIns.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
 // axiosIns.defaults.headers.get['Authorization'] = "Bearer "+ JSON.parse(localStorage.user).data.access_token;
 
@@ -98,7 +99,7 @@ ajaxMethod.forEach((method)=> {
                 if (response.data.code === 201) {
                     notification.success({
                         message: '保存成功！',
-                    })
+                    });
                     resolve(response);
                 }
                 reject(response);

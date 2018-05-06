@@ -6,3 +6,5 @@ export {default as Edit} from './Edit';
 export {default as PlateList} from './PlateList';
 export {default as GongGao} from './GongGao';
 export {default as SheTuan} from './SheTuan';
+export {default as ShiWu} from './ShiWu';
+export {default as Editupdate} from './Editupdate';

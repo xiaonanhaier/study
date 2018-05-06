@@ -22,12 +22,15 @@ class PlateList extends Component{
         api.get(`/posts?plateid=${this.props.match.params.id}`).then(res=>{
             this.setState({articlelist:res.data.data,pagesize:res.headers["x-pagination-per-page"],
                 totalcount:res.headers['x-pagination-total-count']})
+        });
+        api.get(`plate?id=${this.props.match.params.id}`).then(ress=>{
+            this.setState({platename:ress.data.data[0].title})
         })
     }
     onChange(page){
         this.setState({page:page});
         api.get(`posts/?page=${page}&plateid=${this.props.match.params.id}`).then((res)=>{
-            this.setState({articlelist:res.data.data});
+            this.setState({articlelist:res.data.data[0].title});
         })
     }
     newposts(){
@@ -53,7 +56,7 @@ class PlateList extends Component{
         return(
             <div className="platelist">
                 <div className="platetit">
-                    校园新闻
+                    {this.state.platename}
                 </div>
                 <div className="platelistconlist">
                     <div className="platelistlist">

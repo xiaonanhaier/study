@@ -222,7 +222,7 @@ class UserInfo extends  Component{
                 <Option key={item.id} value={item.id.toString()}>{item.name}</Option>
             )
         });
-        //班级
+        //宿舍
         let sushe = this.state.sushelist.map(item=>{
             return(
                 <Option key={item.id} value={item.id.toString()}>{item.name}</Option>

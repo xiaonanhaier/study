@@ -8,3 +8,4 @@ export {default as SignUp} from './SignUp';
 export {default as UserInfo} from './UserInfo';
 export {default as ArticleItem} from './ArticleItem';
 export {default as GongGaoItem} from './GongGaoItem';
+export {default as Shiwuittem} from './Shiwuitem';

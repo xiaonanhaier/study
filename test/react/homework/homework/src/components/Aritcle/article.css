@@ -106,3 +106,11 @@
 .article-table{
     margin-top: 20px;
 }
+.article-introduction{
+    width: 100%;
+    background: rgba(24,144,255,0.2);
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    font-style:italic;
+}
