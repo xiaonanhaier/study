@@ -6,6 +6,7 @@ class Shiwuitem extends Component{
     constructor(props){
         super(props)
         this.showMessage = this.showMessage.bind(this);
+        this.toDetial = this.toDetial.bind(this);
     }
     showMessage(){
         Modal.info({
@@ -18,13 +19,16 @@ class Shiwuitem extends Component{
 
         })
     }
+    toDetial() {
+        this.props.history.push(`/app/detail/${this.props.articleid}`)
+    }
     render(){
         return(
             <div className="shiwuitem" >
                 <Card
                     style={{ width: 200 }}
                     cover={<img style={{width:"100%",height:120}} alt="example" src={this.props.img} />}
-                    actions={[ <Icon type="message"  onClick={this.showMessage}/>, <Icon type="ellipsis" />]}
+                    actions={[ <Icon type="message"  onClick={this.showMessage}/>, <Icon type="ellipsis" onClick={this.toDetial}/>]}
                 >
                     <Meta
                         title={this.props.time}

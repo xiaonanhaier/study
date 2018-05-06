@@ -74,6 +74,8 @@ class ShiWu extends Component{
                             tel={item.tel}
                             address={item.address}
                             title={item.article.title}
+                            articleid={item.article.id}
+                            history={this.props.history}
                 />
             )
         });
@@ -85,6 +87,8 @@ class ShiWu extends Component{
                             tel={item.tel}
                             address={item.address}
                             title={item.article.title}
+                            articleid={item.article.id}
+                            history={this.props.history}
                 />
             )
         });

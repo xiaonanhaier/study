@@ -55,23 +55,36 @@ class Article extends Component{
         if(this.props.ifreply){
             api.get(`/posts/${this.props.id}`).then((res)=>{
                 let article = res.data.data;
-                this.setState({
-                    content:article.content.content,
-                    id:article.content.id,
-                    postsid:article.content.postsid,
-                    username:article.userinfo.nickname,
-                    userimg:article.userinfo.headpicurl,
-                    title:article.title,
-                    lookcont:article.lookcont,
-                    commentcont:article.commentcont,
-                    create_at:article.create_time,
-                    introduction:article.introduction,
-                });
+                if(!article.content && typeof(article.content)!=="undefined"){
+                    this.setState({
+                        username:article.userinfo.nickname,
+                        userimg:article.userinfo.headpicurl,
+                        title:article.title,
+                        lookcont:article.lookcont,
+                        commentcont:article.commentcont,
+                        create_at:article.create_time,
+                        introduction:article.introduction,
+                    });
+                }else {
+                    this.setState({
+                        content:article.content.content,
+                        id:article.content.id,
+                        postsid:article.content.postsid,
+                        username:article.userinfo.nickname,
+                        userimg:article.userinfo.headpicurl,
+                        title:article.title,
+                        lookcont:article.lookcont,
+                        commentcont:article.commentcont,
+                        create_at:article.create_time,
+                        introduction:article.introduction,
+                    });
+                }
+
                 this.refs['article-neirong'].innerHTML=this.state.content
             })
         }else {
             api.get(`/reply?id=${this.props.replyid}`).then((res)=>{
-                if(!res.data.data[0].replycontent && typeof(res.data.data[0].replycontent)!="undefined") {
+                if(!res.data.data[0].replycontent && typeof(res.data.data[0].replycontent)!=="undefined") {
                     this.setState({
                         title: "",
                         content: res.data.data[0].content,

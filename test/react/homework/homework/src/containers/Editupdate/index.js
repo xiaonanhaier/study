@@ -37,6 +37,9 @@ class Editupdate extends Component{
         this.handleThreeChange = this.handleThreeChange.bind(this);
         this.handleOthernumChange = this.handleOthernumChange.bind(this);
         this.onDateRandChange = this.onDateRandChange.bind(this);
+        this.onAddressChange = this.onAddressChange.bind(this);
+        this.onTelChange = this.onTelChange.bind(this);
+        this.onDayChange = this.onDayChange.bind(this);
     }
     componentDidMount() {
         let articleid = this.props.match.params.id;
@@ -174,6 +177,18 @@ class Editupdate extends Component{
                     }else {
                         message.success('修改成功！')
                     }
+                }else {
+                    let lostdata = {
+                        articleid:this.state.articleid,
+                        address:this.state.lostaddress,
+                        time:this.state.losttime,
+                        tel:this.state.losttel,
+                    };
+                    api.put(`lostfound/update?id=${this.state.lostid}`,lostdata).then(lostdata=>{
+                        if (lostdata.data.code === 200) {
+                            message.success('修改成功！')
+                        }
+                    })
                 }
             }
         });
