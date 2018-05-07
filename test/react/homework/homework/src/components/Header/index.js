@@ -18,6 +18,10 @@ class Header extends Component {
         localStorage.removeItem("user");
     }
 
+    componentWillMount() {
+        let userinfo = JSON.parse(localStorage.userinfo);
+        this.setState({...userinfo.data[0]})
+    }
 
     render(){
         let {signOut} = this.props.actions;
@@ -28,8 +32,15 @@ class Header extends Component {
                         <img src={logo} alt=""/>
                     </div>
                     <div className="headerinfo">
-                        <div className="headerlogin" onClick={signOut}>
-                            <Link to='/login'>退出</Link>
+                        <div className="headerlogin" >
+                            <Link to={`/app/person/${this.state.userid}`}>
+                            <img className='headerimg' src={this.state.headpicurl} alt=""/>
+                            {this.state.nickname}
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span className="tuichu" onClick={signOut}>
+                                <Link to='/login'>退出</Link>
+                            </span>
                         </div>
                         <div className="searchbar">
                             <Search

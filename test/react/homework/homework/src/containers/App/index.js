@@ -4,7 +4,7 @@ import { BackTop, Modal, Button, Cascader,} from 'antd';
 import { HashRouter as Router, Route,Switch} from 'react-router-dom';
 
 import {Header,Nav} from "../../components/index";
-import {Shouye,Detail,Edit,PlateList,GongGao,SheTuan,ShiWu,Editupdate} from "../index";
+import {Shouye,Detail,Edit,PlateList,GongGao,SheTuan,ShiWu,Editupdate,Others,Person} from "../index";
 import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
@@ -144,6 +144,8 @@ class App extends Component {
                             <Route path={imgListPath+'/gonggao'} component={GongGao} />
                             <Route path={imgListPath+'/shiwu'} component={ShiWu} />
                             <Route path={imgListPath+'/editupdate/:id'} component={Editupdate} />
+                            <Route path={imgListPath+'/others'} component={Others} />
+                            <Route path={imgListPath+'/person/:id'} component={Person} />
                             <Route path={imgListPath+'/'} component={Shouye} />
                         </Switch>
                     </Router>

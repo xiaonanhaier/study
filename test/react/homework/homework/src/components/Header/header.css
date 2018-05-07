@@ -21,4 +21,11 @@
 .headerlogin{
     text-align: right;
     line-height: 50px;
+    text-decoration: none;
+}
+.headerimg{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: -5px;
 }

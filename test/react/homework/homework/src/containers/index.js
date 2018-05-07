@@ -8,3 +8,5 @@ export {default as GongGao} from './GongGao';
 export {default as SheTuan} from './SheTuan';
 export {default as ShiWu} from './ShiWu';
 export {default as Editupdate} from './Editupdate';
+export {default as Others} from './Others';
+export {default as Person} from './Person';

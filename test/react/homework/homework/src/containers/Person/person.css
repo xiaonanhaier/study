@@ -1,0 +1,26 @@
+.person{
+    min-height: calc(100vh - 214px) ;
+    width: 1100px;
+    margin: 0 auto;
+    font-size: 12px;
+    padding-top: 10px;
+}
+.person-title{
+    font-size: 36px;
+    color: black;
+    margin-bottom: 20px;
+}
+.person-con{
+    width: 100%;
+    display: flex;
+}
+.person-con-user{
+    width: 250px;
+    margin-right: 20px;
+}
+.person-con-list{
+    flex: 1;
+}
+.person-item{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,18 @@
+.others{
+    min-height: calc(100vh - 214px) ;
+    width: 1100px;
+    margin: 0 auto;
+    font-size: 12px;
+    padding-top: 10px;
+}
+.others-title{
+    font-size: 41px;
+    font-family:'微软雅黑';
+    font-weight: 100;
+}
+.others-con{
+    display: flex;
+    padding-top: 10px;
+    overflow: hidden;
+    width: 100%;
+}
