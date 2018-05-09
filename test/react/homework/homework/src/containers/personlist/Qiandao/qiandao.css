@@ -1,0 +1,7 @@
+.qiandao{
+    min-height: calc(100vh - 214px) ;
+    width: 1100px;
+    margin: 0 auto;
+    font-size: 12px;
+    padding-top: 10px;
+}

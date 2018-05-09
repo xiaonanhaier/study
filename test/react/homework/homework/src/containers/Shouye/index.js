@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import "./shouye.css";
 import { Carousel, Icon } from 'antd';
+import {Link} from 'react-router-dom';
 import b123 from '../../common/images/123.jpg';
 import b456 from '../../common/images/456.jpg';
 import b789 from '../../common/images/789.jpg';
@@ -46,18 +47,27 @@ class Shouye extends Component{
         })
     }
     render(){
+        let bannerlist = [];
         let articlelist = this.state.article.map((item,index)=>{
+            if (item.titleimg !== ""){
+                bannerlist.push(item);
+            }
             return(
                 <ArticleLable key={item.id} data = {item}/>
             )
+        });
+        let banner = bannerlist.map(item=>{
+            return <Link key={item.id} to={`/app/detail/${item.id}`}>
+                <div>
+                    <img src={item.titleimg} alt=""/>
+                </div>
+            </Link>
         });
         return(
             <div className="shouyecon">
                 <div className="banner">
                     <Carousel autoplay>
-                        <div><img src={b123} alt=""/></div>
-                        <div><img src={b456} alt=""/></div>
-                        <div><img src={b789} alt=""/></div>
+                        {banner}
                     </Carousel>
                 </div>
 

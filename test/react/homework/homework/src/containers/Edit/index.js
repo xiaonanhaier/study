@@ -135,7 +135,7 @@ class Edit extends Component{
             if(this.state.parentplate === 2){
                 let userinfo = JSON.parse(localStorage.userinfo);
                 var identidy = 1;
-                if(userinfo !== 0){
+                if(userinfo.data.data[0].identidy !== 0){
                     identidy = 2;
                 }
                 let activitydata = {

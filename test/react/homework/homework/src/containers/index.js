@@ -10,3 +10,4 @@ export {default as ShiWu} from './ShiWu';
 export {default as Editupdate} from './Editupdate';
 export {default as Others} from './Others';
 export {default as Person} from './Person';
+export {default as Personedit} from './Personedit';

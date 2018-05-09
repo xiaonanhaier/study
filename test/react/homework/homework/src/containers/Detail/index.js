@@ -7,6 +7,7 @@ import {axiosapi as api} from "../../api";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 const { TextArea } = Input;
 class Detail extends Component{
     constructor(props){
@@ -67,9 +68,8 @@ class Detail extends Component{
                             activitythree:activiy.data.data[0].thirdaward,
                             activityothers:activiy.data.data[0].award,
                         });
-                        console.log(activiy);
                         api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${this.props.state.async.userinfo.data[0].userid}`).then(baoming=>{
-                            if(baoming.data.data >= 1){
+                            if(baoming.data.data.length >= 1){
                                 this.setState({ifbaoming:true})
                             }
                         })
@@ -144,7 +144,11 @@ class Detail extends Component{
             if (baoming.data.code === 201){
                 this.setState({ifbaoming:true})
             }
-        })
+        });
+        let boming = {
+            id:this.state.activityid
+        };
+        api.post(`clubactivity/baoming`,boming).then(bao=>{});
     };
     handleCancel = () => {
         this.setState({
@@ -171,7 +175,15 @@ class Detail extends Component{
             if(this.state.ifbaoming){
                 baoming = <Button type="primary" disabled>已报名</Button>
             }else{
-                baoming = <Button type="primary" onClick={this.baoMing}>报名</Button>
+                if (moment().isBefore(this.state.activitystart)){
+                    baoming = <Button type="primary" onClick={this.baoMing}>报名</Button>
+                }else {
+                    if (moment().isAfter(this.state.activityend)){
+                        baoming = <Button type="primary" disabled onClick={this.baoMing}>已结束</Button>
+                    }else {
+                        baoming = <Button type="primary" disabled onClick={this.baoMing}>活动中</Button>
+                    }
+                }
             }
             activetyinfo = <div>
                 <strong style={{color:"#1890ff"}}>
