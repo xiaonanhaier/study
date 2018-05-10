@@ -413,6 +413,25 @@ class UserInfo extends  Component{
                     )}
                 </FormItem>
             </div>
+        }else if (this.state.identity === "2") {
+            itemlist = <FormItem
+                label="公寓"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                required
+            >
+                {getFieldDecorator('gongyu', {
+                    rules: [{ message: '请选择您的公寓' }],
+                })(
+                    <Select
+                        placeholder="选择一个公寓"
+                        onChange={this.handleGongYuSelectChange}
+                        style={{ width: 200 }}
+                    >
+                        {gongyu}
+                    </Select>
+                )}
+            </FormItem>
         }else {
             itemlist = "";
         }

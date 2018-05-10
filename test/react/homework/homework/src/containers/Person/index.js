@@ -4,7 +4,7 @@ import { Card, Icon, Avatar, Table, Popconfirm } from 'antd';
 import { axiosapi as api} from "../../api/index";
 import { HashRouter as Router, Route,Switch,Link} from 'react-router-dom';
 import moment from 'moment';
-import { Student, Teacher, Ban, Shet,Qiandao } from "../personlist";
+import { Student, Teacher, Ban, Shet,Qiandao,Gongyu } from "../personlist";
 import {message} from "antd/lib/index";
 const { Meta } = Card;
 class Person extends Component{
@@ -67,6 +67,9 @@ class Person extends Component{
                     if (user.data.data[0].identity === 1) {
                         this.props.history.push(`${imgListPath}/student/${this.props.match.params.id}`);
                     }
+                    if (user.data.data[0].identity === 2) {
+                        this.props.history.push(`${imgListPath}/gongyu/${this.props.match.params.id}`);
+                    }
                     if (user.data.data[0].identity === 3) {
                         this.props.history.push(`${imgListPath}/shet/${this.props.match.params.id}`);
                     }
@@ -123,12 +126,17 @@ class Person extends Component{
 
     };
     onDeleteposts(key) {
-        api.delete(`posts/delete?id=${key}`).then(res=>{
+        let dele = {
+            articleid:key
+        };
+        api.post(`reply/deletepost?id=${key}`,dele).then(res=>{
+            api.delete(`posts/delete?id=${key}`).then(res=>{
 
-        }).catch(res=>{
-            const dataSource = [...this.state.articlelists];
-            this.setState({ articlelists: dataSource.filter(item => item.id !== key) });
-            message.success('删除成功！');
+            }).catch(res=>{
+                const dataSource = [...this.state.articlelists];
+                this.setState({ articlelists: dataSource.filter(item => item.id !== key) });
+                message.success('删除成功！');
+            });
         });
     }
     onDeletereply(key){
@@ -286,11 +294,13 @@ class Person extends Component{
             value2: this.state.apartment,
         }];
         let replylist = this.state.replylist.map(item=>{
-            return <p key={item.id}>
-                {moment.unix(item.createtime).format('YYYY-MM-DD h:mm:ss a')}&nbsp;&nbsp;&nbsp;
-                回复了&nbsp;&nbsp;&nbsp;
-                <Link to={`/app/detail/${item.article.id}`}>{item.article.title}</Link>
-            </p>
+            if (item.article !== null){
+                return <p key={item.id}>
+                    {moment.unix(item.createtime).format('YYYY-MM-DD h:mm:ss a')}&nbsp;&nbsp;&nbsp;
+                    回复了&nbsp;&nbsp;&nbsp;
+                    <Link to={`/app/detail/${item.article.id}`}>{item.article.title}</Link>
+                </p>
+            }
         });
         let articlelist = this.state.articlelist.map(item=>{
             return <p key={item.id}>
@@ -337,6 +347,7 @@ class Person extends Component{
                                 <Route path={`${imgListPath}/ban/:id`} component={Ban} />
                                 <Route path={`${imgListPath}/shet/:id`} component={Shet} />
                                 <Route path={`${imgListPath}/qiandao/:id`} component={Qiandao} />
+                                <Route path={`${imgListPath}/gongyu/:id`} component={Gongyu} />
                             </Switch>
                         </Router>
                         <Card title="动态" className={'person-item'} style={{ width: '100%' }}>

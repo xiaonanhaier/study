@@ -1,0 +1,9 @@
+.inputclass input{
+    width: 190px !important;
+}
+.student{
+    cursor: default;
+}
+.teacher-item{
+    margin-bottom: 10px;
+}

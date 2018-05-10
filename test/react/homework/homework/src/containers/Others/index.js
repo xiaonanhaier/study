@@ -22,6 +22,8 @@ class Others extends Component{
             college:userinfo.data[0].college,
             profession:userinfo.data[0].profession,
             class:userinfo.data[0].class,
+            apartment:userinfo.data[0].apartment,
+            dormitory:userinfo.data[0].dormitory
         })
     }
     showModal(){
@@ -45,7 +47,9 @@ class Others extends Component{
                 days:this.state.days,
                 college:this.state.college,
                 profession:this.state.profession,
-                class:this.state.class
+                class:this.state.class,
+                apartment:this.state.apartment,
+                dormitory:this.state.dormitory,
             };
             api.post('leave/create',leaveinfo).then(res=>{
                 console.log(res);

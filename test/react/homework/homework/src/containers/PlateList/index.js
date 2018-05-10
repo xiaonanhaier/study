@@ -30,7 +30,7 @@ class PlateList extends Component{
     onChange(page){
         this.setState({page:page});
         api.get(`posts/?page=${page}&plateid=${this.props.match.params.id}`).then((res)=>{
-            this.setState({articlelist:res.data.data[0].title});
+            this.setState({articlelist:res.data.data});
         })
     }
     newposts(){
