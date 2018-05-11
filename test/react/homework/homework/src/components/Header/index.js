@@ -11,6 +11,11 @@ const Search = Input.Search;
 class Header extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            id:0,
+            headpicurl:"",
+            nickname:""
+        };
         this.hasSignOut = this.hasSignOut.bind(this);
     }
 
@@ -19,8 +24,16 @@ class Header extends Component {
     }
 
     componentWillMount() {
-        let userinfo = JSON.parse(localStorage.userinfo);
-        this.setState({...userinfo.data[0]})
+        if (localStorage.getItem('userinfo')){
+            let userinfo = JSON.parse(localStorage.userinfo);
+            this.setState({...userinfo.data[0]})
+        } else {
+            this.props.actions.userinfo().then(re=>{
+                let userinfo = JSON.parse(localStorage.userinfo);
+                this.setState({...userinfo.data[0]})
+            })
+        }
+
     }
 
     render(){

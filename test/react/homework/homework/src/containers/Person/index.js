@@ -4,7 +4,7 @@ import { Card, Icon, Avatar, Table, Popconfirm } from 'antd';
 import { axiosapi as api} from "../../api/index";
 import { HashRouter as Router, Route,Switch,Link} from 'react-router-dom';
 import moment from 'moment';
-import { Student, Teacher, Ban, Shet,Qiandao,Gongyu } from "../personlist";
+import { Student, Teacher, Ban, Shet,Qiandao,Gongyu, Yuanxi,School } from "../personlist";
 import {message} from "antd/lib/index";
 const { Meta } = Card;
 class Person extends Component{
@@ -79,6 +79,12 @@ class Person extends Component{
                     if (user.data.data[0].identity === 5) {
                         this.props.history.push(`${imgListPath}/ban/${this.props.match.params.id}`);
                     }
+                    if (user.data.data[0].identity === 6) {
+                        this.props.history.push(`${imgListPath}/yuanxi/${this.props.match.params.id}`);
+                    }
+                    if (user.data.data[0].identity === 7) {
+                        this.props.history.push(`${imgListPath}/school/${this.props.match.params.id}`);
+                    }
                 }
             });
 
@@ -106,6 +112,8 @@ class Person extends Component{
                 let  data = posts.data.data.map(posts=>{
                     return {
                         id:posts.id,
+                        dianji:posts.lookcont,
+                        reply:posts.commentcont,
                         name:<Link to={`/app/detail/${posts.id}`}> {posts.title}</Link>,
                         time:moment.unix(posts.create_time).format('YYYY-MM-DD h:mm:ss a')
                     };
@@ -224,6 +232,12 @@ class Person extends Component{
         }, {
             title:"时间",
             dataIndex: 'time',
+        }, {
+            title:"回复",
+            dataIndex: 'reply',
+        }, {
+            title:"点击量",
+            dataIndex: 'dianji',
         }, {
             title: '操作',
             key: 'action',
@@ -348,6 +362,8 @@ class Person extends Component{
                                 <Route path={`${imgListPath}/shet/:id`} component={Shet} />
                                 <Route path={`${imgListPath}/qiandao/:id`} component={Qiandao} />
                                 <Route path={`${imgListPath}/gongyu/:id`} component={Gongyu} />
+                                <Route path={`${imgListPath}/yuanxi/:id`} component={Yuanxi} />
+                                <Route path={`${imgListPath}/school/:id`} component={School} />
                             </Switch>
                         </Router>
                         <Card title="动态" className={'person-item'} style={{ width: '100%' }}>

@@ -40,7 +40,8 @@ class UserInfo extends  Component{
             banjilist:[],
             sushelist:[],
             xueyuanlist:[],
-            gongyulist:[]
+            gongyulist:[],
+            shetuanlist:[]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.normFile = this.normFile.bind(this);
@@ -59,6 +60,10 @@ class UserInfo extends  Component{
         api.get('/organization?type=7').then((res)=>{
             this.setState({gongyulist:res.data.data});
         });
+        //社团初始化
+        api.get('/organization?type=5').then((res)=>{
+            this.setState({shetuanlist:res.data.data});
+        });
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -75,7 +80,7 @@ class UserInfo extends  Component{
             class:values.class,
             apartment:values.gongyu,
             dormitory:values.sushe,
-            organization:"",
+            organization:values.organization,
         };
         let filedata = {
             filename:values.upload[0].response.data.filename,
@@ -95,8 +100,9 @@ class UserInfo extends  Component{
                         if (ress.data.code === 201) {
                             api.post('file/create',filedata).then(fileres=>{
                                 if (fileres.data.code === 201) {
-                                    this.props.actions.userinfo();
-                                    this.props.history.push("/app/shouye");
+                                    this.props.actions.userinfo().then(res=>{
+                                        this.props.history.push("/app/shouye");
+                                    });
                                 }else {
                                     message.error(fileres.data.code);
                                 }
@@ -108,8 +114,9 @@ class UserInfo extends  Component{
                 }else {
                     api.post('file/create',filedata).then(fileres=>{
                         if (fileres.data.code === 201) {
-                            this.props.actions.userinfo();
-                            this.props.history.push("/app/shouye");
+                            this.props.actions.userinfo().then(res=>{
+                                this.props.history.push("/app/shouye");
+                            });
                         }else {
                             message.error(fileres.data.code);
                         }
@@ -228,6 +235,12 @@ class UserInfo extends  Component{
                 <Option key={item.id} value={item.id.toString()}>{item.name}</Option>
             )
         });
+        //社团
+        let shetuan = this.state.shetuanlist.map(item=>{
+            return(
+                <Option key={item.id} value={item.id.toString()}>{item.name}</Option>
+            )
+        });
         //itemlist
         let itemlist = [];
         if (this.state.identity === "1") {
@@ -325,7 +338,7 @@ class UserInfo extends  Component{
                     )}
                 </FormItem>
             </div>
-        }else if(this.state.identity === "4" || this.state.identity === "6" || this.state.identity === "3" ) {
+        }else if(this.state.identity === "4" || this.state.identity === "6"  ) {
             itemlist = <div className={this.state.fileListshow}>
                 <FormItem
                     label="院系"
@@ -432,6 +445,44 @@ class UserInfo extends  Component{
                     </Select>
                 )}
             </FormItem>
+        }else if (this.state.identity === "3") {
+            itemlist = <div className={this.state.fileListshow}>
+                <FormItem
+                    label="院系"
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 16 }}
+                    required
+                >
+                    {getFieldDecorator('yuanxi', {
+                        rules: [{ message: '请选择您的院系' }],
+                    })(
+                        <Select
+                            placeholder="选择一个院系"
+                            onChange={this.handleYuanXiSelectChange}
+                            style={{ width: 200 }}
+                        >
+                            {yuanxi}
+                        </Select>
+                    )}
+                </FormItem>
+                <FormItem
+                    label="社团"
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 16 }}
+                    required
+                >
+                    {getFieldDecorator('shetuan', {
+                        rules: [{ message: '请选择您的社团' }],
+                    })(
+                        <Select
+                            placeholder="选择一个社团"
+                            style={{ width: 200 }}
+                        >
+                            {shetuan}
+                        </Select>
+                    )}
+                </FormItem>
+            </div>
         }else {
             itemlist = "";
         }
