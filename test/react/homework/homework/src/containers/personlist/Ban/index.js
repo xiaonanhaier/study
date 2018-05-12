@@ -3,7 +3,7 @@ import './ban.css';
 // import { axiosapi as api} from "../../../api/index";
 // import {Link} from 'react-router-dom';
 import { axiosapi as api} from "../../../api/index";
-import { Table, Input, Button, Icon, Card,Popconfirm,message } from 'antd';
+import { Table, Card,Popconfirm,message } from 'antd';
 import moment from 'moment';
 
 class Ban extends Component{

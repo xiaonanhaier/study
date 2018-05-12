@@ -15,7 +15,6 @@ class Nav extends Component{
                         <NavLink to="/app/gonggao"><li>校园公告</li></NavLink>
                         <NavLink to="/app/shetuan"><li>社团活动</li></NavLink>
                         <NavLink to="/app/shiwu"><li>失物招领</li></NavLink>
-                        <NavLink to="/login"><li>校园论坛</li></NavLink>
                         <NavLink to="/app/others"><li>附加功能</li></NavLink>
                     </ul>
                 </div>

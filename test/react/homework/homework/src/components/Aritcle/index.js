@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './article.css';
 import {axiosapi as api} from "../../api";
 import { Table, Icon, Divider} from 'antd';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 class Article extends Component{
     constructor(props){
@@ -145,6 +146,50 @@ class Article extends Component{
                 {this.state.introduction}
             </div>
         }
+        const columns1 = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"昵称",
+            dataIndex: 'name',
+        }, {
+            title:"等级",
+            dataIndex: 'grade',
+        },{
+            title:"获奖情况",
+            dataIndex: 'jiang'
+        }];
+        let jianglist = "";
+        if (this.props.jiang){
+            let activity = this.props.jiang.map(activity=> {
+                let activityinfo = '未获奖';
+                let deng = "院级";
+                if (activity.activity.grade === 1) {
+                    deng = "校级";
+                }
+                switch (activity.prize) {
+                    case 1:
+                        activityinfo = "一等奖";
+                        break;
+                    case 2:
+                        activityinfo = "二等奖";
+                        break;
+                    case 3:
+                        activityinfo = "三等奖";
+                        break;
+                    case 4:
+                        activityinfo = "优秀奖";
+                        break;
+                }
+                return {
+                    id:activity.id,
+                    name:activity.userinfo.nickname,
+                    grade:deng,
+                    jiang:activityinfo,
+                }
+            });
+            jianglist = <Table pagination={false} bordered columns={columns1} dataSource={activity} size="small" />
+        }
         return(
             <div className="article">
                 <div className="article-user">
@@ -182,6 +227,7 @@ class Article extends Component{
                     </div>
                     {table}
                     {this.props.activityinfo}
+                    {jianglist}
                     <div className="article-reply">
                         <label onClick={this.reply}>回复</label>
                     </div>

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './detail.css';
-import {Breadcrumb,Icon,Button, Modal, Input, message} from 'antd';
+import {Breadcrumb,Icon,Button, Modal, Input, message,Table} from 'antd';
 import {Link} from 'react-router-dom';
 import {Article, Pages} from '../../components';
 import {axiosapi as api} from "../../api";
@@ -33,6 +33,7 @@ class Detail extends Component{
             activitytwo:0,
             activitythree:0,
             activityothers:0,
+            jianglist:[]
         };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleOk = this.handleOk.bind(this);
@@ -67,12 +68,18 @@ class Detail extends Component{
                             activitytwo:activiy.data.data[0].secondaward,
                             activitythree:activiy.data.data[0].thirdaward,
                             activityothers:activiy.data.data[0].award,
+                            activitystates:activiy.data.data[0].states
                         });
                         api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${this.props.state.async.userinfo.data[0].userid}`).then(baoming=>{
                             if(baoming.data.data.length >= 1){
                                 this.setState({ifbaoming:true})
                             }
-                        })
+                        });
+                        if (activiy.data.data[0].states === 1){
+                            api.get(`personactivity?activityid=${activiy.data.data[0].articleid}`).then(res=>{
+                                this.setState({jianglist:res.data.data});
+                            })
+                        }
                     })
 
                 }
@@ -185,21 +192,26 @@ class Detail extends Component{
                     }
                 }
             }
-            activetyinfo = <div>
-                <strong style={{color:"#1890ff"}}>
-                    活动时间
-                </strong>
-                <p>
-                    {this.state.activitystart} - {this.state.activityend}
-                </p>
-                <strong style={{color:"#1890ff"}}>
-                    奖项设置<br/>
-                </strong>
-                一等奖：{this.state.activityone} 个<br/>
-                二等奖：{this.state.activitytwo} 个<br/>
-                三等奖：{this.state.activitythree} 个<br/>
-                优秀奖：{this.state.activityothers} 个<br/>
-            </div>
+            if (this.state.activitystates!==1){
+                activetyinfo = <div>
+                    <strong style={{color:"#1890ff"}}>
+                        活动时间
+                    </strong>
+                    <p>
+                        {this.state.activitystart} - {this.state.activityend}
+                    </p>
+                    <strong style={{color:"#1890ff"}}>
+                        奖项设置<br/>
+                    </strong>
+                    一等奖：{this.state.activityone} 个<br/>
+                    二等奖：{this.state.activitytwo} 个<br/>
+                    三等奖：{this.state.activitythree} 个<br/>
+                    优秀奖：{this.state.activityothers} 个<br/>
+                </div>
+            } else {
+                activetyinfo="";
+            }
+
         }
         return(
             <div className="detail">
@@ -231,7 +243,7 @@ class Detail extends Component{
                 </div>
 
                 <div className="detail-con">
-                    <Article activityinfo={activetyinfo} id={this.state.articleid} filelist={this.state.fileList} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
+                    <Article activityinfo={activetyinfo} jiang={this.state.jianglist} id={this.state.articleid} filelist={this.state.fileList} replyid={0} ifreply = {true} replybtn={this.childShowModal}/>
                     {replyarr}
                 </div>
                 <div className="detail-footer-page">

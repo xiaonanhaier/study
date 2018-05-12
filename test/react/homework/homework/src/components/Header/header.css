@@ -17,6 +17,7 @@
 }
 .headerinfo div{
     height: 50%;
+    margin-top: 30px;
 }
 .headerlogin{
     text-align: right;

@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import "./shouye.css";
-import { Carousel, Icon, Tabs } from 'antd';
+import { Carousel, Icon, Tabs,Card } from 'antd';
 // import {Editor} from "../../components/index";
+import {Link} from 'react-router-dom';
 import {ArticleLable,Pages,Shiwuittem} from "../../components/index";
 import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
@@ -20,6 +21,7 @@ class ShiWu extends Component{
             totalcount2:0,
             pagesize1:0,
             pagesize2:0,
+            platelist:[]
         };
         this.onChange1 = this.onChange1.bind(this);
         this.onChange2 = this.onChange2.bind(this);
@@ -33,7 +35,7 @@ class ShiWu extends Component{
                 pagesize1:res.headers["x-pagination-per-page"],
                 totalcount1:res.headers['x-pagination-total-count']});
             }
-        })
+        });
         api.get(`lostfound/?type=2`).then((res)=>{
             if(res.data.code === 200){
                 let articles = res.data.data.map((item,index)=>{return item});
@@ -42,6 +44,9 @@ class ShiWu extends Component{
                     totalcount2:res.headers['x-pagination-total-count']});
             }
             console.log(res.data.data);
+        });
+        api.get('plate').then(res=>{
+            this.setState({platelist:res.data.data})
         })
     }
     newposts(){
@@ -66,6 +71,9 @@ class ShiWu extends Component{
         })
     }
     render(){
+        let platelist = this.state.platelist.map(item=>{
+            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+        });
         let articlelist1 = this.state.article1.map((item,index)=>{
             return(
                 <Shiwuittem img={item.article.titleimg}
@@ -116,7 +124,12 @@ class ShiWu extends Component{
                     </div>
                     <div className="shouyebtn">
                         <div className="shouyenew" onClick={this.newposts}>
-                            <Icon type="edit" />  发表新帖
+                            <Icon type="edit" />  写文章
+                        </div>
+                        <div className="platelist">
+                            <Card title="导航"  style={{ width: 300 }}>
+                                {platelist}
+                            </Card>
                         </div>
                     </div>
                 </div>

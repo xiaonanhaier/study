@@ -1,11 +1,11 @@
 import React,{Component} from 'react'
 import './yuanxi.css';
 // import { axiosapi as api} from "../../../api/index";
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { axiosapi as api} from "../../../api/index";
 import { Table, Input, Button, Icon, Card,Popconfirm,message } from 'antd';
 import moment from 'moment';
-
+const Search = Input.Search;
 class Yuanxi extends Component{
     constructor(props){
         super(props)
@@ -18,11 +18,13 @@ class Yuanxi extends Component{
             filtered: false,
             shetuanlist:[],
             teacherlist:[],
-            banlist:[]
+            banlist:[],
+            activitylsit:[]
         };
         this.toJiejin = this.toJiejin.bind(this);
         this.toJinzhi = this.toJinzhi.bind(this);
         this.onToexamine = this.onToexamine.bind(this);
+        this.onSerrch = this.onSerrch.bind(this);
     }
     componentDidMount() {
         if (this.props.match.params.id !== ':id'){
@@ -79,6 +81,11 @@ class Yuanxi extends Component{
             if (res.data.code === 200) {
                 message.success('成功！')
             }
+        })
+    }
+    onSerrch(value){
+        api.get(`personactivity/yuan?studentid=${value}`).then(res=>{
+            this.setState({activitylsit:res.data.data})
         })
     }
     render(){
@@ -237,10 +244,70 @@ class Yuanxi extends Component{
                 )
             },
         }];
+        const columns1 = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"活动名称",
+            dataIndex: 'name',
+        }, {
+            title:"活动时间",
+            dataIndex: 'time',
+        }, {
+            title:"等级",
+            dataIndex: 'grade',
+        },{
+            title:"获奖情况",
+            dataIndex: 'jiang'
+        },{
+            title:"是否参加",
+            dataIndex: 'can'
+        }];
+        let activity = this.state.activitylsit.map(activity=>{
+            let activityinfo = '未获奖';
+            let can = "已参加";
+            let deng = "院级";
+            if (activity.states === 0){
+                can = "未参加";
+            }
+            if (activity.activity.grade === 1) {
+                deng = "校级";
+            }
+            switch (activity.prize) {
+                case 1:
+                    activityinfo = "一等奖";
+                    break;
+                case 2:
+                    activityinfo = "二等奖";
+                    break;
+                case 3:
+                    activityinfo = "三等奖";
+                    break;
+                case 4:
+                    activityinfo = "优秀奖";
+                    break;
+            }
+            return {
+                id:activity.id,
+                time:activity.activity.starttime+"—"+activity.activity.endtime,
+                name:<Link to={`/app/detail/${activity.article.id}`}> {activity.article.title}</Link>,
+                grade:deng,
+                jiang:activityinfo,
+                can:can,
+            }
+        });
         return(
             <div className="student">
                 <Card title="请假信息" className={'person-item'} style={{ width: '100%' }}>
                     <Table pagination={false} bordered columns={columns} dataSource={this.state.data} size="small" />
+                </Card>
+                <Card title="学生参加活动情况" className={'person-item'} style={{ width: '100%' }}>
+                    <Search
+                        placeholder="搜索学号"
+                        onSearch={this.onSerrch}
+                        style={{ width: 200,marginBottom:"10px" }}
+                    />
+                    <Table pagination={false} bordered columns={columns1} dataSource={activity} size="small" />
                 </Card>
                 <Card title="账号管理" className={'person-item'} style={{ width: '100%' }}>
                     <Card title="社团账号" className={'person-item'} style={{ width: '100%' }}>

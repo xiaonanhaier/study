@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
-import {  Form, Select, InputNumber, DatePicker, TimePicker, Switch, Radio,
-    Cascader, Slider, Button, Col, Upload, Icon, Input, message } from 'antd';
+import {  Form, Select, Radio,Button, Upload, Icon, Input, message } from 'antd';
 import { axiosapi as api} from "../../api/index";
 import './userinfo.css';
 import { connect } from 'react-redux';

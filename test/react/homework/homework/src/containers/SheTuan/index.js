@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import "./shouye.css";
-import { Carousel, Icon } from 'antd';
+import { Carousel, Icon,Card } from 'antd';
 import {Link} from 'react-router-dom';
 // import {Editor} from "../../components/index";
 import {ArticleLable,Pages} from "../../components/index";
@@ -16,6 +16,7 @@ class SheTuan extends Component{
             page:1,
             totalcount:0,
             pagesize:0,
+            platelist:[],
         };
         this.onChange = this.onChange.bind(this);
         this.newposts = this.newposts.bind(this);
@@ -29,6 +30,9 @@ class SheTuan extends Component{
                 totalcount:res.headers['x-pagination-total-count']});
             }
             // console.log(res.data.data);
+        })
+        api.get('plate').then(res=>{
+            this.setState({platelist:res.data.data})
         })
     }
     newposts(){
@@ -44,6 +48,9 @@ class SheTuan extends Component{
         })
     }
     render(){
+        let platelist = this.state.platelist.map(item=>{
+            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+        });
         let bannerlist = [];
         let articlelist = this.state.article.map((item,index)=>{
             if (item.titleimg !== ""){
@@ -75,7 +82,12 @@ class SheTuan extends Component{
                     </div>
                     <div className="shouyebtn">
                         <div className="shouyenew" onClick={this.newposts}>
-                            <Icon type="edit" />  发表新帖
+                            <Icon type="edit" />  写文章
+                        </div>
+                        <div className="platelist">
+                            <Card title="导航"  style={{ width: 300 }}>
+                                {platelist}
+                            </Card>
                         </div>
                     </div>
                 </div>

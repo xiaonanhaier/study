@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom';
 import './header.css';
 import logo from '../../common/images/logo.png';
-import { Input } from 'antd';
+// import { Input } from 'antd';
 import {axiosapi as api} from "../../api";
-const Search = Input.Search;
+// const Search = Input.Search;
 class Header extends Component {
     constructor(props){
         super(props);
@@ -55,13 +55,13 @@ class Header extends Component {
                                 <Link to='/login'>退出</Link>
                             </span>
                         </div>
-                        <div className="searchbar">
-                            <Search
-                                placeholder="搜索内容"
-                                onSearch={value => console.log(value)}
-                                style={{ width: 400 }}
-                            />
-                        </div>
+                        {/*<div className="searchbar">*/}
+                            {/*<Search*/}
+                                {/*placeholder="搜索内容"*/}
+                                {/*onSearch={value => console.log(value)}*/}
+                                {/*style={{ width: 400 }}*/}
+                            {/*/>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

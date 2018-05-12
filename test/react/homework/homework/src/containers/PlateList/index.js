@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import "./platelist.css";
-import { Icon } from 'antd';
+import { Icon,Card } from 'antd';
+import {Link} from 'react-router-dom';
 import {Pages, ArticleItem} from "../../components/index";
 import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
@@ -13,7 +14,8 @@ class PlateList extends Component{
             pagesize:0,
             page:1,
             totalcount:0,
-            articlelist:[]
+            articlelist:[],
+            platelist:[]
         };
         this.onChange = this.onChange.bind(this);
         this.newposts = this.newposts.bind(this);
@@ -26,6 +28,9 @@ class PlateList extends Component{
         api.get(`plate?id=${this.props.match.params.id}`).then(ress=>{
             this.setState({platename:ress.data.data[0].title})
         })
+        api.get('plate').then(res=>{
+            this.setState({platelist:res.data.data})
+        })
     }
     onChange(page){
         this.setState({page:page});
@@ -37,6 +42,9 @@ class PlateList extends Component{
         this.props.actions.newposts(true);
     }
     render(){
+        let platelist = this.state.platelist.map(item=>{
+            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+        });
         const articleitems = this.state.articlelist.map(item=>{
            return(
                <ArticleItem
@@ -65,7 +73,12 @@ class PlateList extends Component{
                     </div>
                     <div className="platelistbtn">
                         <div className="shouyenew" onClick={this.newposts}>
-                            <Icon type="edit" />  发表新帖
+                            <Icon type="edit" />  写文章
+                        </div>
+                        <div className="platelist">
+                            <Card title="导航"  style={{ width: 300 }}>
+                                {platelist}
+                            </Card>
                         </div>
                     </div>
                 </div>

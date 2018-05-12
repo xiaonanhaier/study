@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import "./gonggao.css";
 import { Pages, GongGaoItem} from "../../components/index";
-import { Icon } from 'antd';
+import { Icon,Card } from 'antd';
+import {Link} from 'react-router-dom';
 import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
@@ -13,7 +14,8 @@ class GongGao extends Component{
             pagesize:0,
             page:1,
             totalcount:0,
-            articlelist:[]
+            articlelist:[],
+            platelist:[]
         };
         this.onChange = this.onChange.bind(this);
         this.newposts = this.newposts.bind(this);
@@ -22,6 +24,9 @@ class GongGao extends Component{
         api.get(`/posts?plateid=3`).then(res=>{
             this.setState({articlelist:res.data.data,pagesize:res.headers["x-pagination-per-page"],
                 totalcount:res.headers['x-pagination-total-count']})
+        });
+        api.get('plate').then(res=>{
+            this.setState({platelist:res.data.data})
         })
     }
     onChange(page){
@@ -37,6 +42,9 @@ class GongGao extends Component{
         this.props.actions.newposts(true);
     }
     render(){
+        let platelist = this.state.platelist.map(item=>{
+            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+        });
         const gonggaoitems = this.state.articlelist.map(item=>{
             return(
                 <GongGaoItem
@@ -68,7 +76,12 @@ class GongGao extends Component{
                         </div>
                         <div className="platelistbtn">
                             <div className="shouyenew" onClick={this.newposts}>
-                                <Icon type="edit" />  发表新帖
+                                <Icon type="edit" />  写文章
+                            </div>
+                            <div className="platelist">
+                                <Card title="导航"  style={{ width: 300 }}>
+                                    {platelist}
+                                </Card>
                             </div>
                         </div>
                     </div>
