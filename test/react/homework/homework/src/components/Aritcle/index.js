@@ -146,21 +146,21 @@ class Article extends Component{
                 {this.state.introduction}
             </div>
         }
-        const columns1 = [{
-            title:"ID",
-            dataIndex: 'id',
-        }, {
-            title:"昵称",
-            dataIndex: 'name',
-        }, {
-            title:"等级",
-            dataIndex: 'grade',
-        },{
-            title:"获奖情况",
-            dataIndex: 'jiang'
-        }];
         let jianglist = "";
         if (this.props.jiang){
+            const columns1 = [{
+                title:"ID",
+                dataIndex: 'id',
+            }, {
+                title:"昵称",
+                dataIndex: 'name',
+            }, {
+                title:"等级",
+                dataIndex: 'grade',
+            },{
+                title:"获奖情况",
+                dataIndex: 'jiang'
+            }];
             let activity = this.props.jiang.map(activity=> {
                 let activityinfo = '未获奖';
                 let deng = "院级";
@@ -188,7 +188,9 @@ class Article extends Component{
                     jiang:activityinfo,
                 }
             });
-            jianglist = <Table pagination={false} bordered columns={columns1} dataSource={activity} size="small" />
+            if(activity.length>0){
+                jianglist = <Table pagination={false} bordered columns={columns1} dataSource={activity} size="small" />
+            }
         }
         return(
             <div className="article">
