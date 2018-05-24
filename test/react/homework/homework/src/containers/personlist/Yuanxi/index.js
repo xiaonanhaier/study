@@ -19,12 +19,15 @@ class Yuanxi extends Component{
             shetuanlist:[],
             teacherlist:[],
             banlist:[],
-            activitylsit:[]
+            activitylsit:[],
+            activitylist:[]
         };
         this.toJiejin = this.toJiejin.bind(this);
         this.toJinzhi = this.toJinzhi.bind(this);
         this.onToexamine = this.onToexamine.bind(this);
         this.onSerrch = this.onSerrch.bind(this);
+        this.toShenhe = this.toShenhe.bind(this);
+        this.toPostsShen = this.toPostsShen.bind(this);
     }
     componentDidMount() {
         if (this.props.match.params.id !== ':id'){
@@ -59,7 +62,10 @@ class Yuanxi extends Component{
             });
             api.get('adminuserinfo/yuanxib').then(res=>{
                 this.setState({banlist:res.data.data})
-            })
+            });
+            api.get(`clubactivity/yuanhuo`).then(activity=>{
+                this.setState({activitylist:activity.data.data});
+            });
         }
     }
     toJinzhi(id){
@@ -67,6 +73,32 @@ class Yuanxi extends Component{
             if (res.data.code === 200) {
                 message.success('成功！')
             }
+        })
+    }
+    toPostsShen(id){
+        api.get(`posts/shenhe?id=${id}`).then(res=>{
+            if (res.data.code === 200) {
+                message.success('成功！')
+            }
+            api.get(`clubactivity/yuanhuo`).then(activity=>{
+                this.setState({activitylist:activity.data.data});
+            });
+        })
+    }
+    toShenhe(id){
+        api.get(`adminuserinfo/shenhe?id=${id}`).then(res=>{
+            if (res.data.code === 200) {
+                message.success('成功！')
+            }
+            api.get('adminuserinfo/yuanxis?expand=shetuan').then(res=>{
+                this.setState({shetuanlist:res.data.data})
+            });
+            api.get('adminuserinfo/yuanxit').then(res=>{
+                this.setState({teacherlist:res.data.data})
+            });
+            api.get('adminuserinfo/yuanxib').then(res=>{
+                this.setState({banlist:res.data.data})
+            })
         })
     }
     toJiejin(id){
@@ -95,6 +127,7 @@ class Yuanxi extends Component{
                name:item.nickname,
                she:item.shetuan.name,
                tel:item.tel,
+               states1:item.states,
                states:item.userstates.status
            }
         });
@@ -109,6 +142,7 @@ class Yuanxi extends Component{
                 id:item.id,
                 name:item.nickname,
                 tel:item.tel,
+                states1:item.states,
                 states:item.userstates.status,
                 description:claslist
             }
@@ -123,6 +157,7 @@ class Yuanxi extends Component{
                 id:item.id,
                 name:item.nickname,
                 tel:item.tel,
+                states1:item.states,
                 states:item.userstates.status,
                 description:claslist
             }
@@ -173,6 +208,21 @@ class Yuanxi extends Component{
             title:"联系方式",
             dataIndex: 'tel',
         }, {
+            title: '审核',
+            key: 'action1',
+            width:100,
+            dataIndex: 'states1',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states1 === 0 ?(
+                        <Popconfirm title="通过？" onConfirm={() => this.toShenhe(record.id)}>
+                            <a href="javascript:;">通过！</a>
+                        </Popconfirm>
+                    ):"已通过"
+                )
+            },
+        }, {
             title: '操作',
             key: 'action',
             width:100,
@@ -200,6 +250,21 @@ class Yuanxi extends Component{
             title:"联系方式",
             dataIndex: 'tel',
         }, {
+            title: '审核',
+            key: 'action1',
+            width:100,
+            dataIndex: 'states1',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states1 === 0 ?(
+                        <Popconfirm title="通过？" onConfirm={() => this.toShenhe(record.id)}>
+                            <a href="javascript:;">通过！</a>
+                        </Popconfirm>
+                    ):"已通过"
+                )
+            },
+        }, {
             title: '操作',
             key: 'action',
             width:100,
@@ -226,6 +291,21 @@ class Yuanxi extends Component{
         },{
             title:"联系方式",
             dataIndex: 'tel',
+        }, {
+            title: '审核',
+            key: 'action1',
+            width:100,
+            dataIndex: 'states1',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states1 === 0 ?(
+                        <Popconfirm title="通过？" onConfirm={() => this.toShenhe(record.id)}>
+                            <a href="javascript:;">通过！</a>
+                        </Popconfirm>
+                    ):"已通过"
+                )
+            },
         }, {
             title: '操作',
             key: 'action',
@@ -296,6 +376,59 @@ class Yuanxi extends Component{
                 can:can,
             }
         });
+        let activity1 = this.state.activitylist.map(item=>{
+            let deng = "院级";
+            if (item.grade === 1) {
+                deng = "校级";
+            }
+            let shehe = '审核中...';
+            if (item.article.states  === 1){
+                shehe = "通过"
+            }
+            return {
+                id:item.article.id,
+                name:<Link to={`/app/detail/${item.article.id}`}> {item.article.title}</Link>,
+                time:item.starttime+"—"+item.endtime,
+                grade:deng,
+                bao:item.registercont,
+                states:shehe,
+            }
+        });
+        const columns11 = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"活动名称",
+            dataIndex: 'name',
+        }, {
+            title:"活动时间",
+            dataIndex: 'time',
+        }, {
+            title:"等级",
+            dataIndex: 'grade',
+        }, {
+            title:"报名人数",
+            dataIndex: 'bao',
+        }, {
+            title:"审核状态",
+            dataIndex: 'states',
+        },{
+            title: '操作',
+            key: 'action',
+            width:100,
+            className:"article-table-col",
+            render: (text, record) => {
+                if (record.states === '审核中...'){
+                    return(
+                        <Popconfirm title="审核通过？" onConfirm={() => this.toPostsShen(record.id)}>
+                            <a href="javascript:;">审核通过！</a>
+                        </Popconfirm>
+                    )
+                }else {
+                    return "已审核"
+                }
+            },
+        }];
         return(
             <div className="student">
                 <Card title="请假信息" className={'person-item'} style={{ width: '100%' }}>
@@ -319,6 +452,9 @@ class Yuanxi extends Component{
                     <Card title="班主任" className={'person-item'} style={{ width: '100%' }}>
                         <Table expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>} pagination={false} bordered columns={ban} dataSource={bandata} size="small" />
                     </Card>
+                </Card>
+                <Card title="社团活动审核" className={'person-item'} style={{ width: '100%' }}>
+                    <Table pagination={false} bordered columns={columns11} dataSource={activity1} size="small" />
                 </Card>
             </div>
 

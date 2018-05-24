@@ -74,33 +74,25 @@ ajaxMethod.forEach((method)=> {
                 resolve(response);
 
             }).catch((response)=> {
-                if (response.data.code === 401) {
-                    Modal.info({
-                        title: '拒绝访问',
-                        wrapClassName:"vertical-center-modal",
-                        content: (
-                            <div>
-                                <p>1，未登录</p>
-                                <p>2，没有权限</p>
-                            </div>
-                        ),
-                        onOk() {
-                            localStorage.removeItem('user');
-                            window.location.reload()
-                        },
-                    });
-                }
-                if (response.data.code === 422) {
-                    notification.error({
-                        message: '用户名密码错误',
-                        description: '无效的用户名或密码！'
-                    })
-                }
-                if (response.data.code === 201) {
-                    notification.success({
-                        message: '保存成功！',
-                    });
-                    resolve(response);
+                if (typeof(response.data) === "object"){
+                    if (response.data.code === 401){
+                        notification.error({
+                            message: '无权限',
+                            description: '无权限或未登录！'
+                        })
+                    }
+                    if (response.data.code === 422) {
+                        notification.error({
+                            message: '用户名密码错误',
+                            description: '无效的用户名或密码！'
+                        })
+                    }
+                    if (response.data.code === 201) {
+                        notification.success({
+                            message: '保存成功！',
+                        });
+                        resolve(response);
+                    }
                 }
                 reject(response);
                 //alert('xiuxiu，限你10分钟到我面前来,不然...');

@@ -32,12 +32,17 @@ class Shet extends Component{
             if (item.grade === 1) {
                 deng = "校级";
             }
+            let shehe = '审核中...';
+            if (item.article.states  === 1){
+                shehe = "通过"
+            }
            return {
                id:item.article.id,
                name:item.article.title,
                time:item.starttime+"—"+item.endtime,
                grade:deng,
                bao:item.registercont,
+               states1:shehe,
                states:states
            }
         });
@@ -56,6 +61,9 @@ class Shet extends Component{
         }, {
             title:"报名人数",
             dataIndex: 'bao',
+        }, {
+            title:"审核状态",
+            dataIndex: 'states1',
         },{
             title:"状态",
             dataIndex: 'states'
@@ -66,11 +74,7 @@ class Shet extends Component{
                 className:"article-table-col",
                 render: (text, record) => {
                 if (record.states === '未开始'){
-                    return (
-                        <Popconfirm title="确认删除？" onConfirm={() => this.onDelete(record.id)}>
-                            <a href="javascript:;">报名情况</a>
-                        </Popconfirm>
-                    )
+                    return <Link to={`/app/qiandao/${record.id}`}>报名情况</Link>
                 }
                 if(record.states === '活动中') {
                     return (

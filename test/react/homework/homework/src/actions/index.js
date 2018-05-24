@@ -42,6 +42,7 @@ export function SignUp(data) {
 export function signOut() {
     localStorage.removeItem("user");
     localStorage.removeItem("userinfo");
+    localStorage.clear();
     return {type:"SIGNOUT"}
 }
 

@@ -7,6 +7,7 @@ import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {message} from "antd/lib/index";
 class GongGao extends Component{
     constructor(props) {
         super(props)
@@ -39,7 +40,16 @@ class GongGao extends Component{
         })
     }
     newposts(){
-        this.props.actions.newposts(true);
+        let userinfo = JSON.parse(localStorage.userinfo);
+        if (userinfo.data[0].identity !== 1){
+            if (userinfo.data[0].states !== 1){
+                message.error('账号审核中。。。')
+            }else {
+                this.props.actions.newposts(true);
+            }
+        }else {
+            this.props.actions.newposts(true);
+        }
     }
     render(){
         let platelist = this.state.platelist.map(item=>{
@@ -67,7 +77,7 @@ class GongGao extends Component{
             <div className={"gonggao"}>
                 <div className="gonggaolist">
                     <div className="platetit">
-                        校园公告
+                        学生公告
                     </div>
                     <div className="platelistconlist">
                         <div className="gonggaolistlist">

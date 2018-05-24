@@ -8,6 +8,7 @@ import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {message} from "antd/lib/index";
 class SheTuan extends Component{
     constructor(props){
         super(props);
@@ -36,7 +37,16 @@ class SheTuan extends Component{
         })
     }
     newposts(){
-        this.props.actions.newposts(true);
+        let userinfo = JSON.parse(localStorage.userinfo);
+        if (userinfo.data[0].identity !== 1){
+            if (userinfo.data[0].states !== 1){
+                message.error('账号审核中。。。')
+            }else {
+                this.props.actions.newposts(true);
+            }
+        }else {
+            this.props.actions.newposts(true);
+        }
     }
     onChange(page){
         this.setState({page:page})
@@ -49,16 +59,18 @@ class SheTuan extends Component{
     }
     render(){
         let platelist = this.state.platelist.map(item=>{
-            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+            return <p key={item.id}><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
         });
         let bannerlist = [];
         let articlelist = this.state.article.map((item,index)=>{
-            if (item.titleimg !== ""){
-                bannerlist.push(item);
+            if (item.states === 1){
+                if (item.titleimg !== ""){
+                    bannerlist.push(item);
+                }
+                return(
+                    <ArticleLable key={item.id} data = {item}/>
+                )
             }
-            return(
-                <ArticleLable key={item.id} data = {item}/>
-            )
         });
         let banner = bannerlist.map(item=>{
             return <Link key={item.id} to={`/app/detail/${item.id}`}>

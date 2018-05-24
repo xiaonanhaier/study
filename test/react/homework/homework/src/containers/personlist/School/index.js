@@ -1,12 +1,13 @@
 import React,{Component} from 'react'
 import './ban.css';
 // import { axiosapi as api} from "../../../api/index";
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { axiosapi as api} from "../../../api/index";
 import { Table, Input, Button, Icon, Card,Popconfirm,message,Tree,Modal,Select } from 'antd';
 import moment from 'moment';
 const TreeNode = Tree.TreeNode;
 const Option = Select.Option;
+const Search = Input.Search;
 class School extends Component{
     constructor(props){
         super(props)
@@ -28,7 +29,28 @@ class School extends Component{
             jigouvisible:false,
             jigouyuanvisible:false,
             jigougongvisible:false,
-            jigoueditvisible:false
+            jigoueditvisible:false,
+            addshetuan:false,
+            studentlist:[],
+            searchinfo:"",
+            gongyulist:[],
+            searchposts:[]
+            // studentlist:{
+            //     userid:"",
+            //     nickname:"",
+            //     studentid:"",
+            //     yuan:{
+            //         name:""
+            //     },
+            //     ban:{
+            //         organ:{
+            //             name:""
+            //         }
+            //     },
+            //     userstates:{
+            //         status:""
+            //     }
+            // },
         };
         this.onToexamine = this.onToexamine.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -50,6 +72,12 @@ class School extends Component{
         this.onjianChange = this.onjianChange.bind(this);
         this.toJiejin = this.toJiejin.bind(this);
         this.toJinzhi = this.toJinzhi.bind(this);
+        this.toShenhe = this.toShenhe.bind(this);
+        this.addShetuan = this.addShetuan.bind(this);
+        this.addzhuanyeok = this.addzhuanyeok.bind(this);
+        this.addzhuanyeCancel = this.addzhuanyeCancel.bind(this);
+        this.toPostsShen = this.toPostsShen.bind(this);
+        this.toPostsShenj = this.toPostsShenj.bind(this);
     }
     componentDidMount() {
         if (this.props.match.params.id !== ':id'){
@@ -81,6 +109,9 @@ class School extends Component{
             });
             api.get('adminuserinfo/school').then(res=>{
                 this.setState({yuanlist:res.data.data})
+            });
+            api.get('adminuserinfo/schoolgong').then(res=>{
+                this.setState({gongyulist:res.data.data})
             });
             api.get('organization').then(res=>{
                 this.setState({organizationlist:res.data.data})
@@ -136,7 +167,42 @@ class School extends Component{
         if (this.state.selid.length === 1){
             if (this.state.selidentidy === 'yuan'){
                 this.setState({
-                    jigouvisible: true,
+                    addshetuan: true,
+                });
+            } else {
+                message.error('请选择院系！')
+            }
+
+        }else{
+            message.error('请选择父级内容！')
+        }
+    }
+    addzhuanyeok(){
+        let data = {
+            name:this.state.editname,
+            introduce:this.state.editjian,
+            type:5,
+            parentid:this.state.selid[0]
+        };
+        api.post('organization/create',data).then(res=>{
+            if (res.data.code === 201){
+                api.get('organization').then(res=>{
+                    this.setState({organizationlist:res.data.data,addshetuan: false,})
+                });
+                message.success('添加成功！');
+            }
+        })
+    }
+    addzhuanyeCancel(){
+        this.setState({
+            addshetuan: false,
+        });
+    }
+    addShetuan(){
+        if (this.state.selid.length === 1){
+            if (this.state.selidentidy === 'yuan'){
+                this.setState({
+                    addshetuan: true,
                 });
             } else {
                 message.error('请选择院系！')
@@ -226,18 +292,18 @@ class School extends Component{
         })
     };
     handlejigougongCancel = (e) => {
+        this.setState({
+            jigougongvisible: false,
+        });
+    };
+    showjigoueditModal = () => {
         if (this.state.selid.length === 1){
             this.setState({
-                jigougongvisible: true,
+                jigoueditvisible: true,
             });
         }else{
             message.error('请选择要编辑的内容！')
         }
-    };
-    showjigoueditModal = () => {
-        this.setState({
-            jigoueditvisible: true,
-        });
     };
     handlejigoueditOk = (e) => {
         this.setState({
@@ -414,12 +480,101 @@ class School extends Component{
             if (res.data.code === 200) {
                 message.success('成功！')
             }
+            api.get('adminuserinfo/school').then(res=>{
+                this.setState({yuanlist:res.data.data})
+            });
+            api.get('adminuserinfo/schoolgong').then(res=>{
+                this.setState({gongyulist:res.data.data})
+            });
+            if (this.state.searchinfo !== ""){
+                api.get(`adminuserinfo/getstudent?studentid=${this.state.searchinfo}`).then(res=>{
+                    if (res.data.data !== null){
+                        this.setState({studentlist:res.data.data})
+                    }
+                })
+            }
         })
     }
     toJiejin(id){
         api.get(`adminuserinfo/schoolh?id=${id}`).then(res=>{
             if (res.data.code === 200) {
                 message.success('成功！')
+            }
+            api.get('adminuserinfo/school').then(res=>{
+                this.setState({yuanlist:res.data.data})
+            });
+            api.get('adminuserinfo/schoolgong').then(res=>{
+                this.setState({gongyulist:res.data.data})
+            });
+            if (this.state.searchinfo !== ""){
+                api.get(`adminuserinfo/getstudent?studentid=${this.state.searchinfo}`).then(res=>{
+                    if (res.data.data !== null){
+                        this.setState({studentlist:res.data.data})
+                    }
+                })
+            }
+        })
+    }
+    toShenhe(id){
+        api.get(`adminuserinfo/shenhe?id=${id}`).then(res=>{
+            if (res.data.code === 200) {
+                message.success('成功！')
+                api.get('adminuserinfo/school').then(res=>{
+                    this.setState({yuanlist:res.data.data})
+                });
+                api.get('adminuserinfo/schoolgong').then(res=>{
+                    this.setState({gongyulist:res.data.data})
+                });
+            }
+        })
+    }
+    onSerrch(value){
+        if(value === ""){
+            this.setState({studentlist:[]})
+        }else {
+            api.get(`adminuserinfo/getstudent?studentid=${value}`).then(res=>{
+                if (res.data.data !== null){
+                    if(res.data.data.identity !== 1){
+                        message.error('非学生账号')
+                    }else {
+                        this.setState({studentlist:res.data.data,searchinfo:value})
+                    }
+                }
+            })
+        }
+    }
+    onSerrchposts(value){
+        if(value === ""){
+            this.setState({studentlist:[]})
+        }else {
+            api.get(`posts?title=${value}`).then(res=>{
+                if (res.data.data !== null){
+                    this.setState({searchposts:res.data.data,searchpostinfo:value})
+                }
+            })
+        }
+    }
+    toPostsShen(id){
+        api.get(`posts/shenhep?id=${id}`).then(res=>{
+            if (res.data.code === 200) {
+                message.success('成功！')
+                api.get(`posts?title=${this.state.searchpostinfo}`).then(res=>{
+                    if (res.data.data !== null){
+                        this.setState({searchposts:res.data.data})
+                    }
+                })
+            }
+        })
+    }
+    toPostsShenj(id){
+        api.get(`posts/shenhej?id=${id}`).then(res=>{
+            if (res.data.code === 200) {
+                message.success('成功！')
+                api.get(`posts?title=${this.state.searchpostinfo}`).then(res=>{
+                    if (res.data.data !== null){
+                        this.setState({searchposts:res.data.data})
+                    }
+                })
             }
         })
     }
@@ -430,6 +585,17 @@ class School extends Component{
                 name:item.nickname,
                 she:item.yuan.name,
                 tel:item.tel,
+                states1:item.states,
+                states:item.userstates.status
+            }
+        });
+        let gongyudata = this.state.gongyulist.map(item=>{
+            return {
+                id:item.id,
+                name:item.nickname,
+                she:item.gongyu.name,
+                tel:item.tel,
+                states1:item.states,
                 states:item.userstates.status
             }
         });
@@ -459,6 +625,10 @@ class School extends Component{
                     }else if (sm.type === 6) {
                         return (
                             <TreeNode identidy='sushe' title={sm.name} key={sm.id}/>
+                        )
+                    }else if (sm.type === 5) {
+                        return (
+                            <TreeNode identidy='shetuan' title={sm.name} key={sm.id}/>
                         )
                     }
                 });
@@ -516,7 +686,7 @@ class School extends Component{
             dataIndex: 'mestatus',
         }, {
             title: '操作',
-            key: 'action',
+            key: 'action3',
             width:100,
             className:"article-table-col",
             render: (text, record) => {
@@ -542,8 +712,23 @@ class School extends Component{
             title:"联系方式",
             dataIndex: 'tel',
         }, {
-            title: '操作',
+            title: '审核',
             key: 'action',
+            width:100,
+            dataIndex: 'states1',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states1 === 0 ?(
+                        <Popconfirm title="通过？" onConfirm={() => this.toShenhe(record.id)}>
+                            <a href="javascript:;">通过！</a>
+                        </Popconfirm>
+                    ):"已通过"
+                )
+            },
+        }, {
+            title: '操作',
+            key: 'action1',
             width:100,
             dataIndex: 'states',
             className:"article-table-col",
@@ -559,6 +744,156 @@ class School extends Component{
                 )
             },
         }];
+        const gongyu = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"昵称",
+            dataIndex: 'name',
+        },{
+            title:"对应的公寓",
+            dataIndex: 'she',
+        },{
+            title:"联系方式",
+            dataIndex: 'tel',
+        }, {
+            title: '审核',
+            key: 'action',
+            width:100,
+            dataIndex: 'states1',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states1 === 0 ?(
+                        <Popconfirm title="通过？" onConfirm={() => this.toShenhe(record.id)}>
+                            <a href="javascript:;">通过！</a>
+                        </Popconfirm>
+                    ):"已通过"
+                )
+            },
+        }, {
+            title: '操作',
+            key: 'action1',
+            width:100,
+            dataIndex: 'states',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states === 10 ?(
+                        <Popconfirm title="确认？" onConfirm={() => this.toJinzhi(record.id)}>
+                            <a href="javascript:;">禁止登陆！</a>
+                        </Popconfirm>
+                    ):<Popconfirm title="接触禁止？" onConfirm={() => this.toJiejin(record.id)}>
+                        <a href="javascript:;">解禁！</a>
+                    </Popconfirm>
+                )
+            },
+        }];
+        const columns1 = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"昵称",
+            dataIndex: 'name',
+        }, {
+            title:"学号",
+            dataIndex: 'studentid',
+        }, {
+            title:"院系",
+            dataIndex: 'college',
+        },{
+            title:"专业班级",
+            dataIndex: 'profession'
+        }, {
+            title: '操作',
+            key: 'action2',
+            width:100,
+            dataIndex: 'states',
+            className:"article-table-col",
+            render: (text, record) => {
+                return(
+                    record.states === 10 ?(
+                        <Popconfirm title="确认？" onConfirm={() => this.toJinzhi(record.id)}>
+                            <a href="javascript:;">禁止登陆！</a>
+                        </Popconfirm>
+                    ):<Popconfirm title="解除禁止？" onConfirm={() => this.toJiejin(record.id)}>
+                        <a href="javascript:;">解禁！</a>
+                    </Popconfirm>
+                )
+            },
+        }];
+
+        let studentlists =[];
+        if (this.state.studentlist.length === 0 || this.state.studentlist === null){
+            studentlists=[];
+        }else {
+            studentlists =[{
+                id:this.state.studentlist.id,
+                name:this.state.studentlist.nickname,
+                studentid:this.state.studentlist.studentid,
+                college:this.state.studentlist.yuan.name,
+                profession:this.state.studentlist.ban.organ.parent.name+this.state.studentlist.ban.organ.name,
+                states:this.state.studentlist.userstates.status
+            }];
+        }
+        const columns11 = [{
+            title:"ID",
+            dataIndex: 'id',
+        }, {
+            title:"题目",
+            dataIndex: 'name',
+        }, {
+            title:"回复量",
+            dataIndex: 'reply',
+        }, {
+            title:"作者",
+            dataIndex: 'me',
+        }, {
+            title:"点击量",
+            dataIndex: 'click',
+        }, {
+            title:"展示状态",
+            dataIndex: 'states',
+        },{
+            title: '操作',
+            key: 'action',
+            width:100,
+            className:"article-table-col",
+            render: (text, record) => {
+                if (record.states === '展示中'){
+                    return(
+                        <Popconfirm title="屏蔽？" onConfirm={() => this.toPostsShen(record.id)}>
+                            <a href="javascript:;">屏蔽！</a>
+                        </Popconfirm>
+                    )
+                }else {
+                    return(
+                        <Popconfirm title="解除屏蔽？" onConfirm={() => this.toPostsShenj(record.id)}>
+                            <a href="javascript:;">解除屏蔽！</a>
+                        </Popconfirm>
+                    )
+                }
+            },
+        }];
+        let postssearch = [];
+        if (this.state.searchposts.length === 0 || this.state.searchposts === null){
+            postssearch=[];
+        }else {
+            postssearch =this.state.searchposts.map(item=>{
+                let states = "屏蔽中";
+                if (item.states === 0){
+                    states = "展示中";
+                }
+                return {
+                    id:item.id,
+                    name:item.title,
+                    me:item.userinfo.nickname,
+                    reply:item.	commentcont,
+                    click:item.lookcont,
+                    states:states,
+                }
+            });
+        }
         return(
             <div className="student">
                 <Card title="请假信息" className={'person-item'} style={{ width: '100%' }}>
@@ -596,6 +931,7 @@ class School extends Component{
                             <Button onClick={this.showjigouyuanModal.bind(this)}>添加院系</Button>
                             <Button onClick={this.showjigougongModal.bind(this)}>添加公寓</Button>
                             <Button onClick={this.addzhuanye.bind(this)}>添加专业</Button>
+                            <Button onClick={this.addShetuan.bind(this)}>添加社团</Button>
                             <Button onClick={this.addclass.bind(this)}>添加班级</Button>
                             <Button onClick={this.addsushe.bind(this)}>添加宿舍</Button>
                             <Button onClick={this.showjigoueditModal.bind(this)}>编辑</Button>
@@ -606,6 +942,25 @@ class School extends Component{
                     <Card title="院系账号" className={'person-item'} style={{ width: '100%' }}>
                         <Table pagination={false} bordered columns={shetuan} dataSource={shetuandata} size="small" />
                     </Card>
+                    <Card title="公寓账号" className={'person-item'} style={{ width: '100%' }}>
+                        <Table pagination={false} bordered columns={gongyu} dataSource={gongyudata} size="small" />
+                    </Card>
+                    <Card title="学生账号管理" className={'person-item'} style={{ width: '100%' }}>
+                        <Search
+                            placeholder="搜索学号"
+                            onSearch={this.onSerrch.bind(this)}
+                            style={{ width: 200,marginBottom:"10px" }}
+                        />
+                        <Table pagination={false} bordered columns={columns1} dataSource={studentlists} size="small" />
+                    </Card>
+                </Card>
+                <Card title="文章审核" className={'person-item'} style={{ width: '100%' }}>
+                    <Search
+                        placeholder="搜索题目"
+                        onSearch={this.onSerrchposts.bind(this)}
+                        style={{ width: 200,marginBottom:"10px" }}
+                    />
+                    <Table pagination={false} bordered columns={columns11} dataSource={postssearch} size="small" />
                 </Card>
                 <Modal
                     title="添加板块"
@@ -691,6 +1046,15 @@ class School extends Component{
                 >
                     <p>名称：<Input onKeyUp={this.onNameChange}/></p>
                     <p>简介：<Input onKeyUp={this.onjianChange}/></p>
+                </Modal>
+                <Modal
+                    title="添加社团"
+                    visible={this.state.addshetuan}
+                    onOk={this.addzhuanyeok}
+                    onCancel={this.addzhuanyeCancel}
+                >
+                    <p>社团名称：<Input onKeyUp={this.onNameChange}/></p>
+                    <p>社团简介：<Input onKeyUp={this.onjianChange}/></p>
                 </Modal>
             </div>
         )

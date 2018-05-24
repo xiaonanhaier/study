@@ -7,6 +7,7 @@ import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {message} from "antd/lib/index";
 class PlateList extends Component{
     constructor(props) {
         super(props);
@@ -15,19 +16,32 @@ class PlateList extends Component{
             page:1,
             totalcount:0,
             articlelist:[],
-            platelist:[]
+            platelist:[],
         };
         this.onChange = this.onChange.bind(this);
         this.newposts = this.newposts.bind(this);
     }
-    componentDidMount() {
+    componentWillReceiveProps(nextProps) {
+        const skuId =nextProps.match.params.id;
+        api.get(`/posts?plateid=${skuId}`).then(res=>{
+            this.setState({articlelist:res.data.data,pagesize:res.headers["x-pagination-per-page"],
+                totalcount:res.headers['x-pagination-total-count']})
+        });
+        api.get(`plate?id=${skuId}`).then(ress=>{
+            this.setState({platename:ress.data.data[0].title})
+        });
+        api.get('plate').then(res=>{
+            this.setState({platelist:res.data.data})
+        })
+    }
+    componentWillMount() {
         api.get(`/posts?plateid=${this.props.match.params.id}`).then(res=>{
             this.setState({articlelist:res.data.data,pagesize:res.headers["x-pagination-per-page"],
                 totalcount:res.headers['x-pagination-total-count']})
         });
         api.get(`plate?id=${this.props.match.params.id}`).then(ress=>{
             this.setState({platename:ress.data.data[0].title})
-        })
+        });
         api.get('plate').then(res=>{
             this.setState({platelist:res.data.data})
         })
@@ -39,27 +53,57 @@ class PlateList extends Component{
         })
     }
     newposts(){
-        this.props.actions.newposts(true);
+        let userinfo = JSON.parse(localStorage.userinfo);
+        if (userinfo.data[0].identity !== 1){
+            if (userinfo.data[0].states !== 1){
+                message.error('账号审核中。。。')
+            }else {
+                this.props.actions.newposts(true);
+            }
+        }else {
+            this.props.actions.newposts(true);
+        }
     }
     render(){
         let platelist = this.state.platelist.map(item=>{
-            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+            return <p key={item.id}><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
         });
         const articleitems = this.state.articlelist.map(item=>{
-           return(
-               <ArticleItem
-                    key={item.id}
-                    articleid = {item.id}
-                    articlename = {item.title}
-                    articlesmplateid = {item.smplate}
-                    articlelookcont = {item.lookcont}
-                    articleuserid = {item.userinfo.id}
-                    articletopicid = {item.topicid}
-                    articleusername = {item.userinfo.nickname}
-                    articleuserimg = {item.userinfo.headpicurl}
-                    articlecommentcont = {item.commentcont}
-               />
-           )
+            if (item.plateid === 2){
+                if (item.states === 1 && item.states !== 2){
+                    return(
+                        <ArticleItem
+                            key={item.id}
+                            articleid = {item.id}
+                            articlename = {item.title}
+                            articlesmplateid = {item.smplate}
+                            articlelookcont = {item.lookcont}
+                            articleuserid = {item.userinfo.id}
+                            articletopicid = {item.topicid}
+                            articleusername = {item.userinfo.nickname}
+                            articleuserimg = {item.userinfo.headpicurl}
+                            articlecommentcont = {item.commentcont}
+                        />
+                    )
+                }
+            }else {
+                if (item.states !== 2){
+                    return(
+                        <ArticleItem
+                            key={item.id}
+                            articleid = {item.id}
+                            articlename = {item.title}
+                            articlesmplateid = {item.smplate}
+                            articlelookcont = {item.lookcont}
+                            articleuserid = {item.userinfo.id}
+                            articletopicid = {item.topicid}
+                            articleusername = {item.userinfo.nickname}
+                            articleuserimg = {item.userinfo.headpicurl}
+                            articlecommentcont = {item.commentcont}
+                        />
+                    )
+                }
+            }
         });
         return(
             <div className="platelist">

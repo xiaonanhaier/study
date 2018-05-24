@@ -24,11 +24,12 @@ class GongGaoItem extends Component{
         })
     }
     render(){
+        let img = this.props.articletitleimg === ""?"":<img src={this.props.articletitleimg} alt={this.props.articlename}/>;
         return(
             <div className="gonggaoitem">
                 <Card title={this.state.articlesmplatename} extra={<Link to={`/app/detail/${this.props.articleid}`} style={{color: '#0068d3'}}>详情</Link>} style={{ width: "100%" }}>
                     <h3>{this.props.articlename}</h3>
-                    <img src={this.props.articletitleimg} alt={this.props.articlename}/>
+                    {img}
                     <p style={{marginTop:'10px'}}>{this.props.articleintroduction}</p>
                 </Card>
             </div>

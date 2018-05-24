@@ -119,10 +119,10 @@ class Edit extends Component{
                     address:this.state.lostadd,
                     time:this.state.losttime,
                     tel:this.state.losttel,
-                    type:1,
+                    type:2,
                 };
                 if(this.state.smallplate === 6){
-                    lostdata.type = 2;
+                    lostdata.type = 1;
                 }
 
                 api.post('lostfound/create',lostdata).then(lostdata=>{
@@ -135,7 +135,7 @@ class Edit extends Component{
             if(this.state.parentplate === 2){
                 let userinfo = JSON.parse(localStorage.userinfo);
                 var identidy = 1;
-                if(userinfo.data.data[0].identidy !== 0){
+                if(userinfo.data[0].identidy !== 0){
                     identidy = 2;
                 }
                 let activitydata = {
@@ -313,13 +313,13 @@ class Edit extends Component{
                         时间：<RangePicker onChange={this.onDateRandChange} />
                     </div>
                     <div className='edit-item'>
-                        一等奖： <InputNumber min={1} max={30} value={this.state.one} onChange={this.handleOneChange} />
+                        一等奖： <InputNumber min={0} max={30} value={this.state.one} onChange={this.handleOneChange} />
                     </div>
                     <div className='edit-item'>
-                        二等奖： <InputNumber min={1} max={30} value={this.state.two} onChange={this.handleTwoChange} />
+                        二等奖： <InputNumber min={0} max={30} value={this.state.two} onChange={this.handleTwoChange} />
                     </div>
                     <div className='edit-item'>
-                        三等奖： <InputNumber min={1} max={30} value={this.state.three} onChange={this.handleThreeChange} />
+                        三等奖： <InputNumber min={0} max={30} value={this.state.three} onChange={this.handleThreeChange} />
                     </div>
                     <div className='edit-item'>
                         优秀奖： <InputNumber min={0} max={30} value={this.state.othernum} onChange={this.handleOthernumChange} />

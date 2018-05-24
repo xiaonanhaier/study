@@ -508,7 +508,6 @@ class UserInfo extends  Component{
                                 <Option value="4">教师</Option>
                                 <Option value="5">班主任</Option>
                                 <Option value="6">院系</Option>
-                                <Option value="7">学校</Option>
                             </Select>
                         )}
                     </FormItem>

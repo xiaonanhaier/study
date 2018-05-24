@@ -9,6 +9,7 @@ import "./App.css"
 import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
 import { bindActionCreators } from 'redux';
+import logo from '../../common/images/logo.png';
 import { axiosapi as api} from "../../api/index";
 class App extends Component {
 
@@ -162,7 +163,7 @@ class App extends Component {
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消</Button>,
                         <Button key="submit" type="primary" onClick={this.handleOk}>
-                            发表新帖
+                            发表文章
                         </Button>,
                     ]}
                 >
@@ -177,18 +178,16 @@ class App extends Component {
                     <div className="wp" id="footer">
                         <div id="flk">
                             <div style={{float: 'left'}}>
-                                <img src="https://static.bbs.miui.com/static/image/miui/base/footer_title.png" alt="aa"/>
+                                <img style={{height:'25px'}} src={logo} alt=""/>
                             </div>
                             <div style={{display: 'inline'}}>
-                                <a href="http://www.miui.com/" target="_blank" rel="noopener noreferrer">MIUI官方网站</a>
-                                <span className="pipe">|</span><a href="http://www.mi.com" rel="noopener noreferrer" target="_blank">小米旗下网站</a>
-                                <span className="pipe">|</span><a href="http://jobs.miui.com/" rel="noopener noreferrer"  target="_blank">加入小米</a>
-                                <span className="pipe">|</span><a href="a-69.html" target="_blank" rel="noopener noreferrer">免责声明</a>
-                                <span className="pipe">|</span><a target="_blank" href="http://www.miui.com/res/doc/privacy/cn.html" rel="noopener noreferrer">隐私政策</a>
-                                <span className="pipe">|</span><a href="http://www.miui.com/forum.php?mod=newindex&amp;mobile=yes" rel="noopener noreferrer">手机版</a>
+                                校园服务系统
+                                <span className="pipe">|</span>校园服务
+                                <span className="pipe">|</span>关注
+                                <span className="pipe">|</span>免责声明
                             </div>
                             <div style={{float: 'right',color: '#7e7e7e'}}>
-                                Copyright © 2017 MIUI
+                                Copyright © 2017 School
                             </div>
                             {/*<div style={{paddingLeft: '28px',color: '#7e7e7e'}}>*/}
                                 {/*京ICP备10046444号 | 京公网安备11010802020134号 | 京ICP证110507号*/}

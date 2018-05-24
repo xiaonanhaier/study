@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import "./shouye.css";
-import { Carousel, Icon,Card } from 'antd';
+import { Carousel, Icon,Card ,message} from 'antd';
 import {Link} from 'react-router-dom';
 // import {Editor} from "../../components/index";
 import {ArticleLable,Pages} from "../../components/index";
@@ -35,7 +35,16 @@ class Shouye extends Component{
         })
     }
     newposts(){
-        this.props.actions.newposts(true);
+        let userinfo = JSON.parse(localStorage.userinfo);
+        if (userinfo.data[0].identity !== 1){
+            if (userinfo.data[0].states !== 1){
+                message.error('账号审核中。。。')
+            }else {
+                this.props.actions.newposts(true);
+            }
+        }else {
+            this.props.actions.newposts(true);
+        }
     }
     onChange(page){
         this.setState({page:page})
@@ -48,16 +57,29 @@ class Shouye extends Component{
     }
     render(){
         let platelist = this.state.platelist.map(item=>{
-            return <p><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
+            return <p key={item.id}><Link key={item.id} to={`/app/platelist/${item.id}`}>{item.title}</Link> </p>
         });
         let bannerlist = [];
         let articlelist = this.state.article.map((item,index)=>{
-            if (item.titleimg !== ""){
-                bannerlist.push(item);
+            
+            if (item.plateid === 2){
+                if (item.states === 1){
+                    if (item.titleimg !== ""){
+                        bannerlist.push(item);
+                    }
+                    return(
+                        <ArticleLable key={item.id} data = {item}/>
+                    )
+                }
+            }else {
+                if (item.titleimg !== ""){
+                    bannerlist.push(item);
+                }
+                return(
+                    <ArticleLable key={item.id} data = {item}/>
+                )
             }
-            return(
-                <ArticleLable key={item.id} data = {item}/>
-            )
+
         });
         let banner = bannerlist.map(item=>{
             return <Link key={item.id} to={`/app/detail/${item.id}`}>

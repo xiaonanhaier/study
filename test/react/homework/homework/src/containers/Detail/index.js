@@ -70,7 +70,8 @@ class Detail extends Component{
                             activityothers:activiy.data.data[0].award,
                             activitystates:activiy.data.data[0].states
                         });
-                        api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${this.props.state.async.userinfo.data[0].userid}`).then(baoming=>{
+                        let userinfo = JSON.parse(localStorage.userinfo);
+                        api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${userinfo.data[0].userid}}`).then(baoming=>{
                             if(baoming.data.data.length >= 1){
                                 this.setState({ifbaoming:true})
                             }
@@ -193,21 +194,34 @@ class Detail extends Component{
                 }
             }
             if (this.state.activitystates!==1){
-                activetyinfo = <div>
-                    <strong style={{color:"#1890ff"}}>
-                        活动时间
-                    </strong>
-                    <p>
-                        {this.state.activitystart} - {this.state.activityend}
-                    </p>
-                    <strong style={{color:"#1890ff"}}>
-                        奖项设置<br/>
-                    </strong>
-                    一等奖：{this.state.activityone} 个<br/>
-                    二等奖：{this.state.activitytwo} 个<br/>
-                    三等奖：{this.state.activitythree} 个<br/>
-                    优秀奖：{this.state.activityothers} 个<br/>
-                </div>
+                if (this.state.activityone === 0 && this.state.activitytwo ===0 &&this.state.activitythree ===0 &&this.state.activityothers === 0){
+                    activetyinfo = <div>
+                        <strong style={{color:"#1890ff"}}>
+                            活动时间
+                        </strong>
+                        <p>
+                            {this.state.activitystart} - {this.state.activityend}
+                        </p>
+                        活动结果另行通知
+                    </div>
+                } else {
+                    activetyinfo = <div>
+                        <strong style={{color:"#1890ff"}}>
+                            活动时间
+                        </strong>
+                        <p>
+                            {this.state.activitystart} - {this.state.activityend}
+                        </p>
+                        <strong style={{color:"#1890ff"}}>
+                            奖项设置<br/>
+                        </strong>
+                        一等奖：{this.state.activityone} 个<br/>
+                        二等奖：{this.state.activitytwo} 个<br/>
+                        三等奖：{this.state.activitythree} 个<br/>
+                        优秀奖：{this.state.activityothers} 个<br/>
+                    </div>
+                }
+
             } else {
                 activetyinfo="";
             }

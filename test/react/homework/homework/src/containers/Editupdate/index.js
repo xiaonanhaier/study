@@ -72,7 +72,8 @@ class Editupdate extends Component{
                             activitythree:activiy.data.data[0].thirdaward,
                             activityothers:activiy.data.data[0].award,
                         });
-                        api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${this.props.state.async.userinfo.data[0].userid}`).then(baoming=>{
+                        let userinfo = JSON.parse(localStorage.userinfo);
+                        api.get(`/personactivity/activity?activityid=${activiy.data.data[0].id}$userid=${userinfo.data[0].userid}`).then(baoming=>{
                             if(baoming.data.data >= 1){
                                 this.setState({ifbaoming:true})
                             }

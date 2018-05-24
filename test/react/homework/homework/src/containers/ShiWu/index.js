@@ -8,6 +8,7 @@ import { axiosapi as api} from "../../api/index";
 import * as TodoActions from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {message} from "antd/lib/index";
 const TabPane = Tabs.TabPane;
 class ShiWu extends Component{
     constructor(props){
@@ -28,7 +29,7 @@ class ShiWu extends Component{
         this.newposts = this.newposts.bind(this);
     }
     componentDidMount(){
-        api.get(`lostfound/?type=1`).then((res)=>{
+        api.get(`lostfound/?type=1&states=0`).then((res)=>{
             if(res.data.code === 200){
                 let articles = res.data.data.map((item,index)=>{return item});
                 this.setState({article1:articles,
@@ -36,7 +37,7 @@ class ShiWu extends Component{
                 totalcount1:res.headers['x-pagination-total-count']});
             }
         });
-        api.get(`lostfound/?type=2`).then((res)=>{
+        api.get(`lostfound/?type=2&states=0`).then((res)=>{
             if(res.data.code === 200){
                 let articles = res.data.data.map((item,index)=>{return item});
                 this.setState({article2:articles,
@@ -50,7 +51,16 @@ class ShiWu extends Component{
         })
     }
     newposts(){
-        this.props.actions.newposts(true);
+        let userinfo = JSON.parse(localStorage.userinfo);
+        if (userinfo.data[0].identity !== 1){
+            if (userinfo.data[0].states !== 1){
+                message.error('账号审核中。。。')
+            }else {
+                this.props.actions.newposts(true);
+            }
+        }else {
+            this.props.actions.newposts(true);
+        }
     }
     onChange1(page){
         this.setState({page1:page});

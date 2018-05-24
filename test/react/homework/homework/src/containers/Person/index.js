@@ -20,7 +20,8 @@ class Person extends Component{
             articlelists: [],
             articlelist: [],
             leave: [],
-            lost: []
+            lost: [],
+            apartment:""
         };
         this.onFound = this.onFound.bind(this);
         this.onDeleteposts = this.onDeleteposts.bind(this);
@@ -57,6 +58,12 @@ class Person extends Component{
                         this.setState({classname: clas.data.data[0].name})
                     })
                 }
+                //公寓
+                if (user.data.data[0].apartment !== 0) {
+                    api.get(`organization?id=${this.state.apartment}`).then(clas => {
+                        this.setState({apartment: clas.data.data[0].name})
+                    })
+                }
 
                 //失物招领
                 api.get(`lostfound?userid=${this.props.match.params.id}`).then(lost=>{
@@ -68,22 +75,34 @@ class Person extends Component{
                         this.props.history.push(`${imgListPath}/student/${this.props.match.params.id}`);
                     }
                     if (user.data.data[0].identity === 2) {
-                        this.props.history.push(`${imgListPath}/gongyu/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/gongyu/${this.props.match.params.id}`);
+                        }
                     }
                     if (user.data.data[0].identity === 3) {
-                        this.props.history.push(`${imgListPath}/shet/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/shet/${this.props.match.params.id}`);
+                        }
                     }
                     if (user.data.data[0].identity === 4) {
-                        this.props.history.push(`${imgListPath}/teacher/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/teacher/${this.props.match.params.id}`);
+                        }
                     }
                     if (user.data.data[0].identity === 5) {
-                        this.props.history.push(`${imgListPath}/ban/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/ban/${this.props.match.params.id}`);
+                        }
                     }
                     if (user.data.data[0].identity === 6) {
-                        this.props.history.push(`${imgListPath}/yuanxi/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/yuanxi/${this.props.match.params.id}`);
+                        }
                     }
                     if (user.data.data[0].identity === 7) {
-                        this.props.history.push(`${imgListPath}/school/${this.props.match.params.id}`);
+                        if (user.data.data[0].states !== 0) {
+                            this.props.history.push(`${imgListPath}/school/${this.props.match.params.id}`);
+                        }
                     }
                 }
             });
@@ -138,6 +157,12 @@ class Person extends Component{
             articleid:key
         };
         api.post(`reply/deletepost?id=${key}`,dele).then(res=>{
+            api.post(`clubactivity/deletepost?id=${key}`,dele).then(res=>{});
+            api.post(`lostfound/deletepost?id=${key}`,dele).then(res=>{});
+            let delea = {
+                activityid:key
+            };
+            api.post(`personactivity/deletepost?id=${key}`,delea).then(res=>{});
             api.delete(`posts/delete?id=${key}`).then(res=>{
 
             }).catch(res=>{
