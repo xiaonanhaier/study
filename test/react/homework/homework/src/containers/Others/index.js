@@ -10,6 +10,7 @@ class Others extends Component{
         this.state = {
             visible: false,
             days:0,
+            buttonif:false,
         };
         this.hideModal = this.hideModal.bind(this);
         this.showModal = this.showModal.bind(this);
@@ -18,13 +19,18 @@ class Others extends Component{
     }
     componentDidMount() {
         let userinfo = JSON.parse(localStorage.userinfo);
-        this.setState({
-            college:userinfo.data[0].college,
-            profession:userinfo.data[0].profession,
-            class:userinfo.data[0].class,
-            apartment:userinfo.data[0].apartment,
-            dormitory:userinfo.data[0].dormitory
-        })
+        if (userinfo.data[0].identity === 1){
+            this.setState({
+                college:userinfo.data[0].college,
+                profession:userinfo.data[0].profession,
+                class:userinfo.data[0].class,
+                apartment:userinfo.data[0].apartment,
+                dormitory:userinfo.data[0].dormitory
+            })
+        } else {
+            this.setState({buttonif:true})
+        }
+
     }
     showModal(){
         this.setState({
@@ -71,7 +77,7 @@ class Others extends Component{
                     附加功能
                 </div>
                 <div className="others-con">
-                    <Button type="primary" onClick={this.showModal}>请假</Button>
+                    <Button disabled={this.state.buttonif} type="primary" onClick={this.showModal}>请假</Button>
                     <Modal
                         title="填写信息"
                         visible={this.state.visible}

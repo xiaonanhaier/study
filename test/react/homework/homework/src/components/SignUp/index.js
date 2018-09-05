@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as TodoActions from '../../actions';
 import { bindActionCreators } from 'redux';
 import {PropTypes} from "prop-types";
+import { axiosapi as api} from "../../api/index";
 const createForm = Form.create;
 const FormItem = Form.Item;
 function noop() {
@@ -22,6 +23,7 @@ class SignUp extends Component{
         this.handleSignSubmit = this.handleSignSubmit.bind(this);
         this.userSignExists = this.userSignExists.bind(this);
         this.handleReset = this.handleReset.bind(this);
+        this.userSignemailExists = this.userSignemailExists.bind(this);
     }
     //注册
     handleSignSubmit(e) {
@@ -52,13 +54,26 @@ class SignUp extends Component{
         if (!value) {
             callback();
         } else {
-            setTimeout(() => {
-                if (value === 'JasonWood') {
-                    callback([new Error('抱歉，该用户名已被占用。')]);
-                } else {
+            api.get(`adminuser/userif?username=${value}`).then(res=>{
+               if (res.data.data === 1) {
+                   callback([new Error('抱歉，该用户名已被占用。')]);
+               }else {
+                   callback();
+               }
+            });
+        }
+    }
+    userSignemailExists(rule, value, callback) {
+        if (!value) {
+            callback();
+        } else {
+            api.get(`adminuser/userif?email=${value}`).then(res=>{
+                if (res.data.data === 1) {
+                    callback([new Error('抱歉，该邮箱已被占用。')]);
+                }else {
                     callback();
                 }
-            }, 800);
+            });
         }
     }
     checkSignPass(rule, value, callback) {
@@ -99,6 +114,7 @@ class SignUp extends Component{
             }, {
                 rules: [
                     { type: 'email', message: '请输入正确的邮箱地址' },
+                    { validator: this.userSignemailExists }
                 ],
                 trigger: ['onBlur', 'onChange'],
             }],
@@ -131,7 +147,7 @@ class SignUp extends Component{
                         hasFeedback
                         help={isFieldValidating('name') ? '校验中...' : (getFieldError('name') || []).join(', ')}
                     >
-                        <Input {...nameProps} placeholder="实时校验，输入 JasonWood 看看" />
+                        <Input {...nameProps} placeholder="用户名" />
                     </FormItem>
 
                     <FormItem
@@ -139,7 +155,7 @@ class SignUp extends Component{
                         label="邮箱"
                         hasFeedback
                     >
-                        <Input {...emailProps} type="email" placeholder="onBlur 与 onChange 相结合" />
+                        <Input {...emailProps} type="email" placeholder="邮箱" />
                     </FormItem>
 
                     <FormItem

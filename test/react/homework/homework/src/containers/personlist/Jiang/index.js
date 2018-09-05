@@ -25,7 +25,7 @@ class Jiang extends Component{
     }
     componentWillMount() {
         if (this.props.match.params.id !== ':id'){
-            api.get(`personactivity?activityid=${this.props.match.params.id}`).then(activity=>{
+            api.get(`personactivity?activityid=${this.props.match.params.id}&states=1`).then(activity=>{
                 let activitylist = activity.data.data.map(activity=>{
                     return {
                         id:activity.id,
@@ -123,7 +123,7 @@ class Jiang extends Component{
                 <div className="qiandao-title">
 
                 </div>
-                <Card title={`${this.state.activitytitle}签到`} extra={ <Button onClick={this.showConfirm}>确认</Button>} className={'person-item'} style={{ width: '100%' }}>
+                <Card title={`${this.state.activitytitle}录入获奖信息`} extra={ <Button onClick={this.showConfirm}>确认</Button>} className={'person-item'} style={{ width: '100%' }}>
                     <Table pagination={false} bordered columns={columns1} dataSource={this.state.activity} size="small" />
                 </Card>
             </div>

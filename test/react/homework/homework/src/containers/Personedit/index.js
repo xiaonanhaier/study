@@ -31,6 +31,7 @@ class Personedit extends Component{
         this.getBase64 = this.getBase64.bind(this);
         this.beforeUpload = this.beforeUpload.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handlepwdSubmit = this.handlepwdSubmit.bind(this);
     };
     componentDidMount(){
         if (this.props.match.params.id !== ':id') {
@@ -99,6 +100,21 @@ class Personedit extends Component{
                 message.success('修改成功！')
             }else {
                 message.error(res.data.code);
+            }
+        });
+    }
+    handlepwdSubmit(e){
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                let data = {
+                    password:values.password
+                };
+                api.post(`adminuserinfo/changepwd?id=${this.props.match.params.id}`,data).then(res=>{
+                    if (res.data.code === 200) {
+                        message.success(res.data.data);
+                    }
+                });
             }
         });
     }
@@ -214,6 +230,25 @@ class Personedit extends Component{
                             <Meta
                                 title={this.state.nickname}
                             />
+                        </Card>
+                        <Card
+                            style={{ width: 250 }}
+                            title="修改密码"
+                        >
+                            <Form onSubmit={this.handlepwdSubmit} className="login-form">
+                                <FormItem>
+                                    {getFieldDecorator('password', {
+                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                    )}
+                                </FormItem>
+                                <FormItem>
+                                    <Button type="primary" htmlType="submit" className="login-form-button">
+                                        确定
+                                    </Button>
+                                </FormItem>
+                            </Form>
                         </Card>
                     </div>
                     <div className="person-con-list">

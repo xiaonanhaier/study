@@ -79,7 +79,7 @@ class UserInfo extends  Component{
             class:values.class,
             apartment:values.gongyu,
             dormitory:values.sushe,
-            organization:values.organization,
+            organization:values.shetuan,
         };
         let filedata = {
             filename:values.upload[0].response.data.filename,

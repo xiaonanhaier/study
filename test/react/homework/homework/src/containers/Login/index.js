@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import {SignUp, UserInfo} from "../../components";
 import bgimg from '../../common/images/69968.jpg';
 import './login.css';
+import {axiosapi as api} from "../../api";
 const createForm = Form.create;
 const FormItem = Form.Item;
 function noop() {
@@ -92,13 +93,13 @@ class Login extends Component{
         if (!value) {
             callback();
         } else {
-            setTimeout(() => {
-                if (value === 'JasonWood') {
-                    callback([new Error('抱歉，该用户名已被占用。')]);
-                } else {
+            api.get(`adminuser/userif?username=${value}`).then(res=>{
+                if (res.data.data === 1) {
                     callback();
+                }else {
+                    callback([new Error('无此用户！')]);
                 }
-            }, 800);
+            });
         }
     }
 
