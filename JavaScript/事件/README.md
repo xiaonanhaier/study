@@ -15,6 +15,9 @@
 
     * 解绑：element.removeEventListener(type, listener, [useCapture]);
       * 移除事件时需要注意，捕获和冒泡要分别移除
+    * 捕获和冒泡的先后顺序
+      1. 对于非target节点则先执行捕获在执行冒泡
+      2. 对于target节点则是先执行先注册的事件，无论冒泡还是捕获
     * 可以绑定多个事件
 
   3. 事件目标(event target)
