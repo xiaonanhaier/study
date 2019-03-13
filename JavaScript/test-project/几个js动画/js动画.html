@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jsboxmove动画</title>
+	<style type="text/css">
+		.box {
+			padding: 0;
+			margin: 0;
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			left: 200px;
+			top: 200px;
+			background: black;
+		}
+
+		.button {
+			width: 50px;
+			height: 25px;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var boxid = document.getElementById('box');
+			var btn = document.getElementById('button');
+			var time = null;
+
+			function move(obj, Num) {
+				clearInterval(obj.time);
+				// time = setInterval(function(){
+				obj.time = setInterval(function () {
+					var speet = 10;
+					var left = obj.offsetLeft;
+					if (left > Num) {
+						speet = -10;
+					} else {
+						speet = 10;
+					}
+					obj.style.left = (left + speet) + 'px';
+					var result = Math.abs(left - Num);
+					//当盒子位置到达600时清除定时器					
+					if (result < 10) {
+						// clearInterval(time);
+						clearInterval(obj.time);
+						//防止超出位置
+						obj.style.left = Num + 'px';
+					}
+
+				}, 10)
+			}
+
+			btn.onclick = function () {
+				// clearInterval(time);
+				// time = setInterval(function(){
+				// 	var left = boxid.offsetLeft;
+				// 	console.log(left);
+				// 	boxid.style.left = (left + 10)+'px';
+				// 	//当盒子位置到达600时清除定时器					
+				// 	if(left >= 600){
+				// 		clearInterval(time);
+				// 		//防止超出位置
+				// 		boxid.style.left = "600px";
+				// 	}
+
+				// },10)
+				move(boxid, 50);
+			}
+
+		}
+	</script>
+</head>
+
+<body>
+	<div class="box" id="box"></div>
+	<div class="button" id="button"></div>
+</body>
+
+</html>

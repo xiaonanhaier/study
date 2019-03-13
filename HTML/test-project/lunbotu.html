@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<!-- 	<link rel="stylesheet" href="animate.css"> -->
+	<style>
+		body,*{
+			margin: 0;
+			padding: 0;
+		}
+		#lbt{
+			position: relative;
+			width: 100%;
+			height: 400px;
+		}
+		#up,#down{
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			line-height: 30px;
+			text-align: center;
+			top: 45%;
+			color: white;
+			background: black;
+			opacity: 0.8;
+			font-weight: bold;
+		}
+		#up:hover,#down:hover{
+			cursor: pointer;
+		}
+		#lbt img{
+			width: 100%;
+			height: 100%;
+			position:absolute;
+		}
+		#up {
+			left: 10px;
+		}
+		#down{
+			right: 10px;
+		}
+		.shishi{
+			width: 50px;
+			height: 50px;
+			background: red;
+		}
+		</style>
+</head>
+
+<body>
+	<div id="lbt">
+		<img class="animated" src="1.jpg" alt="" id="imag">
+		<p id="up">
+			<</p> <p id="down">>
+		</p>
+	</div>
+	<script type="text/javascript">
+		window.onload = function () {
+			function show(d) {
+				return document.getElementById(d);
+			}
+			var num = 0;
+			// 方法一
+			// show('down').onclick = function(){
+			// 	if(num >= 5){
+			// 		num=0;
+			// 	}	
+			// 	num++;
+			// 	show('imag').src = num +'.jpg';			
+			// 	console.log(num);			
+			// }
+			// show('up').onclick = function(){
+			// 	if (num <= 1) {
+			// 		num = 6;
+			// 	}
+			// 	num--;
+			// 	show('imag').src = num + '.jpg';		
+			// 	console.log(num);				
+			// }
+
+			// 方法二
+			// var imgarry = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']
+			// show('down').onclick = function(){
+			// 	num++;
+			// 	if (num > imgarry.length - 1){
+			// 		num = 0;
+			// 	}
+			// 	console.log(num);
+			// 	// show('imag').className+=' bounceInLeft';
+			// 	show('imag').src = imgarry[num];
+			// }
+			// show('up').onclick = function(){
+			// 	num--;
+			// 	if (num < 0) {
+			// 		num = imgarry.length - 1;
+			// 	}
+			// 	console.log(num);
+			// 	show('imag').src = imgarry[num];	
+		}
+
+		// 方法二加点击动画
+		var imgarry = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg']
+
+
+		show('down').onclick = function () {
+			num++;
+			if (num > imgarry.length - 1) {
+				num = 0;
+			}
+			show('imag').className = 'animated';
+			setTimeout(function () {
+				show('imag').className = 'animated bounceInRight';
+			}, 10);
+			show('imag').src = imgarry[num];
+		}
+		show('down').onmouseup = function () {
+			show('imag').className = 'animated';
+		}
+		show('up').onclick = function () {
+			num--;
+			if (num < 0) {
+				num = imgarry.length - 1;
+			}
+			console.log(num);
+			show('imag').className = 'animated';
+			setTimeout(function () {
+				show('imag').className = 'animated bounceInLeft';
+			}, 10);
+
+			// show('imag').className+='animated bounceInLeft';
+			show('imag').src = imgarry[num];
+			// show('imag').className = '';	
+		}
+		}
+	</script>
+</body>
+
+</html>

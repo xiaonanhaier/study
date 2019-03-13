@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>dou例子1留言板</title>
+	<link rel="stylesheet" href="animate.css">
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			background: #DDDDBB;
+		}
+
+		.box {
+			width: 403px;
+			margin: 0 auto;
+			margin-top: 40px;
+		}
+
+		.text {
+			width: 400px;
+			height: 150px;
+			border-radius: 10px;
+			background: #779977;
+			border: 3px solid #447878;
+			font-size: 20px;
+			color: #4B2C34;
+		}
+
+		.button {
+			width: 60px;
+			height: 30px;
+			background: #649DAD;
+			border-radius: 20px;
+			text-align: center;
+			line-height: 30px;
+			float: right;
+			color: #4B2C34;
+			margin-top: 5px;
+			cursor: pointer;
+		}
+
+		.list-con {
+			width: 400px;
+			margin-top: 40px;
+		}
+
+		.list {
+			width: 400px;
+			height: 50px;
+			position: relative;
+			overflow: hidden;
+			margin-top: 10px;
+		}
+
+		.list img {
+			display: block;
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+			float: left;
+		}
+
+		.list p {
+			width: 200px;
+			height: 30px;
+			padding-left: 10px;
+			line-height: 30px;
+			margin-top: 10px;
+			border-radius: 15px;
+			background: rgba(0, 0, 0, 0.2);
+			float: left;
+			margin-left: 10px;
+			color: #4B2C34;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
+		.list input {
+			height: 30px;
+			width: 60px;
+			background: rgba(241, 149, 132, 0.5);
+			border: none;
+			margin-top: 10px;
+			margin-left: 20px;
+			border-radius: 15px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var btn = document.getElementById('button');
+			var txt = document.getElementById('text');
+			var lcon = document.getElementById('con');
+			btn.onclick = function () {
+				var text = txt.value;
+				var divl = document.createElement('div');
+				divl.setAttribute('class', 'list animated slideInUp');
+				var imag = document.createElement('img');
+				imag.setAttribute('src', 'images/7.jpg');
+				var pword = document.createElement('p');
+				var textd = document.createTextNode(text);
+				var butt = document.createElement('input');
+				butt.setAttribute('type', 'button');
+				butt.setAttribute('value', '删除');
+				butt.setAttribute('id', 'delect');
+				butt.onclick = function () {
+					var fys = this.parentNode;
+					lcon.removeChild(fys);
+				}
+				pword.appendChild(textd);
+				divl.appendChild(imag);
+				divl.appendChild(pword);
+				divl.appendChild(butt);
+				lcon.appendChild(divl);
+				txt.value = '';
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="box">
+		<textarea class="text" id="text" name="" id="" cols="30" rows="10"></textarea>
+		<p class="button" id="button">发布</p>
+		<div class="list-con" id="con">
+			<!-- <div class="list">
+				<img src="images/7.jpg" alt="">
+				<p>sdfsdfsd</p>
+				<input type="button" id="delect" name="" value="删除">
+			</div> -->
+		</div>
+	</div>
+</body>
+
+</html>

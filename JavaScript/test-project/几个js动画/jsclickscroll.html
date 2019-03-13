@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动框</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.scroll {
+			width: 1100px;
+			height: 220px;
+			border: 1px solid black;
+			margin: 0 auto;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.scrill-con {
+			width: 200%;
+			height: 100%;
+			overflow: hidden;
+			position: absolute;
+		}
+
+		.scrill-con a {
+			display: block;
+			width: 220px;
+			height: 220px;
+			float: left;
+			overflow: hidden;
+		}
+
+		.scrill-con a>img {
+			display: block;
+			width: 220px;
+			height: 220px;
+		}
+
+		.scroll p {
+			width: 30px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			background: #ccc;
+			position: absolute;
+			transition: all linear 0.5s;
+			z-index: 100;
+		}
+
+		.scroll p:hover {
+			cursor: pointer;
+			background: #aaa
+		}
+
+		.scroll p:nth-child(1) {
+			top: 5px;
+			left: 1070px;
+		}
+
+		.scroll p:nth-child(2) {
+			top: 5px;
+			left: 1040px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var scrollc = document.getElementById('con');
+			var scroll = document.getElementById('scroll');
+			var pd = scroll.getElementsByTagName('p');
+			var timid = setInterval(function () {
+				var pdd = scrollc.offsetLeft;
+				if (Math.abs(pdd) == 1100) {
+					pdd = 0;
+				} else {
+					pdd = -1100;
+				}
+				move(scrollc, pdd);
+			}, 2000);
+			pd[0].onclick = function () {
+				clearInterval(timid)
+				var pdd = scrollc.offsetLeft;
+				if (pdd <= 0) {
+					pdd = 0;
+				} else {
+					pdd = 1100;
+				}
+				move(scrollc, pdd);
+			}
+			pd[1].onclick = function () {
+				clearInterval(timid)
+				move(scrollc, -1100)
+			}
+
+			function move(obj, Num) {
+				clearInterval(obj.time);
+				// time = setInterval(function(){
+				obj.time = setInterval(function () {
+					var speet = 10;
+					var left = obj.offsetLeft;
+					if (left > Num) {
+						speet = -10;
+					} else {
+						speet = 10;
+					}
+					obj.style.left = (left + speet) + 'px';
+					var result = Math.abs(left - Num);
+					//当盒子位置到达600时清除定时器					
+					if (result < 10) {
+						// clearInterval(time);
+						clearInterval(obj.time);
+						//防止超出位置
+						obj.style.left = Num + 'px';
+					}
+				}, 10)
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="scroll" id="scroll">
+		<p>></p>
+		<p>
+			<</p> <div class="scrill-con" id="con">
+				<a href=""><img src="images/s-img1.jpg" alt=""></a>
+				<a href=""><img src="images/s-img2.jpg" alt=""></a>
+				<a href=""><img src="images/s-img3.jpg" alt=""></a>
+				<a href=""><img src="images/s-img4.jpg" alt=""></a>
+				<a href=""><img src="images/s-img5.jpg" alt=""></a>
+				<a href=""><img src="images/s-img1.jpg" alt=""></a>
+				<a href=""><img src="images/s-img2.jpg" alt=""></a>
+				<a href=""><img src="images/s-img3.jpg" alt=""></a>
+				<a href=""><img src="images/s-img4.jpg" alt=""></a>
+				<a href=""><img src="images/s-img5.jpg" alt=""></a>
+	</div>
+	</div>
+</body>
+
+</html>

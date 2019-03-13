@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>canvas</title>
 	<script type="text/javascript" src="js/easeljs-0.8.2.min.js"></script>
 </head>
+
 <body>
 	<canvas id="canvas" class="canvas" width="600px" height="600p"></canvas>
 </body>
 <script type="text/javascript">
-	window.onload = function(){
+	window.onload = function () {
 		var canvas = document.getElementById('canvas');
 		var stage = new createjs.Stage(canvas);
 		console.log(stage);
@@ -20,11 +22,13 @@
 		createjs.Ticker.setFPS(200);
 		createjs.Ticker.addEventListener("tick", tick);
 		var count = 0;
-		function tick(e){
+
+		function tick(e) {
 			count++;
-			text.text = "hai->0"+count+"!";
+			text.text = "hai->0" + count + "!";
 			stage.update();
 		}
 	}
 </script>
+
 </html>

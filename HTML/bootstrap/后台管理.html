@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>后台管理系统</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style type='text/css'>
+    .clearbs {
+      -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    .navco {
+      background: #aaa;
+    }
+
+    .clearbm {
+      margin-bottom: 0;
+    }
+
+    .clearpa {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 20px;
+    }
+
+    .zhuti {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .nav a {
+      -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+      border-radius: 0 !important;
+      color: #337ab7;
+    }
+
+    .nav a:hover {
+      background-color: #337ab7 !important;
+      color: #fff;
+    }
+
+    h1 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .marbo {
+      margin-bottom: 30px;
+    }
+
+    .he {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse clearbs clearbm">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">后台管理系统</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">功能 <span
+                class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <li><a href="#">帮助</a></li>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="用户名">
+            <input type="text" class="form-control" placeholder="密码">
+          </div>
+          <button type="submit" class="btn btn-default">登录</button>
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 navco clearpa">
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation" class="active"><a href="#">首页</a></li>
+          <li role="presentation"><a href="#">订单管理</a></li>
+          <li role="presentation"><a href="#">用户管理</a></li>
+          <li role="presentation"><a href="#">系统管理</a></li>
+          <li role="presentation"><a href="#">设置</a></li>
+          <li role="presentation"><a href="#">帮助</a></li>
+        </ul>
+      </div>
+      <div class="col-md-10 zhuti">
+        <div class="row">
+          <h1>管理控制台</h1>
+        </div>
+        <div class="row marbo">
+          <button type="button" class="btn btn-default">操作一</button>
+          <button type="button" class="btn btn-primary">操作二</button>
+          <button type="button" class="btn btn-success">操作三</button>
+          <button type="button" class="btn btn-info">操作四</button>
+          <button type="button" class="btn btn-warning">操作五</button>
+          <button type="button" class="btn btn-danger">操作六</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">最新提醒</div>
+              <div class="panel-body">
+                <div class="alert alert-success" role="alert">提示您的订单</div>
+                <div class="alert alert-info" role="alert">提示您的订单</div>
+                <div class="alert alert-warning" role="alert">提示您的订单</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">我的任务</div>
+              <div class="panel-body">
+                <div class="alert alert-info he " role="alert">
+                  <span class="badge pull-right">14</span>订单批阅</div>
+                <div class="alert alert-info he" role="alert">
+                  <span class="badge pull-right">14</span>收获确认</div>
+                <div class="alert alert-info he" role="alert">
+                  <span class="badge pull-right">14</span>付款确认</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">最新订单</div>
+              <div class="panel-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <td>#</td>
+                      <td>产品</td>
+                      <td>数量</td>
+                      <td>总金额</td>
+                      <td>业务员</td>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>1</td>
+                    <td>Apple Macbook air</td>
+                    <td>10</td>
+                    <td>800000</td>
+                    <td>王晓静</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Apple iPad air</td>
+                    <td>20</td>
+                    <td>800000</td>
+                    <td>王晓静</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Apple Macbook Pro</td>
+                    <td>5</td>
+                    <td>50000</td>
+                    <td>刘老师</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">工程进度</div>
+              <div class="panel-body">
+                <h4><span class="label label-primary">水井挖掘工程</span></h4>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                    style="width: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+                <h4><span class="label label-danger">基建工程</span></h4>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                    aria-valuemax="100" style="width: 70%">
+                    <span class="sr-only">80% Complete (danger)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-3.2.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

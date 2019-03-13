@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>canvas</title>
 </head>
+
 <body onload="diaw('canvas')">
 	<!--
 	context.drawImage(img,x,y)
@@ -13,24 +15,26 @@
 	<canvas id="canvas" class="canvas" width="600px" height="600p"></canvas>
 </body>
 <script type="text/javascript">
-	function diaw(id){
+	function diaw(id) {
 		var canvas = document.getElementById(id);
 		if (canvas == null) {
 			return false;
 		}
-    var context = canvas.getContext('2d');
-		context.fillStyle ='orange';
-		context.fillRect(0,0,500,500);
+		var context = canvas.getContext('2d');
+		context.fillStyle = 'orange';
+		context.fillRect(0, 0, 500, 500);
 		image = new Image();
 		image.src = '../images/huihuxi.jpg';
-		image.onload = function(){
-			drawImage(context,image);
+		image.onload = function () {
+			drawImage(context, image);
 		}
 
 	}
-	function drawImage(context,img){
+
+	function drawImage(context, img) {
 		// context.drawImage(img,0,0,200,200);
-		context.drawImage(img,70,70,380,380,20,20,200,200);
+		context.drawImage(img, 70, 70, 380, 380, 20, 20, 200, 200);
 	}
 </script>
+
 </html>

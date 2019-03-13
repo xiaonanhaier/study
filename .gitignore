@@ -3,3 +3,5 @@ node_modules/
 *min.js
 *min.css
 .idea/
+/test/react/homework/.idea/
+/project/

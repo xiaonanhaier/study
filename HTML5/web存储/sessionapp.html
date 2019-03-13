@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>session</title>
 </head>
+
 <body>
   <span id="txt">0</span>
   <button id="addbtn"> add </button>
@@ -13,23 +15,25 @@
     var num = 0;
     var txt;
     var btn;
-    window.onload = function(){
+    window.onload = function () {
       txt = document.getElementById('txt');
       btn = document.getElementById('addbtn');
       if (sessionStorage.num) {
         num = sessionStorage.num;
-      }else{
+      } else {
         num = 0;
       }
-      btn.onclick = function(){
+      btn.onclick = function () {
         num++;
         sessionStorage.num = num;
         show()
       }
     }
+
     function show() {
       txt.innerHTML = num;
     }
   </script>
 </body>
+
 </html>
