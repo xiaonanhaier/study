@@ -5,3 +5,4 @@ node_modules/
 .idea/
 /test/react/homework/.idea/
 /project/
+test*

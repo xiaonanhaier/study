@@ -25,7 +25,7 @@ class Editor extends Component{
             // 上传成功后调用param.success并传入上传后的文件地址
             let responseMsg = JSON.parse(xhr.responseText);
             if(responseMsg.code === 200){
-                let url = 'http://120.79.133.95/homeworkapi/api/web/'+responseMsg.data.url;
+                let url = 'http://localhost/homeworkapi/api/web/'+responseMsg.data.url;
                 this.props.imglist(responseMsg.data);
                 param.success({
                     url: url,
