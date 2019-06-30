@@ -87,5 +87,10 @@ MongDB所在服务器地址，例如：127.0.0.1，当然也可以指定端口�
 >mongorestore -d blog D:\data -u=root -p123456 --authenticationDatabase admin
 
 
+5. 删库
+> db.dropDatabase()
+
+6. 删表
+> db.collection.drop() 
 ### 链接数据库遇到的问题
 1. current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
