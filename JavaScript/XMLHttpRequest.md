@@ -42,6 +42,7 @@ xhr.send();
 
 3. 常用属性
    1. readyState  属性返回一个 XMLHttpRequest  代理当前所处的状态
+   
         |值|状态| 描述
         |--|--|--
         |0|UNSENT|代理被创建，但尚未调用 open() 方法。
@@ -152,5 +153,5 @@ xhr.send();
             });
         ```
 
-        
+
 [参考链接](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
