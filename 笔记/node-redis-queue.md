@@ -26,14 +26,14 @@ queue.process('queueA', async function queueAAsync (job, done) {
   done(null, 'OK');
 });
 
-// 美团取消订单回调队列,返回promise时省略done参数
+// 返回promise时省略done参数
 queue.process('queueB', async function queueBAsync (job) {
   return queueBHandlerAsync(job.data).catch(err => {
     log.error(`queueB-err-${err.message}`);
   });
 });
 
-// 饿了么订单回调队列，直接返回值时也需要省略done参数
+// 直接返回值时也需要省略done参数
 queue.process('queueC', async function queueCAsync (job) {
   return job.data;
 });
