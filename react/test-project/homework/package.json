@@ -9,7 +9,7 @@
     "babel-polyfill": "^6.26.0",
     "braft-editor": "^1.8.9",
     "history": "^4.7.2",
-    "moment": "^2.22.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.6.1",
     "qs": "^6.5.1",
     "react": "^16.2.0",
